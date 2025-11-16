@@ -104,62 +104,54 @@
 </nav>
 
 <!-- templates -->
-{{ define "section-tree-nav" }}
-  {{ $showvisitedlinks := .showvisitedlinks }}
-  {{ $showhidden := .showhidden }}
-  {{ $currentNode := .currentnode }}
-  {{ $currentFileUniqueID := "" }}
-  {{ with $currentNode.File }}{{ $currentFileUniqueID = .UniqueID }}{{ end }}
-  {{ with .sect }}
-    {{ if and .IsSection (or (not .Params.hidden) $showhidden) }} {{ safeHTML .Params.head }}
-    <li
-      data-nav-id="{{.RelPermalink}}"
-      title="{{.Title}}"
-      class="dd-item 
-            {{if .IsAncestor $currentNode }}parent{{end}}
-            {{if eq ..File.UniqueID $currentFileUniqueID}}active{{end}}
-            {{if .Params.alwaysopen}}parent{{end}}
-            "
-    >
-      <a href="{{.RelPermalink}}">
-        {{safeHTML .Params.Pre}}{{or .Params.menuTitle .LinkTitle .Title}}{{safeHTML .Params.Post}} {{ if $showvisitedlinks}}
-        <i class="fas fa-check read-icon"></i>
-        {{ end }}
-      </a>
-      {{ $numberOfPages := (add (len .Pages) (len .Sections)) }}
-      {{ if ne $numberOfPages 0 }}
-      <ul>
-        {{ $currentNode.Scratch.Set "pages" .Pages }}
-        {{ if .Sections }} {{ $currentNode.Scratch.Set "pages" (.Pages | union .Sections) }} {{ end }}
-        {{ $pages := ($currentNode.Scratch.Get "pages") }}
-        {{ if eq .Site.Params.ordersectionsby "title" }}
-          {{ range $pages.ByTitle }}
-            {{ if and .Params.hidden (not $showhidden) }} {{ else }}
-              {{ template "section-tree-nav" dict "sect" . "currentnode" $currentNode "showvisitedlinks" $showvisitedlinks "showhidden" $showhidden }}
-            {{ end }}
-          {{ end }}
-        {{ else }}
-          {{ range $pages.ByWeight }}
-            {{ if and .Params.hidden (not $showhidden) }} {{ else }}
-              {{ template "section-tree-nav" dict "sect" . "currentnode" $currentNode "showvisitedlinks" $showvisitedlinks "showhidden" $showhidden }}
-            {{ end }}
-          {{ end }}
-        {{ end }}
-      </ul>
-      {{ end }}
-    </li>
-    {{ else }}
-      {{ if not .Params.hidden }}
-      <li
-        data-nav-id="{{.RelPermalink}}"
-        title="{{.Title}}"
-        class="dd-item {{if eq .File.UniqueID $currentFileUniqueID}}active{{end}}"
-      >
-        <a href="{{ .RelPermalink}}">
-          {{safeHTML .Params.Pre}}{{or .Params.menuTitle .LinkTitle .Title}}{{safeHTML .Params.Post}} {{ if $showvisitedlinks}}<i class="fas fa-check read-icon"></i>{{end}}
-        </a>
-      </li>
-      {{ end }}
+{{ define "section-tree-nav" }} {{ $showvisitedlinks := .showvisitedlinks }} {{
+$currentNode := .currentnode }} {{ $currentFileUniqueID := "" }} {{ with
+$currentNode.File }}{{ $currentFileUniqueID = .UniqueID }}{{ end }} {{with
+.sect}} {{if and .IsSection (or (not .Params.hidden) $.showhidden)}} {{safeHTML
+.Params.head}}
+<li
+  data-nav-id="{{.RelPermalink}}"
+  title="{{.Title}}"
+  class="dd-item 
+        {{if .IsAncestor $currentNode }}parent{{end}}
+        {{if eq .File.UniqueID $currentFileUniqueID}}active{{end}}
+        {{if .Params.alwaysopen}}parent{{end}}
+        "
+>
+  <a href="{{.RelPermalink}}">
+    {{safeHTML .Params.Pre}}{{or .Params.menuTitle .LinkTitle .Title}}{{safeHTML
+    .Params.Post}} {{ if $showvisitedlinks}}
+    <i class="fas fa-check read-icon"></i>
     {{ end }}
+  </a>
+  {{ $numberOfPages := (add (len .Pages) (len .Sections)) }} {{ if ne
+  $numberOfPages 0 }}
+  <ul>
+    {{ $currentNode.Scratch.Set "pages" .Pages }} {{ if .Sections}} {{
+    $currentNode.Scratch.Set "pages" (.Pages | union .Sections) }} {{end}} {{
+    $pages := ($currentNode.Scratch.Get "pages") }} {{if eq
+    .Site.Params.ordersectionsby "title"}} {{ range $pages.ByTitle }} {{ if and
+    .Params.hidden (not $.showhidden) }} {{else}} {{ template "section-tree-nav"
+    dict "sect" . "currentnode" $currentNode "showvisitedlinks"
+    $showvisitedlinks "showhidden" .showhidden }} {{end}} {{ end }} {{else}} {{ range $pages.ByWeight }}
+    {{ if and .Params.hidden (not $.showhidden) }} {{else}} {{ template
+    "section-tree-nav" dict "sect" . "currentnode" $currentNode
+    "showvisitedlinks" $showvisitedlinks "showhidden" .showhidden }} {{end}} {{ end }} {{end}}
+  </ul>
   {{ end }}
-{{ end }}
+</li>
+{{else}} {{ if not .Params.Hidden }}
+<li
+  data-nav-id="{{.RelPermalink}}"
+  title="{{.Title}}"
+  class="dd-item {{if eq .File.UniqueID $currentFileUniqueID}}active{{end}}"
+>
+  <a href="{{ .RelPermalink}}">
+    {{safeHTML .Params.Pre}}{{or .Params.menuTitle .LinkTitle .Title}}{{safeHTML
+    .Params.Post}} {{ if $showvisitedlinks}}<i
+      class="fas fa-check read-icon"
+    ></i
+    >{{end}}
+  </a>
+</li>
+{{ end }} {{end}} {{ end }} {{ end }}
