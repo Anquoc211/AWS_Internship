@@ -1,31 +1,159 @@
 ---
-title: "Workshop"
-date: "2025-09-09T15:44:00+07:00"
+title: "Workshop: Building an Online Library with AWS Serverless"
+date: "2025-01-15T09:00:00+07:00"
 weight: 5
 chapter: false
 pre: " <b> 5. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-# Secure Hybrid Access to S3 using VPC Endpoints
+# Building a Serverless Online Library Platform
 
-#### Overview
+## Workshop Overview
 
-**AWS PrivateLink** provides private connectivity to AWS services from VPCs and your on-premises networks, without exposing your traffic to the Public Internet.
+In this hands-on workshop, you'll build a complete serverless online library platform using AWS services. The application features user authentication, file uploads with admin approval workflow, secure content delivery via CloudFront, and search functionality.
 
-In this lab, you will learn how to create, configure, and test VPC endpoints that enable your workloads to reach AWS services without traversing the Public Internet.
+**Duration:** 6 modules (~6 hours)
 
-You will create two types of endpoints to access Amazon S3: a Gateway VPC endpoint, and an Interface VPC endpoint. These two types of VPC endpoints offer different benefits depending on if you are accessing Amazon S3 from the cloud or your on-premises location
-+ **Gateway** - Create a gateway endpoint to send traffic to Amazon S3 or DynamoDB using private IP addresses.You route traffic from your VPC to the gateway endpoint using route tables.
-+ **Interface** - Create an interface endpoint to send traffic to endpoint services that use a Network Load Balancer to distribute traffic. Traffic destined for the endpoint service is resolved using DNS.
+**Cost:** ~$10/month (excluding AWS Free Tier)
 
-#### Content
+**Difficulty:** Intermediate
 
-1. [Workshop overview](5.1-Workshop-overview)
-2. [Prerequiste](5.2-Prerequiste/)
-3. [Access S3 from VPC](5.3-S3-vpc/)
-4. [Access S3 from On-premises](5.4-S3-onprem/)
-5. [VPC Endpoint Policies (Bonus)](5.5-Policy/)
-6. [Clean up](5.6-Cleanup/)
+---
+
+## What You'll Build
+
+A production-ready online library platform with:
+
+- **User Authentication** with Amazon Cognito
+- **File Upload System** using S3 Presigned URLs
+- **Admin Approval Workflow** with role-based access control
+- **Secure Content Delivery** via CloudFront Signed URLs
+- **Search Functionality** using DynamoDB GSI
+- **CI/CD Pipeline** with AWS Amplify
+
+---
+
+## Architecture
+
+![Architecture Diagram](/images/2-Proposal/Architect.jpeg)
+
+The solution uses a fully serverless architecture:
+
+- **Frontend:** Next.js hosted on AWS Amplify
+- **Authentication:** Amazon Cognito User Pools
+- **API:** Amazon API Gateway (HTTP API)
+- **Compute:** AWS Lambda (Python)
+- **Storage:** Amazon S3 with CloudFront CDN
+- **Database:** Amazon DynamoDB
+- **Infrastructure:** AWS CDK (TypeScript)
+
+---
+
+## Prerequisites
+
+Before starting this workshop, you should have:
+
+- **AWS Account** with administrative access
+- **AWS CLI** installed and configured
+- **Node.js 18+** and npm/yarn
+- **Python 3.9+** installed
+- **Git** for version control
+- **Basic knowledge** of:
+  - JavaScript/TypeScript
+  - Python
+  - REST APIs
+  - Basic AWS services
+
+---
+
+## Workshop Modules
+
+### [Module 1: Foundation & Authentication](5.1-module1/)
+- Set up AWS CDK project
+- Deploy Cognito User Pool
+- Configure authentication flow
+- Build login/registration pages
+
+### [Module 2: Upload Infrastructure](5.2-module2/)
+- Create S3 buckets with proper policies
+- Implement presigned URL generation
+- Build upload form with progress tracking
+- Store metadata in DynamoDB
+
+### [Module 3: Admin Approval System](5.3-module3/)
+- Set up admin user groups
+- Create approval Lambda functions
+- Build admin dashboard UI
+- Implement status tracking
+
+### [Module 4: Content Delivery](5.4-module4/)
+- Configure CloudFront distribution
+- Implement Origin Access Control (OAC)
+- Generate CloudFront Signed URLs
+- Build PDF/ePub reader interface
+
+### [Module 5: Search & Discovery](5.5-module5/)
+- Design DynamoDB GSI for search
+- Create search Lambda function
+- Build search UI with filters
+- Implement pagination
+
+### [Module 6: Deployment & Operations](5.6-module6/)
+- Set up CI/CD with Amplify
+- Configure monitoring and alerts
+- Implement cost optimization
+- Security hardening
+
+---
+
+## Learning Objectives
+
+By the end of this workshop, you will:
+
+✅ Understand serverless architecture patterns  
+✅ Implement secure authentication with Cognito  
+✅ Handle file uploads at scale with S3  
+✅ Build approval workflows with Lambda  
+✅ Deliver content securely via CloudFront  
+✅ Design efficient search with DynamoDB  
+✅ Deploy with CI/CD automation  
+✅ Monitor and optimize costs  
+
+---
+
+## Cost Estimation
+
+**Monthly costs (without Free Tier):** ~$9.80
+
+| Service | Estimated Cost |
+|---------|---------------|
+| Amazon Cognito | $5.00 (100 MAU) |
+| AWS Amplify | $1.31 (hosting) |
+| Amazon CloudFront | $0.86 (CDN) |
+| Amazon API Gateway | $0.01 (10k requests) |
+| AWS Lambda | $0.00 (low usage) |
+| Amazon S3 | $0.05 (2GB storage) |
+| Amazon DynamoDB | $0.03 (on-demand) |
+| Amazon CloudWatch | $1.64 (logs) |
+| Amazon Route 53 | $0.90 (hosted zone) |
+
+**Note:** AWS Free Tier significantly reduces or eliminates these costs for the first 12 months.
+
+---
+
+## Support & Resources
+
+- **GitHub Repository:** [Online Library Workshop](https://github.com/your-repo/online-library-workshop)
+- **AWS Documentation:** [docs.aws.amazon.com](https://docs.aws.amazon.com)
+- **Community Support:** Workshop Q&A section
+- **Troubleshooting Guide:** Available in each module
+
+---
+
+## Clean Up
+
+⚠️ **Important:** Remember to clean up resources after completing the workshop to avoid ongoing charges. Detailed cleanup instructions are provided in Module 6.
+
+---
+
+**Ready to begin?** Start with [Module 1: Foundation & Authentication](5.1-module1/)
