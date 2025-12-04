@@ -1,0 +1,572 @@
+<!doctype html><html lang=en class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.134.3"><meta name=description content><meta name=author content="thienlh@thienlu.com"><link rel=icon href=../../images/favicon.png type=image/png><title>Module 4: Content Delivery with CloudFront :: Internship Report</title>
+<link href=../../css/nucleus.css?1764835724 rel=stylesheet><link href=../../css/fontawesome-all.min.css?1764835724 rel=stylesheet><link href=../../css/hybrid.css?1764835724 rel=stylesheet><link href=../../css/featherlight.min.css?1764835724 rel=stylesheet><link href=../../css/perfect-scrollbar.min.css?1764835724 rel=stylesheet><link href=../../css/auto-complete.css?1764835724 rel=stylesheet><link href=../../css/atom-one-dark-reasonable.css?1764835724 rel=stylesheet><link href=../../css/theme.css?1764835724 rel=stylesheet><link href=../../css/hugo-theme.css?1764835724 rel=stylesheet><link href=../../css/theme-workshop.css?1764835724 rel=stylesheet><script src=../../js/jquery-3.3.1.min.js?1764835724></script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=../../5-workshop/5.4-module4/><nav id=sidebar class=showVisitedLinks><div id=header-wrapper><div id=header><a id=logo href=../../><svg id="Layer_1" data-name="Layer 1" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff}.cls-2{fill:#f90;fill-rule:evenodd}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09 10.85a4.7 4.7.0 00.19 1.48 7.73 7.73.0 00.54 1.19.77.77.0 01.12.38.64.64.0 01-.32.49l-1 .7a.83.83.0 01-.44.15.69.69.0 01-.49-.23 3.8 3.8.0 01-.6-.77q-.25-.42-.51-1a6.14 6.14.0 01-4.89 2.3 4.54 4.54.0 01-3.32-1.19 4.27 4.27.0 01-1.22-3.2 4.28 4.28.0 011.46-3.4A6.06 6.06.0 017.69 6.46a12.47 12.47.0 011.76.13q.92.13 1.91.36V5.73a3.65 3.65.0 00-.79-2.66A3.81 3.81.0 007.86 2.3a7.71 7.71.0 00-1.79.22 12.78 12.78.0 00-1.79.57 4.55 4.55.0 01-.58.22h-.26q-.35.0-.35-.52V2a1.09 1.09.0 01.12-.58 1.2 1.2.0 01.47-.35A10.88 10.88.0 015.77.32 10.19 10.19.0 018.36.0a6 6 0 014.35 1.35 5.49 5.49.0 011.38 4.09zM7.34 13.38a5.36 5.36.0 001.72-.31A3.63 3.63.0 0010.63 12 2.62 2.62.0 0011.19 11a5.63 5.63.0 00.16-1.44v-.7a14.35 14.35.0 00-1.53-.28 12.37 12.37.0 00-1.56-.1 3.84 3.84.0 00-2.47.67A2.34 2.34.0 005 11a2.35 2.35.0 00.61 1.76A2.4 2.4.0 007.34 13.38zm13.35 1.8a1 1 0 01-.64-.16 1.3 1.3.0 01-.35-.65L15.81 1.51a3 3 0 01-.15-.67.36.36.0 01.41-.41H17.7a1 1 0 01.65.16 1.4 1.4.0 01.33.65l2.79 11 2.59-11A1.17 1.17.0 0124.39.6a1.1 1.1.0 01.67-.16H26.4a1.1 1.1.0 01.67.16 1.17 1.17.0 01.32.65L30 12.39 32.88 1.25A1.39 1.39.0 0133.22.6a1 1 0 01.65-.16h1.54a.36.36.0 01.41.41 1.36 1.36.0 010 .26 3.64 3.64.0 01-.12.41l-4 12.86a1.3 1.3.0 01-.35.65 1 1 0 01-.64.16H29.25a1 1 0 01-.67-.17 1.26 1.26.0 01-.32-.67L25.67 3.64l-2.56 10.7a1.26 1.26.0 01-.32.67 1 1 0 01-.67.17zm21.36.44a11.28 11.28.0 01-2.56-.29 7.44 7.44.0 01-1.92-.67 1 1 0 01-.61-.93v-.84q0-.52.38-.52a.9.9.0 01.31.06l.42.17a8.77 8.77.0 001.83.58 9.78 9.78.0 002 .2 4.48 4.48.0 002.43-.55 1.76 1.76.0 00.86-1.57 1.61 1.61.0 00-.45-1.16A4.29 4.29.0 0043 9.22l-2.41-.76A5.15 5.15.0 0138 6.78a3.94 3.94.0 01-.83-2.41 3.7 3.7.0 01.45-1.85 4.47 4.47.0 011.19-1.37 5.27 5.27.0 011.7-.86A7.4 7.4.0 0142.6.0a8.87 8.87.0 011.12.07q.57.07 1.08.19t.95.26a4.27 4.27.0 01.7.29 1.59 1.59.0 01.49.41.94.94.0 01.15.55v.79q0 .52-.38.52a1.76 1.76.0 01-.64-.2 7.74 7.74.0 00-3.2-.64 4.37 4.37.0 00-2.21.47 1.6 1.6.0 00-.79 1.48 1.58 1.58.0 00.49 1.18 4.94 4.94.0 001.83.92L44.55 7a5.08 5.08.0 012.57 1.6A3.76 3.76.0 0147.9 11a4.21 4.21.0 01-.44 1.93 4.4 4.4.0 01-1.21 1.47 5.43 5.43.0 01-1.85.93A8.25 8.25.0 0142.05 15.62z"/><path class="cls-2" d="M45.19 23.81C39.72 27.85 31.78 30 25 30A36.64 36.64.0 01.22 20.57c-.51-.46-.06-1.09.56-.74A49.78 49.78.0 0025.53 26.4 49.23 49.23.0 0044.4 22.53C45.32 22.14 46.1 23.14 45.19 23.81z"/><path class="cls-2" d="M47.47 21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74 3.13-2.2 8.27-1.57 8.86-.83s-.16 5.89-3.09 8.35c-.45.38-.88.18-.68-.32C46.69 25.8 48.17 22.11 47.47 21.21z"/></svg></a></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
+<input data-search-input id=search-by type=search placeholder=Search...>
+<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=../../js/lunr.min.js?1764835724></script><script type=text/javascript src=../../js/auto-complete.js?1764835724></script><script type=text/javascript>var baseurl="https://aws-workshop-8slc.vercel.app/"</script><script type=text/javascript src=../../js/search.js?1764835724></script></div><div class=highlightable><ul class=topics><li data-nav-id=/1-worklog/ title="Worklog - AWS Learning Journey" class=dd-item><a href=../../1-worklog/><b>1. </b>Worklog - AWS Learning Journey
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.1-week1/ title="Week 1 - Cloud Computing Fundamentals" class=dd-item><a href=../../1-worklog/1.1-week1/><b>1.1. </b>Week 1 - Cloud Computing Fundamentals
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.1-week1/1.1.1-day01-2025-09-08/ title="Day 01 - Introduction to Cloud Computing" class=dd-item><a href=../../1-worklog/1.1-week1/1.1.1-day01-2025-09-08/><b>1.1.1. </b>Day 01 - Introduction to Cloud Computing
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.1-week1/1.1.2-day02-2025-09-09/ title="Day 02 - AWS Global Infrastructure" class=dd-item><a href=../../1-worklog/1.1-week1/1.1.2-day02-2025-09-09/><b>1.1.2. </b>Day 02 - AWS Global Infrastructure
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.1-week1/1.1.3-day03-2025-09-10/ title="Day 03 - AWS Management Tools" class=dd-item><a href=../../1-worklog/1.1-week1/1.1.3-day03-2025-09-10/><b>1.1.3. </b>Day 03 - AWS Management Tools
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.1-week1/1.1.4-day04-2025-09-11/ title="Day 04 - Cost Optimization on AWS" class=dd-item><a href=../../1-worklog/1.1-week1/1.1.4-day04-2025-09-11/><b>1.1.4. </b>Day 04 - Cost Optimization on AWS
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.1-week1/1.1.5-day05-2025-09-12/ title="Day 05 - AWS Well-Architected Framework" class=dd-item><a href=../../1-worklog/1.1-week1/1.1.5-day05-2025-09-12/><b>1.1.5. </b>Day 05 - AWS Well-Architected Framework
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.2-week2/ title="Week 2 - AWS Networking Services" class=dd-item><a href=../../1-worklog/1.2-week2/><b>1.2. </b>Week 2 - AWS Networking Services
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.2-week2/1.2.1-day06-2025-09-15/ title="Day 06 - Amazon VPC Fundamentals" class=dd-item><a href=../../1-worklog/1.2-week2/1.2.1-day06-2025-09-15/><b>1.2.1. </b>Day 06 - Amazon VPC Fundamentals
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.2-week2/1.2.2-day07-2025-09-16/ title="Day 07 - VPC Routing & Network Interfaces" class=dd-item><a href=../../1-worklog/1.2-week2/1.2.2-day07-2025-09-16/><b>1.2.2. </b>Day 07 - VPC Routing & Network Interfaces
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.2-week2/1.2.3-day08-2025-09-17/ title="Day 08 - VPC Security & Flow Logs" class=dd-item><a href=../../1-worklog/1.2-week2/1.2.3-day08-2025-09-17/><b>1.2.3. </b>Day 08 - VPC Security & Flow Logs
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.2-week2/1.2.4-day09-2025-09-18/ title="Day 09 - VPC Connectivity & Load Balancing" class=dd-item><a href=../../1-worklog/1.2-week2/1.2.4-day09-2025-09-18/><b>1.2.4. </b>Day 09 - VPC Connectivity & Load Balancing
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.2-week2/1.2.5-day10-2025-09-19/ title="Day 10 - Elastic Load Balancing" class=dd-item><a href=../../1-worklog/1.2-week2/1.2.5-day10-2025-09-19/><b>1.2.5. </b>Day 10 - Elastic Load Balancing
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.3-week3/ title="Week 3 - AWS Compute Services" class=dd-item><a href=../../1-worklog/1.3-week3/><b>1.3. </b>Week 3 - AWS Compute Services
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.3-week3/1.3.1-day11-2025-09-22/ title="Day 11 - Amazon EC2 Fundamentals" class=dd-item><a href=../../1-worklog/1.3-week3/1.3.1-day11-2025-09-22/><b>1.3.1. </b>Day 11 - Amazon EC2 Fundamentals
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.3-week3/1.3.2-day12-2025-09-23/ title="Day 12 - EC2 Storage & Backup" class=dd-item><a href=../../1-worklog/1.3-week3/1.3.2-day12-2025-09-23/><b>1.3.2. </b>Day 12 - EC2 Storage & Backup
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.3-week3/1.3.3-day13-2025-09-24/ title="Day 13 - Instance Store & User Data" class=dd-item><a href=../../1-worklog/1.3-week3/1.3.3-day13-2025-09-24/><b>1.3.3. </b>Day 13 - Instance Store & User Data
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.3-week3/1.3.4-day14-2025-09-25/ title="Day 14 - EC2 Auto Scaling" class=dd-item><a href=../../1-worklog/1.3-week3/1.3.4-day14-2025-09-25/><b>1.3.4. </b>Day 14 - EC2 Auto Scaling
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.3-week3/1.3.5-day15-2025-09-26/ title="Day 15 - Lightsail, EFS & FSx" class=dd-item><a href=../../1-worklog/1.3-week3/1.3.5-day15-2025-09-26/><b>1.3.5. </b>Day 15 - Lightsail, EFS & FSx
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.4-week4/ title="Week 4 - AWS Storage Services" class=dd-item><a href=../../1-worklog/1.4-week4/><b>1.4. </b>Week 4 - AWS Storage Services
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.4-week4/1.4.1-day16-2025-09-29/ title="Day 16 - Amazon S3 Fundamentals" class=dd-item><a href=../../1-worklog/1.4-week4/1.4.1-day16-2025-09-29/><b>1.4.1. </b>Day 16 - Amazon S3 Fundamentals
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.4-week4/1.4.2-day17-2025-09-30/ title="Day 17 - S3 Advanced Features" class=dd-item><a href=../../1-worklog/1.4-week4/1.4.2-day17-2025-09-30/><b>1.4.2. </b>Day 17 - S3 Advanced Features
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.4-week4/1.4.3-day18-2025-10-01/ title="Day 18 - AWS Snow Family & Hybrid Storage" class=dd-item><a href=../../1-worklog/1.4-week4/1.4.3-day18-2025-10-01/><b>1.4.3. </b>Day 18 - AWS Snow Family & Hybrid Storage
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.4-week4/1.4.4-day19-2025-10-02/ title="Day 19 - Disaster Recovery on AWS" class=dd-item><a href=../../1-worklog/1.4-week4/1.4.4-day19-2025-10-02/><b>1.4.4. </b>Day 19 - Disaster Recovery on AWS
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.4-week4/1.4.5-day20-2025-10-03/ title="Day 20 - AWS Backup & FSx" class=dd-item><a href=../../1-worklog/1.4-week4/1.4.5-day20-2025-10-03/><b>1.4.5. </b>Day 20 - AWS Backup & FSx
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.5-week5/ title="Week 5 - AWS Security & Identity" class=dd-item><a href=../../1-worklog/1.5-week5/><b>1.5. </b>Week 5 - AWS Security & Identity
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.5-week5/1.5.1-day21-2025-10-06/ title="Day 21 - Shared Responsibility & IAM Basics" class=dd-item><a href=../../1-worklog/1.5-week5/1.5.1-day21-2025-10-06/><b>1.5.1. </b>Day 21 - Shared Responsibility & IAM Basics
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.5-week5/1.5.2-day22-2025-10-07/ title="Day 22 - IAM Policies & Roles" class=dd-item><a href=../../1-worklog/1.5-week5/1.5.2-day22-2025-10-07/><b>1.5.2. </b>Day 22 - IAM Policies & Roles
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.5-week5/1.5.3-day23-2025-10-08/ title="Day 23 - Amazon Cognito & Organizations" class=dd-item><a href=../../1-worklog/1.5-week5/1.5.3-day23-2025-10-08/><b>1.5.3. </b>Day 23 - Amazon Cognito & Organizations
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.5-week5/1.5.4-day24-2025-10-09/ title="Day 24 - SCPs, Identity Center & KMS" class=dd-item><a href=../../1-worklog/1.5-week5/1.5.4-day24-2025-10-09/><b>1.5.4. </b>Day 24 - SCPs, Identity Center & KMS
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.5-week5/1.5.5-day25-2025-10-10/ title="Day 25 - AWS Security Hub & Automation" class=dd-item><a href=../../1-worklog/1.5-week5/1.5.5-day25-2025-10-10/><b>1.5.5. </b>Day 25 - AWS Security Hub & Automation
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.6-week6/ title="Week 6 - AWS Database Services" class=dd-item><a href=../../1-worklog/1.6-week6/><b>1.6. </b>Week 6 - AWS Database Services
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.6-week6/1.6.1-day26-2025-10-13/ title="Day 26 - Database Fundamentals" class=dd-item><a href=../../1-worklog/1.6-week6/1.6.1-day26-2025-10-13/><b>1.6.1. </b>Day 26 - Database Fundamentals
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.6-week6/1.6.2-day27-2025-10-14/ title="Day 27 - Amazon RDS & Aurora" class=dd-item><a href=../../1-worklog/1.6-week6/1.6.2-day27-2025-10-14/><b>1.6.2. </b>Day 27 - Amazon RDS & Aurora
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.6-week6/1.6.3-day28-2025-10-15/ title="Day 28 - Amazon Redshift" class=dd-item><a href=../../1-worklog/1.6-week6/1.6.3-day28-2025-10-15/><b>1.6.3. </b>Day 28 - Amazon Redshift
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.6-week6/1.6.4-day29-2025-10-16/ title="Day 29 - Amazon ElastiCache" class=dd-item><a href=../../1-worklog/1.6-week6/1.6.4-day29-2025-10-16/><b>1.6.4. </b>Day 29 - Amazon ElastiCache
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.6-week6/1.6.5-day30-2025-10-17/ title="Day 30 - Database Migration & Best Practices" class=dd-item><a href=../../1-worklog/1.6-week6/1.6.5-day30-2025-10-17/><b>1.6.5. </b>Day 30 - Database Migration & Best Practices
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.7-week7/ title="Week 7 - Vertical Slice Delivery" class=dd-item><a href=../../1-worklog/1.7-week7/><b>1.7. </b>Week 7 - Vertical Slice Delivery
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.7-week7/1.7.1-day31-2025-10-20/ title="Day 31 - Vertical Slice Kickoff" class=dd-item><a href=../../1-worklog/1.7-week7/1.7.1-day31-2025-10-20/><b>1.7.1. </b>Day 31 - Vertical Slice Kickoff
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.7-week7/1.7.2-day32-2025-10-21/ title="Day 32 - Contract-First & Mocking" class=dd-item><a href=../../1-worklog/1.7-week7/1.7.2-day32-2025-10-21/><b>1.7.2. </b>Day 32 - Contract-First & Mocking
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.7-week7/1.7.3-day33-2025-10-22/ title="Day 33 - Next.js App Router" class=dd-item><a href=../../1-worklog/1.7-week7/1.7.3-day33-2025-10-22/><b>1.7.3. </b>Day 33 - Next.js App Router
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.7-week7/1.7.4-day34-2025-10-23/ title="Day 34 - FastAPI Clean Architecture" class=dd-item><a href=../../1-worklog/1.7-week7/1.7.4-day34-2025-10-23/><b>1.7.4. </b>Day 34 - FastAPI Clean Architecture
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.7-week7/1.7.5-day35-2025-10-24/ title="Day 35 - Contract Testing & Retrospective" class=dd-item><a href=../../1-worklog/1.7-week7/1.7.5-day35-2025-10-24/><b>1.7.5. </b>Day 35 - Contract Testing & Retrospective
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.8-week8/ title="Week 8 - Learning Natural Language Processing" class=dd-item><a href=../../1-worklog/1.8-week8/><b>1.8. </b>Week 8 - Learning Natural Language Processing
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.8-week8/1.8.1-day36-2025-10-27/ title="Day 36 - Introduction to NLP & Text Preprocessing" class=dd-item><a href=../../1-worklog/1.8-week8/1.8.1-day36-2025-10-27/><b>1.8.1. </b>Day 36 - Introduction to NLP & Text Preprocessing
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.8-week8/1.8.2-day37-2025-10-28/ title="Day 37 - Advanced Text Preprocessing" class=dd-item><a href=../../1-worklog/1.8-week8/1.8.2-day37-2025-10-28/><b>1.8.2. </b>Day 37 - Advanced Text Preprocessing
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.8-week8/1.8.3-day38-2025-10-29/ title="Day 38 - Text Analysis & Sentiment Analysis" class=dd-item><a href=../../1-worklog/1.8-week8/1.8.3-day38-2025-10-29/><b>1.8.3. </b>Day 38 - Text Analysis & Sentiment Analysis
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.8-week8/1.8.4-day39-2025-10-30/ title="Day 39 - Named Entity Recognition (NER)" class=dd-item><a href=../../1-worklog/1.8-week8/1.8.4-day39-2025-10-30/><b>1.8.4. </b>Day 39 - Named Entity Recognition (NER)
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.8-week8/1.8.5-day40-2025-10-31/ title="Day 40 - Building NLP Projects" class=dd-item><a href=../../1-worklog/1.8-week8/1.8.5-day40-2025-10-31/><b>1.8.5. </b>Day 40 - Building NLP Projects
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.9-week9/ title="Week 9 - NLP Revision & Advanced Concepts" class=dd-item><a href=../../1-worklog/1.9-week9/><b>1.9. </b>Week 9 - NLP Revision & Advanced Concepts
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.9-week9/1.9.1-day41-2025-11-03/ title="Day 41 - NLP Fundamentals Revision" class=dd-item><a href=../../1-worklog/1.9-week9/1.9.1-day41-2025-11-03/><b>1.9.1. </b>Day 41 - NLP Fundamentals Revision
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.9-week9/1.9.2-day42-2025-11-04/ title="Day 42 - Advanced Text Classification" class=dd-item><a href=../../1-worklog/1.9-week9/1.9.2-day42-2025-11-04/><b>1.9.2. </b>Day 42 - Advanced Text Classification
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.9-week9/1.9.3-day43-2025-11-05/ title="Day 43 - Production Sentiment Analysis Systems" class=dd-item><a href=../../1-worklog/1.9-week9/1.9.3-day43-2025-11-05/><b>1.9.3. </b>Day 43 - Production Sentiment Analysis Systems
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.9-week9/1.9.4-day44-2025-11-06/ title="Day 44 - Advanced NER & Custom Entity Training" class=dd-item><a href=../../1-worklog/1.9-week9/1.9.4-day44-2025-11-06/><b>1.9.4. </b>Day 44 - Advanced NER & Custom Entity Training
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.9-week9/1.9.5-day45-2025-11-07/ title="Day 45 - NLP Integration & Final Project" class=dd-item><a href=../../1-worklog/1.9-week9/1.9.5-day45-2025-11-07/><b>1.9.5. </b>Day 45 - NLP Integration & Final Project
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.10-week10/ title="Week 10 - Online Library Project Completion (Frontend)" class=dd-item><a href=../../1-worklog/1.10-week10/><b>1.10. </b>Week 10 - Online Library Project Completion (Frontend)
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.10-week10/1.10.1-day46-2025-11-10/ title="Day 46 - Authentication & Project Setup" class=dd-item><a href=../../1-worklog/1.10-week10/1.10.1-day46-2025-11-10/><b>1.10.1. </b>Day 46 - Authentication & Project Setup
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.10-week10/1.10.2-day47-2025-11-11/ title="Day 47 - Book Upload Flow & Presigned URLs" class=dd-item><a href=../../1-worklog/1.10-week10/1.10.2-day47-2025-11-11/><b>1.10.2. </b>Day 47 - Book Upload Flow & Presigned URLs
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.10-week10/1.10.3-day48-2025-11-12/ title="Day 48 - Admin Panel & Approval Workflow" class=dd-item><a href=../../1-worklog/1.10-week10/1.10.3-day48-2025-11-12/><b>1.10.3. </b>Day 48 - Admin Panel & Approval Workflow
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.10-week10/1.10.4-day49-2025-11-13/ title="Day 49 - Reader Interface & Search Implementation" class=dd-item><a href=../../1-worklog/1.10-week10/1.10.4-day49-2025-11-13/><b>1.10.4. </b>Day 49 - Reader Interface & Search Implementation
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.10-week10/1.10.5-day50-2025-11-14/ title="Day 50 - Testing, Deployment & Project Completion" class=dd-item><a href=../../1-worklog/1.10-week10/1.10.5-day50-2025-11-14/><b>1.10.5. </b>Day 50 - Testing, Deployment & Project Completion
+<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li><li data-nav-id=/2-proposal/ title=Proposal class=dd-item><a href=../../2-proposal/><b>2. </b>Proposal
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/3-blogstranslated/ title="Translated Blogs" class=dd-item><a href=../../3-blogstranslated/><b>3. </b>Translated Blogs
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/3-blogstranslated/3.1-blog1/ title="Blog 1" class=dd-item><a href=../../3-blogstranslated/3.1-blog1/><b>3.1. </b>Blog 1
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/3-blogstranslated/3.2-blog2/ title="Blog 2" class=dd-item><a href=../../3-blogstranslated/3.2-blog2/><b>3.2. </b>Blog 2
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/3-blogstranslated/3.3-blog3/ title="Blog 3" class=dd-item><a href=../../3-blogstranslated/3.3-blog3/><b>3.3. </b>Blog 3
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/4-eventparticipated/ title="Events Participated" class=dd-item><a href=../../4-eventparticipated/><b>4. </b>Events Participated
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/4-eventparticipated/4.1-event1/ title="Event 1 - Vietnam Cloud Day 2025" class=dd-item><a href=../../4-eventparticipated/4.1-event1/><b>4.1. </b>Event 1 - Vietnam Cloud Day 2025
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/4-eventparticipated/4.2-event2/ title="Event 2 - AWS GenAI Builder Club" class=dd-item><a href=../../4-eventparticipated/4.2-event2/><b>4.2. </b>Event 2 - AWS GenAI Builder Club
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/5-workshop/ title="Workshop: Building an Online Library with AWS Serverless" class="dd-item
+parent"><a href=../../5-workshop/><b>5. </b>Workshop: Building an Online Library with AWS Serverless
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/5-workshop/5.1-module1/ title="Module 1: Foundation & Authentication" class=dd-item><a href=../../5-workshop/5.1-module1/><b>5.1. </b>Module 1: Foundation & Authentication
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.2-module2/ title="Module 2: Upload Infrastructure" class=dd-item><a href=../../5-workshop/5.2-module2/><b>5.2. </b>Module 2: Upload Infrastructure
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.3-module3/ title="Module 3: Hệ Thống Duyệt Admin" class=dd-item><a href=../../5-workshop/5.3-module3/><b>5.3. </b>Module 3: Hệ Thống Duyệt Admin
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.4-module4/ title="Module 4: Content Delivery with CloudFront" class="dd-item
+active"><a href=../../5-workshop/5.4-module4/><b>5.4. </b>Module 4: Content Delivery with CloudFront
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.5-module5/ title="Module 5: Search & Discovery" class=dd-item><a href=../../5-workshop/5.5-module5/><b>5.5. </b>Module 5: Search & Discovery
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.6-module6/ title="Module 6: Deployment & Operations" class=dd-item><a href=../../5-workshop/5.6-module6/><b>5.6. </b>Module 6: Deployment & Operations
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/6-self-evaluation/ title=Self-Assessment class=dd-item><a href=../../6-self-evaluation/><b>6. </b>Self-Assessment
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/7-feedback/ title="Sharing and Feedback" class=dd-item><a href=../../7-feedback/><b>7. </b>Sharing and Feedback
+<i class="fas fa-check read-icon"></i></a></li></ul><section id=shortcuts><h3>More</h3><ul><li><a class=padding href=https://www.facebook.com/groups/awsstudygroupfcj/><i class='fab fa-facebook'></i> AWS Study Group</a></li></ul></section><section id=prefooter><hr><ul><li><a class=padding><i class="fas fa-language fa-fw"></i><div class=select-style><select id=select-language onchange="location=this.value"><option id=en value=https://aws-workshop-8slc.vercel.app/5-workshop/5.4-module4/ selected>English</option><option id=vi value=https://aws-workshop-8slc.vercel.app/vi/5-workshop/5.4-module4/>Tiếng Việt</option></select><svg id="Capa_1" xmlns:xlink="http://www.w3.org/1999/xlink" width="255" height="255" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255"><g><g id="arrow-drop-down"><polygon points="0,63.75 127.5,191.25 255,63.75"/></g></g></svg></div></a></li><li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></section><section id=footer><left><b>Workshop</b><br><img src="https://hitwebcounter.com/counter/counter.php?page=7920860&style=0038&nbdigits=9&type=page&initCount=0" title=Migrate alt="web counter" border=0></a><br><b><a href=https://cloudjourney.awsstudygroup.com/>Cloud Journey</a></b><br><img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" alt="web counter" border=0>
+</left><left><br><br><b>Last Updated</b><br><i><span id=lastUpdated style=color:orange></span>
+</i><script>const today=new Date,formattedDate=today.toLocaleDateString("en-GB");document.getElementById("lastUpdated").textContent=formattedDate</script></left><left><br><br><b>Team</b><br><i><a href=https://www.facebook.com/groups/660548818043427 style=color:orange>First Cloud Journey</a><br></i></left><script async defer src=https://buttons.github.io/buttons.js></script></section></div></nav><section id=body><div id=overlay></div><div class="padding highlightable"><div><div id=top-bar><div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb><span id=sidebar-toggle-span><a href=# id=sidebar-toggle data-sidebar-toggle><i class="fas fa-bars"></i>
+</a></span><span id=toc-menu><i class="fas fa-list-alt"></i></span>
+<span class=links><a href=../../>Internship Report</a> > <a href=../../5-workshop/>Workshop: Building an Online Library with AWS Serverless</a> > Module 4: Content Delivery with CloudFront</span></div><div class=progress><div class=wrapper><nav id=TableOfContents><ul><li><a href=#overview>Overview</a></li><li><a href=#what-youll-learn>What You&rsquo;ll Learn</a></li><li><a href=#architecture-for-this-module>Architecture for This Module</a></li><li><a href=#step-1-create-cloudfront-distribution-with-oac>Step 1: Create CloudFront Distribution with OAC</a><ul><li><a href=#11-add-cloudfront-to-cdk-stack>1.1 Add CloudFront to CDK Stack</a></li><li><a href=#12-create-cloudfront-key-pair>1.2 Create CloudFront Key Pair</a></li></ul></li><li><a href=#step-2-create-lambda-for-signed-url-generation>Step 2: Create Lambda for Signed URL Generation</a><ul><li><a href=#21-create-getreadurl-lambda>2.1 Create getReadUrl Lambda</a></li><li><a href=#22-add-lambda-to-cdk>2.2 Add Lambda to CDK</a></li></ul></li><li><a href=#step-3-build-reader-interface>Step 3: Build Reader Interface</a><ul><li><a href=#31-create-reader-api-client>3.1 Create Reader API Client</a></li><li><a href=#32-create-pdf-reader-component>3.2 Create PDF Reader Component</a></li><li><a href=#33-create-reader-page>3.3 Create Reader Page</a></li></ul></li><li><a href=#verification--testing>Verification & Testing</a><ul><li><a href=#checklist>Checklist</a></li><li><a href=#common-issues--solutions>Common Issues & Solutions</a></li></ul></li><li><a href=#clean-up>Clean Up</a></li><li><a href=#next-steps>Next Steps</a></li><li><a href=#additional-resources>Additional Resources</a></li></ul></nav></div></div></div></div><div id=head-tags></div><div id=body-inner><h1>Module 4: Content Delivery with CloudFront</h1><h2 id=overview>Overview</h2><p>In this module, you&rsquo;ll implement secure content delivery using Amazon CloudFront with signed URLs. You&rsquo;ll configure Origin Access Control (OAC) to protect S3 content, generate time-limited signed URLs for authorized access, and build a PDF/ePub reader interface.</p><p><strong>Duration:</strong> ~90 minutes</p><p><strong>Services Used:</strong></p><ul><li>Amazon CloudFront (CDN with signed URLs)</li><li>Amazon S3 (protected origin)</li><li>AWS Lambda (signed URL generation)</li><li>CloudFront Key Pairs (for signing)</li></ul><hr><h2 id=what-youll-learn>What You&rsquo;ll Learn</h2><ul><li>Configure CloudFront distribution with OAC</li><li>Generate CloudFront signed URLs from Lambda</li><li>Implement URL expiration and security policies</li><li>Build PDF and ePub reader components</li><li>Handle content streaming and caching</li></ul><hr><h2 id=architecture-for-this-module>Architecture for This Module</h2><pre tabindex=0><code>User → Request Book → Lambda (getReadUrl)
+                        ↓
+                  Check DynamoDB (APPROVED?)
+                        ↓
+                  Generate CloudFront Signed URL (15 min TTL)
+                        ↓
+User ← Signed URL ← Response
+     ↓
+Access Content via CloudFront (with OAC to S3)
+</code></pre><hr><h2 id=step-1-create-cloudfront-distribution-with-oac>Step 1: Create CloudFront Distribution with OAC</h2><h3 id=11-add-cloudfront-to-cdk-stack>1.1 Add CloudFront to CDK Stack</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// filepath: lib/online-library-cdk-stack.ts
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>cloudfront</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;aws-cdk-lib/aws-cloudfront&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>origins</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;aws-cdk-lib/aws-cloudfront-origins&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>OnlineLibraryCdkStack</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>cdk</span>.<span style=color:#a6e22e>Stack</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>constructor</span>(<span style=color:#a6e22e>scope</span>: <span style=color:#66d9ef>Construct</span>, <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>string</span>, <span style=color:#a6e22e>props?</span>: <span style=color:#66d9ef>cdk.StackProps</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>super</span>(<span style=color:#a6e22e>scope</span>, <span style=color:#a6e22e>id</span>, <span style=color:#a6e22e>props</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// ...existing code...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Create Origin Access Control (OAC)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>oac</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cloudfront</span>.<span style=color:#a6e22e>CfnOriginAccessControl</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;BooksOAC&#39;</span>, {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>originAccessControlConfig</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>name</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;online-library-oac&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>originAccessControlOriginType</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;s3&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>signingBehavior</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;always&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>signingProtocol</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;sigv4&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>description</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;OAC for Online Library books bucket&#39;</span>,
+</span></span><span style=display:flex><span>      },
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Create CloudFront Distribution
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>distribution</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cloudfront</span>.<span style=color:#a6e22e>Distribution</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;BooksDistribution&#39;</span>, {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>defaultBehavior</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>origin</span>: <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>origins</span>.<span style=color:#a6e22e>S3Origin</span>(<span style=color:#a6e22e>booksBucket</span>),
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>viewerProtocolPolicy</span>: <span style=color:#66d9ef>cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>cachePolicy</span>: <span style=color:#66d9ef>cloudfront.CachePolicy.CACHING_OPTIMIZED</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>originRequestPolicy</span>: <span style=color:#66d9ef>cloudfront.OriginRequestPolicy.CORS_S3_ORIGIN</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>trustedKeyGroups</span><span style=color:#f92672>:</span> [<span style=color:#75715e>/* Will add signing key group */</span>],
+</span></span><span style=display:flex><span>      },
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>priceClass</span>: <span style=color:#66d9ef>cloudfront.PriceClass.PRICE_CLASS_200</span>,
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>enableLogging</span>: <span style=color:#66d9ef>true</span>,
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>logBucket</span>: <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>s3</span>.<span style=color:#a6e22e>Bucket</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;CloudFrontLogsBucket&#39;</span>, {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>bucketName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>`online-library-cf-logs-</span><span style=color:#e6db74>${</span><span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>account</span><span style=color:#e6db74>}</span><span style=color:#e6db74>`</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>removalPolicy</span>: <span style=color:#66d9ef>cdk.RemovalPolicy.DESTROY</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>autoDeleteObjects</span>: <span style=color:#66d9ef>true</span>,
+</span></span><span style=display:flex><span>      }),
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Update S3 bucket policy to allow only CloudFront OAC
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>booksBucket</span>.<span style=color:#a6e22e>addToResourcePolicy</span>(
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>iam</span>.<span style=color:#a6e22e>PolicyStatement</span>({
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>actions</span><span style=color:#f92672>:</span> [<span style=color:#e6db74>&#39;s3:GetObject&#39;</span>],
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>resources</span><span style=color:#f92672>:</span> [<span style=color:#e6db74>`</span><span style=color:#e6db74>${</span><span style=color:#a6e22e>booksBucket</span>.<span style=color:#a6e22e>bucketArn</span><span style=color:#e6db74>}</span><span style=color:#e6db74>/public/books/*`</span>],
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>principals</span><span style=color:#f92672>:</span> [<span style=color:#66d9ef>new</span> <span style=color:#a6e22e>iam</span>.<span style=color:#a6e22e>ServicePrincipal</span>(<span style=color:#e6db74>&#39;cloudfront.amazonaws.com&#39;</span>)],
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>conditions</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>&#39;StringEquals&#39;</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;AWS:SourceArn&#39;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>`arn:aws:cloudfront::</span><span style=color:#e6db74>${</span><span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>account</span><span style=color:#e6db74>}</span><span style=color:#e6db74>:distribution/</span><span style=color:#e6db74>${</span><span style=color:#a6e22e>distribution</span>.<span style=color:#a6e22e>distributionId</span><span style=color:#e6db74>}</span><span style=color:#e6db74>`</span>,
+</span></span><span style=display:flex><span>          },
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>      })
+</span></span><span style=display:flex><span>    );
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Output distribution domain
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cdk</span>.<span style=color:#a6e22e>CfnOutput</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;DistributionDomain&#39;</span>, {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>value</span>: <span style=color:#66d9ef>distribution.distributionDomainName</span>,
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>exportName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;OnlineLibraryDistributionDomain&#39;</span>,
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cdk</span>.<span style=color:#a6e22e>CfnOutput</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;DistributionId&#39;</span>, {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>value</span>: <span style=color:#66d9ef>distribution.distributionId</span>,
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>exportName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;OnlineLibraryDistributionId&#39;</span>,
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=12-create-cloudfront-key-pair>1.2 Create CloudFront Key Pair</h3><p>Via AWS Console (one-time setup):</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 1. Navigate to CloudFront Console</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 2. Go to Key Management → Public keys</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 3. Create a new key pair</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 4. Download private key (keep secure!)</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 5. Note the Key ID</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Store private key in Secrets Manager</span>
+</span></span><span style=display:flex><span>aws secretsmanager create-secret <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --name online-library/cloudfront-private-key <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --secret-string file://private_key.pem <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --region ap-southeast-1
+</span></span></code></pre></div><hr><h2 id=step-2-create-lambda-for-signed-url-generation>Step 2: Create Lambda for Signed URL Generation</h2><h3 id=21-create-getreadurl-lambda>2.1 Create getReadUrl Lambda</h3><p>Create <code>lambda/getReadUrl/index.py</code>:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># filepath: lambda/getReadUrl/index.py</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> json
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> boto3
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> datetime <span style=color:#f92672>import</span> datetime, timedelta
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> cryptography.hazmat.primitives <span style=color:#f92672>import</span> hashes, serialization
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> cryptography.hazmat.primitives.asymmetric <span style=color:#f92672>import</span> padding
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> cryptography.hazmat.backends <span style=color:#f92672>import</span> default_backend
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> base64
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> os
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>dynamodb <span style=color:#f92672>=</span> boto3<span style=color:#f92672>.</span>resource(<span style=color:#e6db74>&#39;dynamodb&#39;</span>)
+</span></span><span style=display:flex><span>secrets_manager <span style=color:#f92672>=</span> boto3<span style=color:#f92672>.</span>client(<span style=color:#e6db74>&#39;secretsmanager&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>BOOKS_TABLE <span style=color:#f92672>=</span> os<span style=color:#f92672>.</span>environ[<span style=color:#e6db74>&#39;BOOKS_TABLE&#39;</span>]
+</span></span><span style=display:flex><span>DISTRIBUTION_DOMAIN <span style=color:#f92672>=</span> os<span style=color:#f92672>.</span>environ[<span style=color:#e6db74>&#39;DISTRIBUTION_DOMAIN&#39;</span>]
+</span></span><span style=display:flex><span>KEY_PAIR_ID <span style=color:#f92672>=</span> os<span style=color:#f92672>.</span>environ[<span style=color:#e6db74>&#39;KEY_PAIR_ID&#39;</span>]
+</span></span><span style=display:flex><span>PRIVATE_KEY_SECRET <span style=color:#f92672>=</span> os<span style=color:#f92672>.</span>environ[<span style=color:#e6db74>&#39;PRIVATE_KEY_SECRET&#39;</span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>table <span style=color:#f92672>=</span> dynamodb<span style=color:#f92672>.</span>Table(BOOKS_TABLE)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Cache private key</span>
+</span></span><span style=display:flex><span>_private_key <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_private_key</span>():
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;Retrieve and cache CloudFront private key&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>global</span> _private_key
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> _private_key <span style=color:#f92672>is</span> <span style=color:#66d9ef>None</span>:
+</span></span><span style=display:flex><span>        response <span style=color:#f92672>=</span> secrets_manager<span style=color:#f92672>.</span>get_secret_value(SecretId<span style=color:#f92672>=</span>PRIVATE_KEY_SECRET)
+</span></span><span style=display:flex><span>        key_pem <span style=color:#f92672>=</span> response[<span style=color:#e6db74>&#39;SecretString&#39;</span>]
+</span></span><span style=display:flex><span>        _private_key <span style=color:#f92672>=</span> serialization<span style=color:#f92672>.</span>load_pem_private_key(
+</span></span><span style=display:flex><span>            key_pem<span style=color:#f92672>.</span>encode(),
+</span></span><span style=display:flex><span>            password<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>,
+</span></span><span style=display:flex><span>            backend<span style=color:#f92672>=</span>default_backend()
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> _private_key
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>create_signed_url</span>(url, expires_in_minutes<span style=color:#f92672>=</span><span style=color:#ae81ff>15</span>):
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;Generate CloudFront signed URL&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Calculate expiration time</span>
+</span></span><span style=display:flex><span>    expire_time <span style=color:#f92672>=</span> datetime<span style=color:#f92672>.</span>utcnow() <span style=color:#f92672>+</span> timedelta(minutes<span style=color:#f92672>=</span>expires_in_minutes)
+</span></span><span style=display:flex><span>    expire_timestamp <span style=color:#f92672>=</span> int(expire_time<span style=color:#f92672>.</span>timestamp())
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Create policy</span>
+</span></span><span style=display:flex><span>    policy <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Statement&#34;</span>: [
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;Resource&#34;</span>: url,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;Condition&#34;</span>: {
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;DateLessThan&#34;</span>: {
+</span></span><span style=display:flex><span>                        <span style=color:#e6db74>&#34;AWS:EpochTime&#34;</span>: expire_timestamp
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        ]
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    policy_json <span style=color:#f92672>=</span> json<span style=color:#f92672>.</span>dumps(policy, separators<span style=color:#f92672>=</span>(<span style=color:#e6db74>&#39;,&#39;</span>, <span style=color:#e6db74>&#39;:&#39;</span>))
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Sign policy</span>
+</span></span><span style=display:flex><span>    private_key <span style=color:#f92672>=</span> get_private_key()
+</span></span><span style=display:flex><span>    signature <span style=color:#f92672>=</span> private_key<span style=color:#f92672>.</span>sign(
+</span></span><span style=display:flex><span>        policy_json<span style=color:#f92672>.</span>encode(),
+</span></span><span style=display:flex><span>        padding<span style=color:#f92672>.</span>PKCS1v15(),
+</span></span><span style=display:flex><span>        hashes<span style=color:#f92672>.</span>SHA1()
+</span></span><span style=display:flex><span>    )
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Encode for URL</span>
+</span></span><span style=display:flex><span>    policy_b64 <span style=color:#f92672>=</span> base64<span style=color:#f92672>.</span>b64encode(policy_json<span style=color:#f92672>.</span>encode())<span style=color:#f92672>.</span>decode()
+</span></span><span style=display:flex><span>    signature_b64 <span style=color:#f92672>=</span> base64<span style=color:#f92672>.</span>b64encode(signature)<span style=color:#f92672>.</span>decode()
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># URL-safe encoding</span>
+</span></span><span style=display:flex><span>    policy_b64 <span style=color:#f92672>=</span> policy_b64<span style=color:#f92672>.</span>replace(<span style=color:#e6db74>&#39;+&#39;</span>, <span style=color:#e6db74>&#39;-&#39;</span>)<span style=color:#f92672>.</span>replace(<span style=color:#e6db74>&#39;=&#39;</span>, <span style=color:#e6db74>&#39;_&#39;</span>)<span style=color:#f92672>.</span>replace(<span style=color:#e6db74>&#39;/&#39;</span>, <span style=color:#e6db74>&#39;~&#39;</span>)
+</span></span><span style=display:flex><span>    signature_b64 <span style=color:#f92672>=</span> signature_b64<span style=color:#f92672>.</span>replace(<span style=color:#e6db74>&#39;+&#39;</span>, <span style=color:#e6db74>&#39;-&#39;</span>)<span style=color:#f92672>.</span>replace(<span style=color:#e6db74>&#39;=&#39;</span>, <span style=color:#e6db74>&#39;_&#39;</span>)<span style=color:#f92672>.</span>replace(<span style=color:#e6db74>&#39;/&#39;</span>, <span style=color:#e6db74>&#39;~&#39;</span>)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Build signed URL</span>
+</span></span><span style=display:flex><span>    signed_url <span style=color:#f92672>=</span> <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{</span>url<span style=color:#e6db74>}</span><span style=color:#e6db74>?Policy=</span><span style=color:#e6db74>{</span>policy_b64<span style=color:#e6db74>}</span><span style=color:#e6db74>&amp;Signature=</span><span style=color:#e6db74>{</span>signature_b64<span style=color:#e6db74>}</span><span style=color:#e6db74>&amp;Key-Pair-Id=</span><span style=color:#e6db74>{</span>KEY_PAIR_ID<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> signed_url, expire_timestamp
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>lambda_handler</span>(event, context):
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Generate signed URL for approved book
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>try</span>:
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Get book ID from path</span>
+</span></span><span style=display:flex><span>        book_id <span style=color:#f92672>=</span> event[<span style=color:#e6db74>&#39;pathParameters&#39;</span>][<span style=color:#e6db74>&#39;bookId&#39;</span>]
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Get user info from JWT</span>
+</span></span><span style=display:flex><span>        claims <span style=color:#f92672>=</span> event[<span style=color:#e6db74>&#39;requestContext&#39;</span>][<span style=color:#e6db74>&#39;authorizer&#39;</span>][<span style=color:#e6db74>&#39;jwt&#39;</span>][<span style=color:#e6db74>&#39;claims&#39;</span>]
+</span></span><span style=display:flex><span>        user_id <span style=color:#f92672>=</span> claims[<span style=color:#e6db74>&#39;sub&#39;</span>]
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Get book metadata</span>
+</span></span><span style=display:flex><span>        response <span style=color:#f92672>=</span> table<span style=color:#f92672>.</span>get_item(
+</span></span><span style=display:flex><span>            Key<span style=color:#f92672>=</span>{
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;bookId&#39;</span>: book_id,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;version&#39;</span>: <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#e6db74>&#39;Item&#39;</span> <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> response:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> {
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;statusCode&#39;</span>: <span style=color:#ae81ff>404</span>,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;body&#39;</span>: json<span style=color:#f92672>.</span>dumps({<span style=color:#e6db74>&#39;error&#39;</span>: <span style=color:#e6db74>&#39;Book not found&#39;</span>})
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        book <span style=color:#f92672>=</span> response[<span style=color:#e6db74>&#39;Item&#39;</span>]
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Check if book is approved</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> book[<span style=color:#e6db74>&#39;status&#39;</span>] <span style=color:#f92672>!=</span> <span style=color:#e6db74>&#39;APPROVED&#39;</span>:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> {
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;statusCode&#39;</span>: <span style=color:#ae81ff>403</span>,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;body&#39;</span>: json<span style=color:#f92672>.</span>dumps({
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#39;error&#39;</span>: <span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;Book not available. Status: </span><span style=color:#e6db74>{</span>book[<span style=color:#e6db74>&#34;status&#34;</span>]<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>
+</span></span><span style=display:flex><span>                })
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Build CloudFront URL</span>
+</span></span><span style=display:flex><span>        s3_key <span style=color:#f92672>=</span> book[<span style=color:#e6db74>&#39;publicS3Key&#39;</span>]  <span style=color:#75715e># e.g., public/books/book-id.pdf</span>
+</span></span><span style=display:flex><span>        cloudfront_url <span style=color:#f92672>=</span> <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;https://</span><span style=color:#e6db74>{</span>DISTRIBUTION_DOMAIN<span style=color:#e6db74>}</span><span style=color:#e6db74>/</span><span style=color:#e6db74>{</span>s3_key<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Generate signed URL</span>
+</span></span><span style=display:flex><span>        signed_url, expires_at <span style=color:#f92672>=</span> create_signed_url(cloudfront_url)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Optional: Log access</span>
+</span></span><span style=display:flex><span>        print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;User </span><span style=color:#e6db74>{</span>user_id<span style=color:#e6db74>}</span><span style=color:#e6db74> accessed book </span><span style=color:#e6db74>{</span>book_id<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> {
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;statusCode&#39;</span>: <span style=color:#ae81ff>200</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;headers&#39;</span>: {
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;Content-Type&#39;</span>: <span style=color:#e6db74>&#39;application/json&#39;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;Access-Control-Allow-Origin&#39;</span>: <span style=color:#e6db74>&#39;*&#39;</span>,
+</span></span><span style=display:flex><span>            },
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;body&#39;</span>: json<span style=color:#f92672>.</span>dumps({
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;url&#39;</span>: signed_url,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;expiresAt&#39;</span>: expires_at,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;title&#39;</span>: book[<span style=color:#e6db74>&#39;title&#39;</span>],
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;author&#39;</span>: book[<span style=color:#e6db74>&#39;author&#39;</span>],
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;fileType&#39;</span>: book[<span style=color:#e6db74>&#39;fileType&#39;</span>],
+</span></span><span style=display:flex><span>            })
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>except</span> <span style=color:#a6e22e>Exception</span> <span style=color:#66d9ef>as</span> e:
+</span></span><span style=display:flex><span>        print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Error: </span><span style=color:#e6db74>{</span>str(e)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> {
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;statusCode&#39;</span>: <span style=color:#ae81ff>500</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;body&#39;</span>: json<span style=color:#f92672>.</span>dumps({<span style=color:#e6db74>&#39;error&#39;</span>: <span style=color:#e6db74>&#39;Internal server error&#39;</span>})
+</span></span><span style=display:flex><span>        }
+</span></span></code></pre></div><h3 id=22-add-lambda-to-cdk>2.2 Add Lambda to CDK</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// filepath: lib/online-library-cdk-stack.ts
+</span></span></span><span style=display:flex><span><span style=color:#75715e>// ...existing code...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Create Lambda layer for cryptography
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>cryptographyLayer</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>lambda</span>.<span style=color:#a6e22e>LayerVersion</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;CryptographyLayer&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>code</span>: <span style=color:#66d9ef>lambda.Code.fromAsset</span>(<span style=color:#e6db74>&#39;lambda/layers/cryptography&#39;</span>),
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>compatibleRuntimes</span><span style=color:#f92672>:</span> [<span style=color:#a6e22e>lambda</span>.<span style=color:#a6e22e>Runtime</span>.<span style=color:#a6e22e>PYTHON_3_9</span>],
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>description</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;Cryptography library for CloudFront signing&#39;</span>,
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Create getReadUrl Lambda
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>getReadUrlFunction</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>lambda</span>.Function(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;GetReadUrl&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>runtime</span>: <span style=color:#66d9ef>lambda.Runtime.PYTHON_3_9</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>handler</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;index.lambda_handler&#39;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>code</span>: <span style=color:#66d9ef>lambda.Code.fromAsset</span>(<span style=color:#e6db74>&#39;lambda/getReadUrl&#39;</span>),
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>layers</span><span style=color:#f92672>:</span> [<span style=color:#a6e22e>cryptographyLayer</span>],
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>environment</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>BOOKS_TABLE</span>: <span style=color:#66d9ef>booksTable.tableName</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>DISTRIBUTION_DOMAIN</span>: <span style=color:#66d9ef>distribution.distributionDomainName</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>KEY_PAIR_ID</span>: <span style=color:#66d9ef>process.env.CLOUDFRONT_KEY_PAIR_ID</span><span style=color:#f92672>!</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>PRIVATE_KEY_SECRET</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;online-library/cloudfront-private-key&#39;</span>,
+</span></span><span style=display:flex><span>  },
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>timeout</span>: <span style=color:#66d9ef>cdk.Duration.seconds</span>(<span style=color:#ae81ff>30</span>),
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Grant permissions
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>booksTable</span>.<span style=color:#a6e22e>grantReadData</span>(<span style=color:#a6e22e>getReadUrlFunction</span>);
+</span></span><span style=display:flex><span><span style=color:#a6e22e>getReadUrlFunction</span>.<span style=color:#a6e22e>addToRolePolicy</span>(
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>iam</span>.<span style=color:#a6e22e>PolicyStatement</span>({
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>actions</span><span style=color:#f92672>:</span> [<span style=color:#e6db74>&#39;secretsmanager:GetSecretValue&#39;</span>],
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>resources</span><span style=color:#f92672>:</span> [
+</span></span><span style=display:flex><span>      <span style=color:#e6db74>`arn:aws:secretsmanager:</span><span style=color:#e6db74>${</span><span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>region</span><span style=color:#e6db74>}</span><span style=color:#e6db74>:</span><span style=color:#e6db74>${</span><span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>account</span><span style=color:#e6db74>}</span><span style=color:#e6db74>:secret:online-library/cloudfront-private-key-*`</span>,
+</span></span><span style=display:flex><span>    ],
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Add API route
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>httpApi</span>.<span style=color:#a6e22e>addRoutes</span>({
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>path</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;/books/{bookId}/read&#39;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>methods</span><span style=color:#f92672>:</span> [<span style=color:#a6e22e>apigateway</span>.<span style=color:#a6e22e>HttpMethod</span>.<span style=color:#a6e22e>GET</span>],
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>integration</span>: <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>integrations</span>.<span style=color:#a6e22e>HttpLambdaIntegration</span>(
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#39;GetReadUrlIntegration&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>getReadUrlFunction</span>
+</span></span><span style=display:flex><span>  ),
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>authorizer</span>: <span style=color:#66d9ef>jwtAuthorizer</span>,
+</span></span><span style=display:flex><span>});
+</span></span></code></pre></div><hr><h2 id=step-3-build-reader-interface>Step 3: Build Reader Interface</h2><h3 id=31-create-reader-api-client>3.1 Create Reader API Client</h3><p>Create <code>src/lib/api/reader.ts</code>:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// filepath: src/lib/api/reader.ts
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>fetchAuthSession</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;aws-amplify/auth&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>ReadUrlResponse</span> {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>url</span>: <span style=color:#66d9ef>string</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>expiresAt</span>: <span style=color:#66d9ef>number</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>title</span>: <span style=color:#66d9ef>string</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>author</span>: <span style=color:#66d9ef>string</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>fileType</span>: <span style=color:#66d9ef>string</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getReadUrl</span>(<span style=color:#a6e22e>bookId</span>: <span style=color:#66d9ef>string</span>)<span style=color:#f92672>:</span> <span style=color:#a6e22e>Promise</span>&lt;<span style=color:#f92672>ReadUrlResponse</span>&gt; {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>session</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>fetchAuthSession</span>();
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>idToken</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>session</span>.<span style=color:#a6e22e>tokens</span><span style=color:#f92672>?</span>.<span style=color:#a6e22e>idToken</span><span style=color:#f92672>?</span>.<span style=color:#a6e22e>toString</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>response</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>fetch</span>(
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>`</span><span style=color:#e6db74>${</span><span style=color:#a6e22e>process</span>.<span style=color:#a6e22e>env</span>.<span style=color:#a6e22e>NEXT_PUBLIC_API_URL</span><span style=color:#e6db74>}</span><span style=color:#e6db74>/books/</span><span style=color:#e6db74>${</span><span style=color:#a6e22e>bookId</span><span style=color:#e6db74>}</span><span style=color:#e6db74>/read`</span>,
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>headers</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#39;Authorization&#39;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>`Bearer </span><span style=color:#e6db74>${</span><span style=color:#a6e22e>idToken</span><span style=color:#e6db74>}</span><span style=color:#e6db74>`</span>,
+</span></span><span style=display:flex><span>      },
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  );
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span><span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>ok</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>error</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>json</span>();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> Error(<span style=color:#a6e22e>error</span>.<span style=color:#a6e22e>error</span> <span style=color:#f92672>||</span> <span style=color:#e6db74>&#39;Failed to get read URL&#39;</span>);
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>json</span>();
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=32-create-pdf-reader-component>3.2 Create PDF Reader Component</h3><p>Create <code>src/components/reader/PdfReader.tsx</code>:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// filepath: src/components/reader/PdfReader.tsx
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#e6db74>&#39;use client&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>useState</span>, <span style=color:#a6e22e>useEffect</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Document</span>, <span style=color:#a6e22e>Page</span>, <span style=color:#a6e22e>pdfjs</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-pdf&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#e6db74>&#39;react-pdf/dist/Page/AnnotationLayer.css&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#e6db74>&#39;react-pdf/dist/Page/TextLayer.css&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Configure PDF.js worker
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>pdfjs</span>.<span style=color:#a6e22e>GlobalWorkerOptions</span>.<span style=color:#a6e22e>workerSrc</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>`//cdnjs.cloudflare.com/ajax/libs/pdf.js/</span><span style=color:#e6db74>${</span><span style=color:#a6e22e>pdfjs</span>.<span style=color:#a6e22e>version</span><span style=color:#e6db74>}</span><span style=color:#e6db74>/pdf.worker.min.js`</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>PdfReaderProps</span> {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>url</span>: <span style=color:#66d9ef>string</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>title</span>: <span style=color:#66d9ef>string</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>PdfReader</span>({ <span style=color:#a6e22e>url</span>, <span style=color:#a6e22e>title</span> }<span style=color:#f92672>:</span> <span style=color:#a6e22e>PdfReaderProps</span>) {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> [<span style=color:#a6e22e>numPages</span>, <span style=color:#a6e22e>setNumPages</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>useState</span>&lt;<span style=color:#f92672>number</span>&gt;(<span style=color:#ae81ff>0</span>);
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> [<span style=color:#a6e22e>pageNumber</span>, <span style=color:#a6e22e>setPageNumber</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>useState</span>&lt;<span style=color:#f92672>number</span>&gt;(<span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> [<span style=color:#a6e22e>scale</span>, <span style=color:#a6e22e>setScale</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>useState</span>&lt;<span style=color:#f92672>number</span>&gt;(<span style=color:#ae81ff>1.0</span>);
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> [<span style=color:#a6e22e>loading</span>, <span style=color:#a6e22e>setLoading</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>useState</span>&lt;<span style=color:#f92672>boolean</span>&gt;(<span style=color:#66d9ef>true</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>onDocumentLoadSuccess</span>({ <span style=color:#a6e22e>numPages</span> }<span style=color:#f92672>:</span> { <span style=color:#a6e22e>numPages</span>: <span style=color:#66d9ef>number</span> }) {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>setNumPages</span>(<span style=color:#a6e22e>numPages</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>setLoading</span>(<span style=color:#66d9ef>false</span>);
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>goToPrevPage</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>setPageNumber</span>((<span style=color:#a6e22e>prev</span>) <span style=color:#f92672>=&gt;</span> Math.<span style=color:#a6e22e>max</span>(<span style=color:#a6e22e>prev</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>));
+</span></span><span style=display:flex><span>  };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>goToNextPage</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>setPageNumber</span>((<span style=color:#a6e22e>prev</span>) <span style=color:#f92672>=&gt;</span> Math.<span style=color:#a6e22e>min</span>(<span style=color:#a6e22e>prev</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, <span style=color:#a6e22e>numPages</span>));
+</span></span><span style=display:flex><span>  };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>zoomIn</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>setScale</span>((<span style=color:#a6e22e>prev</span>) <span style=color:#f92672>=&gt;</span> Math.<span style=color:#a6e22e>min</span>(<span style=color:#a6e22e>prev</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>0.2</span>, <span style=color:#ae81ff>2.0</span>));
+</span></span><span style=display:flex><span>  };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>zoomOut</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>setScale</span>((<span style=color:#a6e22e>prev</span>) <span style=color:#f92672>=&gt;</span> Math.<span style=color:#a6e22e>max</span>(<span style=color:#a6e22e>prev</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>0.2</span>, <span style=color:#ae81ff>0.5</span>));
+</span></span><span style=display:flex><span>  };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> (
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;flex flex-col h-screen bg-gray-900&#34;</span>&gt;
+</span></span><span style=display:flex><span>      {<span style=color:#75715e>/* Toolbar */</span>}
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;bg-gray-800 text-white p-4 flex justify-between items-center&#34;</span>&gt;
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>          &lt;<span style=color:#f92672>h1</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text-xl font-bold&#34;</span>&gt;{<span style=color:#a6e22e>title</span>}&lt;/<span style=color:#f92672>h1</span>&gt;
+</span></span><span style=display:flex><span>          &lt;<span style=color:#f92672>p</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text-sm text-gray-400&#34;</span>&gt;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>Page</span> {<span style=color:#a6e22e>pageNumber</span>} <span style=color:#66d9ef>of</span> {<span style=color:#a6e22e>numPages</span>}
+</span></span><span style=display:flex><span>          &lt;/<span style=color:#f92672>p</span>&gt;
+</span></span><span style=display:flex><span>        &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;flex gap-2&#34;</span>&gt;
+</span></span><span style=display:flex><span>          {<span style=color:#75715e>/* Zoom controls */</span>}
+</span></span><span style=display:flex><span>          &lt;<span style=color:#f92672>button</span>
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>onClick</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>zoomOut</span>}
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;px-3 py-2 bg-gray-700 rounded hover:bg-gray-600&#34;</span>
+</span></span><span style=display:flex><span>          &gt;
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-</span>
+</span></span><span style=display:flex><span>          &lt;/<span style=color:#f92672>button</span>&gt;
+</span></span><span style=display:flex><span>          &lt;<span style=color:#f92672>span</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;px-3 py-2&#34;</span>&gt;{Math.<span style=color:#a6e22e>round</span>(<span style=color:#a6e22e>scale</span> <span style=color:#f92672>*</span> <span style=color:#ae81ff>100</span>)}<span style=color:#f92672>%</span>&lt;/<span style=color:#f92672>span</span>&gt;
+</span></span><span style=display:flex><span>          &lt;<span style=color:#f92672>button</span>
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>onClick</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>zoomIn</span>}
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;px-3 py-2 bg-gray-700 rounded hover:bg-gray-600&#34;</span>
+</span></span><span style=display:flex><span>          &gt;
+</span></span><span style=display:flex><span>            <span style=color:#f92672>+</span>
+</span></span><span style=display:flex><span>          &lt;/<span style=color:#f92672>button</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>          {<span style=color:#75715e>/* Navigation */</span>}
+</span></span><span style=display:flex><span>          &lt;<span style=color:#f92672>button</span>
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>onClick</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>goToPrevPage</span>}
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>disabled</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>pageNumber</span> <span style=color:#f92672>&lt;=</span> <span style=color:#ae81ff>1</span>}
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;px-4 py-2 bg-blue-600 rounded hover:bg-blue-700 disabled:bg-gray-600&#34;</span>
+</span></span><span style=display:flex><span>          &gt;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>Previous</span>
+</span></span><span style=display:flex><span>          &lt;/<span style=color:#f92672>button</span>&gt;
+</span></span><span style=display:flex><span>          &lt;<span style=color:#f92672>button</span>
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>onClick</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>goToNextPage</span>}
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>disabled</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>pageNumber</span> <span style=color:#f92672>&gt;=</span> <span style=color:#a6e22e>numPages</span>}
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;px-4 py-2 bg-blue-600 rounded hover:bg-blue-700 disabled:bg-gray-600&#34;</span>
+</span></span><span style=display:flex><span>          &gt;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>Next</span>
+</span></span><span style=display:flex><span>          &lt;/<span style=color:#f92672>button</span>&gt;
+</span></span><span style=display:flex><span>        &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>      &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      {<span style=color:#75715e>/* PDF Viewer */</span>}
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;flex-1 overflow-auto bg-gray-900 flex justify-center p-4&#34;</span>&gt;
+</span></span><span style=display:flex><span>        {<span style=color:#a6e22e>loading</span> <span style=color:#f92672>&amp;&amp;</span> (
+</span></span><span style=display:flex><span>          &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text-white&#34;</span>&gt;<span style=color:#a6e22e>Loading</span> <span style=color:#a6e22e>PDF</span>...&lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>        )}
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>Document</span>
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>file</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>url</span>}
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>onLoadSuccess</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>onDocumentLoadSuccess</span>}
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>loading</span><span style=color:#f92672>=</span>{&lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text-white&#34;</span>&gt;<span style=color:#a6e22e>Loading</span> document...&lt;/<span style=color:#f92672>div</span>&gt;}
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>error</span><span style=color:#f92672>=</span>{&lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text-red-500&#34;</span>&gt;<span style=color:#a6e22e>Failed</span> <span style=color:#a6e22e>to</span> <span style=color:#a6e22e>load</span> <span style=color:#a6e22e>PDF</span>&lt;/<span style=color:#f92672>div</span>&gt;}
+</span></span><span style=display:flex><span>        &gt;
+</span></span><span style=display:flex><span>          &lt;<span style=color:#f92672>Page</span>
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>pageNumber</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>pageNumber</span>}
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>scale</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>scale</span>}
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>renderTextLayer</span><span style=color:#f92672>=</span>{<span style=color:#66d9ef>true</span>}
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>renderAnnotationLayer</span><span style=color:#f92672>=</span>{<span style=color:#66d9ef>true</span>}
+</span></span><span style=display:flex><span>          /&gt;
+</span></span><span style=display:flex><span>        &lt;/<span style=color:#f92672>Document</span>&gt;
+</span></span><span style=display:flex><span>      &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>  );
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=33-create-reader-page>3.3 Create Reader Page</h3><p>Create <code>src/app/read/[bookId]/page.tsx</code>:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// filepath: src/app/read/[bookId]/page.tsx
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#e6db74>&#39;use client&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>useEffect</span>, <span style=color:#a6e22e>useState</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>useParams</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;next/navigation&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>ProtectedRoute</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@/components/auth/ProtectedRoute&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>PdfReader</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@/components/reader/PdfReader&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>getReadUrl</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@/lib/api/reader&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>ReadPage() {</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>params</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>useParams</span>();
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>bookId</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>params</span>.<span style=color:#a6e22e>bookId</span> <span style=color:#66d9ef>as</span> <span style=color:#66d9ef>string</span>;
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> [<span style=color:#a6e22e>readUrl</span>, <span style=color:#a6e22e>setReadUrl</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>useState</span>&lt;<span style=color:#f92672>string</span> <span style=color:#960050;background-color:#1e0010>|</span> <span style=color:#a6e22e>null</span>&gt;(<span style=color:#66d9ef>null</span>);
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> [<span style=color:#a6e22e>title</span>, <span style=color:#a6e22e>setTitle</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>useState</span>&lt;<span style=color:#f92672>string</span>&gt;(<span style=color:#e6db74>&#39;&#39;</span>);
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> [<span style=color:#a6e22e>loading</span>, <span style=color:#a6e22e>setLoading</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>useState</span>(<span style=color:#66d9ef>true</span>);
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> [<span style=color:#a6e22e>error</span>, <span style=color:#a6e22e>setError</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>useState</span>&lt;<span style=color:#f92672>string</span> <span style=color:#960050;background-color:#1e0010>|</span> <span style=color:#a6e22e>null</span>&gt;(<span style=color:#66d9ef>null</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>useEffect</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>fetchReadUrl() {</span>
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>data</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>getReadUrl</span>(<span style=color:#a6e22e>bookId</span>);
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>setReadUrl</span>(<span style=color:#a6e22e>data</span>.<span style=color:#a6e22e>url</span>);
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>setTitle</span>(<span style=color:#a6e22e>data</span>.<span style=color:#a6e22e>title</span>);
+</span></span><span style=display:flex><span>      } <span style=color:#66d9ef>catch</span> (<span style=color:#a6e22e>err</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>setError</span>(<span style=color:#a6e22e>err</span> <span style=color:#66d9ef>instanceof</span> Error <span style=color:#f92672>?</span> <span style=color:#a6e22e>err</span>.<span style=color:#a6e22e>message</span> <span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;Failed to load book&#39;</span>);
+</span></span><span style=display:flex><span>      } <span style=color:#66d9ef>finally</span> {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>setLoading</span>(<span style=color:#66d9ef>false</span>);
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fetchReadUrl</span>();
+</span></span><span style=display:flex><span>  }, [<span style=color:#a6e22e>bookId</span>]);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>loading</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> (
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;min-h-screen flex items-center justify-center&#34;</span>&gt;
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900&#34;</span>&gt;&lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>      &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>    );
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>error</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> (
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;min-h-screen flex items-center justify-center&#34;</span>&gt;
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text-center&#34;</span>&gt;
+</span></span><span style=display:flex><span>          &lt;<span style=color:#f92672>h1</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text-2xl font-bold text-red-600 mb-4&#34;</span>&gt;Error&lt;/<span style=color:#f92672>h1</span>&gt;
+</span></span><span style=display:flex><span>          &lt;<span style=color:#f92672>p</span>&gt;{<span style=color:#a6e22e>error</span>}&lt;/<span style=color:#f92672>p</span>&gt;
+</span></span><span style=display:flex><span>        &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>      &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>    );
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> (
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>ProtectedRoute</span>&gt;
+</span></span><span style=display:flex><span>      {<span style=color:#a6e22e>readUrl</span> <span style=color:#f92672>&amp;&amp;</span> &lt;<span style=color:#f92672>PdfReader</span> <span style=color:#a6e22e>url</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>readUrl</span>} <span style=color:#a6e22e>title</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>title</span>} /&gt;}
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>ProtectedRoute</span>&gt;
+</span></span><span style=display:flex><span>  );
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><hr><h2 id=verification--testing>Verification & Testing</h2><h3 id=checklist>Checklist</h3><ul><li>CloudFront distribution created with OAC</li><li>S3 bucket policy allows only CloudFront access</li><li>Lambda generates valid signed URLs</li><li>Signed URLs expire after TTL</li><li>PDF renders correctly in browser</li><li>Navigation controls work (prev/next page)</li><li>Zoom functionality works</li><li>Unauthorized users cannot access content</li></ul><h3 id=common-issues--solutions>Common Issues & Solutions</h3><p><strong>Issue:</strong> PDF fails to load with CORS error<br><strong>Solution:</strong> Verify CloudFront CORS settings and S3 bucket CORS configuration</p><p><strong>Issue:</strong> Signed URL expires too quickly<br><strong>Solution:</strong> Adjust TTL in Lambda or implement URL refresh mechanism</p><p><strong>Issue:</strong> PDF.js worker fails to load<br><strong>Solution:</strong> Ensure PDF.js worker URL is accessible and version matches</p><hr><h2 id=clean-up>Clean Up</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>cdk destroy
+</span></span></code></pre></div><hr><h2 id=next-steps>Next Steps</h2><p>Congratulations! You&rsquo;ve completed Module 4. You now have:</p><ul><li>Secure content delivery via CloudFront</li><li>Signed URL generation with expiration</li><li>PDF reader with navigation and zoom</li><li>Protected S3 content with OAC</li></ul><p><strong>Continue to:</strong> <a href=../../5-workshop/5.5-module5/>Module 5: Search & Discovery</a></p><hr><h2 id=additional-resources>Additional Resources</h2><ul><li><a href=https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-signed-urls.html>CloudFront Signed URLs Documentation</a></li><li><a href=https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html>CloudFront OAC Guide</a></li><li><a href=https://github.com/wojtekmaj/react-pdf>React PDF Documentation</a></li></ul><footer class=footline></footer></div></div><div id=navigation><a class="nav nav-prev" href=../../5-workshop/5.3-module3/ title="Module 3: Hệ Thống Duyệt Admin"><i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=../../5-workshop/5.5-module5/ title="Module 5: Search & Discovery" style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=../../js/clipboard.min.js?1764835724></script><script src=../../js/perfect-scrollbar.min.js?1764835724></script><script src=../../js/perfect-scrollbar.jquery.min.js?1764835724></script><script src=../../js/jquery.sticky.js?1764835724></script><script src=../../js/featherlight.min.js?1764835724></script><script src=../../js/highlight.pack.js?1764835724></script><script>hljs.initHighlightingOnLoad()</script><script src=../../js/modernizr.custom-3.6.0.js?1764835724></script><script src=../../js/learn.js?1764835724></script><script src=../../js/hugo-learn.js?1764835724></script><link href=../../mermaid/mermaid.css?1764835724 rel=stylesheet><script src=../../mermaid/mermaid.js?1764835724></script><script>mermaid.initialize({startOnLoad:!0})</script><script>(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,(e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date),(i=t.createElement(n),a=t.getElementsByTagName(n)[0]),i.async=1,i.src=s,a.parentNode.insertBefore(i,a)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-158079754-2","auto"),ga("send","pageview")</script></body></html>

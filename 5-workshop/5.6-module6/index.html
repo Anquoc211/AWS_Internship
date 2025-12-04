@@ -1,0 +1,546 @@
+<!doctype html><html lang=en class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.134.3"><meta name=description content><meta name=author content="thienlh@thienlu.com"><link rel=icon href=../../images/favicon.png type=image/png><title>Module 6: Deployment & Operations :: Internship Report</title>
+<link href=../../css/nucleus.css?1764835724 rel=stylesheet><link href=../../css/fontawesome-all.min.css?1764835724 rel=stylesheet><link href=../../css/hybrid.css?1764835724 rel=stylesheet><link href=../../css/featherlight.min.css?1764835724 rel=stylesheet><link href=../../css/perfect-scrollbar.min.css?1764835724 rel=stylesheet><link href=../../css/auto-complete.css?1764835724 rel=stylesheet><link href=../../css/atom-one-dark-reasonable.css?1764835724 rel=stylesheet><link href=../../css/theme.css?1764835724 rel=stylesheet><link href=../../css/hugo-theme.css?1764835724 rel=stylesheet><link href=../../css/theme-workshop.css?1764835724 rel=stylesheet><script src=../../js/jquery-3.3.1.min.js?1764835724></script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=../../5-workshop/5.6-module6/><nav id=sidebar class=showVisitedLinks><div id=header-wrapper><div id=header><a id=logo href=../../><svg id="Layer_1" data-name="Layer 1" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff}.cls-2{fill:#f90;fill-rule:evenodd}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09 10.85a4.7 4.7.0 00.19 1.48 7.73 7.73.0 00.54 1.19.77.77.0 01.12.38.64.64.0 01-.32.49l-1 .7a.83.83.0 01-.44.15.69.69.0 01-.49-.23 3.8 3.8.0 01-.6-.77q-.25-.42-.51-1a6.14 6.14.0 01-4.89 2.3 4.54 4.54.0 01-3.32-1.19 4.27 4.27.0 01-1.22-3.2 4.28 4.28.0 011.46-3.4A6.06 6.06.0 017.69 6.46a12.47 12.47.0 011.76.13q.92.13 1.91.36V5.73a3.65 3.65.0 00-.79-2.66A3.81 3.81.0 007.86 2.3a7.71 7.71.0 00-1.79.22 12.78 12.78.0 00-1.79.57 4.55 4.55.0 01-.58.22h-.26q-.35.0-.35-.52V2a1.09 1.09.0 01.12-.58 1.2 1.2.0 01.47-.35A10.88 10.88.0 015.77.32 10.19 10.19.0 018.36.0a6 6 0 014.35 1.35 5.49 5.49.0 011.38 4.09zM7.34 13.38a5.36 5.36.0 001.72-.31A3.63 3.63.0 0010.63 12 2.62 2.62.0 0011.19 11a5.63 5.63.0 00.16-1.44v-.7a14.35 14.35.0 00-1.53-.28 12.37 12.37.0 00-1.56-.1 3.84 3.84.0 00-2.47.67A2.34 2.34.0 005 11a2.35 2.35.0 00.61 1.76A2.4 2.4.0 007.34 13.38zm13.35 1.8a1 1 0 01-.64-.16 1.3 1.3.0 01-.35-.65L15.81 1.51a3 3 0 01-.15-.67.36.36.0 01.41-.41H17.7a1 1 0 01.65.16 1.4 1.4.0 01.33.65l2.79 11 2.59-11A1.17 1.17.0 0124.39.6a1.1 1.1.0 01.67-.16H26.4a1.1 1.1.0 01.67.16 1.17 1.17.0 01.32.65L30 12.39 32.88 1.25A1.39 1.39.0 0133.22.6a1 1 0 01.65-.16h1.54a.36.36.0 01.41.41 1.36 1.36.0 010 .26 3.64 3.64.0 01-.12.41l-4 12.86a1.3 1.3.0 01-.35.65 1 1 0 01-.64.16H29.25a1 1 0 01-.67-.17 1.26 1.26.0 01-.32-.67L25.67 3.64l-2.56 10.7a1.26 1.26.0 01-.32.67 1 1 0 01-.67.17zm21.36.44a11.28 11.28.0 01-2.56-.29 7.44 7.44.0 01-1.92-.67 1 1 0 01-.61-.93v-.84q0-.52.38-.52a.9.9.0 01.31.06l.42.17a8.77 8.77.0 001.83.58 9.78 9.78.0 002 .2 4.48 4.48.0 002.43-.55 1.76 1.76.0 00.86-1.57 1.61 1.61.0 00-.45-1.16A4.29 4.29.0 0043 9.22l-2.41-.76A5.15 5.15.0 0138 6.78a3.94 3.94.0 01-.83-2.41 3.7 3.7.0 01.45-1.85 4.47 4.47.0 011.19-1.37 5.27 5.27.0 011.7-.86A7.4 7.4.0 0142.6.0a8.87 8.87.0 011.12.07q.57.07 1.08.19t.95.26a4.27 4.27.0 01.7.29 1.59 1.59.0 01.49.41.94.94.0 01.15.55v.79q0 .52-.38.52a1.76 1.76.0 01-.64-.2 7.74 7.74.0 00-3.2-.64 4.37 4.37.0 00-2.21.47 1.6 1.6.0 00-.79 1.48 1.58 1.58.0 00.49 1.18 4.94 4.94.0 001.83.92L44.55 7a5.08 5.08.0 012.57 1.6A3.76 3.76.0 0147.9 11a4.21 4.21.0 01-.44 1.93 4.4 4.4.0 01-1.21 1.47 5.43 5.43.0 01-1.85.93A8.25 8.25.0 0142.05 15.62z"/><path class="cls-2" d="M45.19 23.81C39.72 27.85 31.78 30 25 30A36.64 36.64.0 01.22 20.57c-.51-.46-.06-1.09.56-.74A49.78 49.78.0 0025.53 26.4 49.23 49.23.0 0044.4 22.53C45.32 22.14 46.1 23.14 45.19 23.81z"/><path class="cls-2" d="M47.47 21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74 3.13-2.2 8.27-1.57 8.86-.83s-.16 5.89-3.09 8.35c-.45.38-.88.18-.68-.32C46.69 25.8 48.17 22.11 47.47 21.21z"/></svg></a></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
+<input data-search-input id=search-by type=search placeholder=Search...>
+<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=../../js/lunr.min.js?1764835724></script><script type=text/javascript src=../../js/auto-complete.js?1764835724></script><script type=text/javascript>var baseurl="https://aws-workshop-8slc.vercel.app/"</script><script type=text/javascript src=../../js/search.js?1764835724></script></div><div class=highlightable><ul class=topics><li data-nav-id=/1-worklog/ title="Worklog - AWS Learning Journey" class=dd-item><a href=../../1-worklog/><b>1. </b>Worklog - AWS Learning Journey
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.1-week1/ title="Week 1 - Cloud Computing Fundamentals" class=dd-item><a href=../../1-worklog/1.1-week1/><b>1.1. </b>Week 1 - Cloud Computing Fundamentals
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.1-week1/1.1.1-day01-2025-09-08/ title="Day 01 - Introduction to Cloud Computing" class=dd-item><a href=../../1-worklog/1.1-week1/1.1.1-day01-2025-09-08/><b>1.1.1. </b>Day 01 - Introduction to Cloud Computing
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.1-week1/1.1.2-day02-2025-09-09/ title="Day 02 - AWS Global Infrastructure" class=dd-item><a href=../../1-worklog/1.1-week1/1.1.2-day02-2025-09-09/><b>1.1.2. </b>Day 02 - AWS Global Infrastructure
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.1-week1/1.1.3-day03-2025-09-10/ title="Day 03 - AWS Management Tools" class=dd-item><a href=../../1-worklog/1.1-week1/1.1.3-day03-2025-09-10/><b>1.1.3. </b>Day 03 - AWS Management Tools
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.1-week1/1.1.4-day04-2025-09-11/ title="Day 04 - Cost Optimization on AWS" class=dd-item><a href=../../1-worklog/1.1-week1/1.1.4-day04-2025-09-11/><b>1.1.4. </b>Day 04 - Cost Optimization on AWS
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.1-week1/1.1.5-day05-2025-09-12/ title="Day 05 - AWS Well-Architected Framework" class=dd-item><a href=../../1-worklog/1.1-week1/1.1.5-day05-2025-09-12/><b>1.1.5. </b>Day 05 - AWS Well-Architected Framework
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.2-week2/ title="Week 2 - AWS Networking Services" class=dd-item><a href=../../1-worklog/1.2-week2/><b>1.2. </b>Week 2 - AWS Networking Services
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.2-week2/1.2.1-day06-2025-09-15/ title="Day 06 - Amazon VPC Fundamentals" class=dd-item><a href=../../1-worklog/1.2-week2/1.2.1-day06-2025-09-15/><b>1.2.1. </b>Day 06 - Amazon VPC Fundamentals
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.2-week2/1.2.2-day07-2025-09-16/ title="Day 07 - VPC Routing & Network Interfaces" class=dd-item><a href=../../1-worklog/1.2-week2/1.2.2-day07-2025-09-16/><b>1.2.2. </b>Day 07 - VPC Routing & Network Interfaces
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.2-week2/1.2.3-day08-2025-09-17/ title="Day 08 - VPC Security & Flow Logs" class=dd-item><a href=../../1-worklog/1.2-week2/1.2.3-day08-2025-09-17/><b>1.2.3. </b>Day 08 - VPC Security & Flow Logs
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.2-week2/1.2.4-day09-2025-09-18/ title="Day 09 - VPC Connectivity & Load Balancing" class=dd-item><a href=../../1-worklog/1.2-week2/1.2.4-day09-2025-09-18/><b>1.2.4. </b>Day 09 - VPC Connectivity & Load Balancing
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.2-week2/1.2.5-day10-2025-09-19/ title="Day 10 - Elastic Load Balancing" class=dd-item><a href=../../1-worklog/1.2-week2/1.2.5-day10-2025-09-19/><b>1.2.5. </b>Day 10 - Elastic Load Balancing
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.3-week3/ title="Week 3 - AWS Compute Services" class=dd-item><a href=../../1-worklog/1.3-week3/><b>1.3. </b>Week 3 - AWS Compute Services
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.3-week3/1.3.1-day11-2025-09-22/ title="Day 11 - Amazon EC2 Fundamentals" class=dd-item><a href=../../1-worklog/1.3-week3/1.3.1-day11-2025-09-22/><b>1.3.1. </b>Day 11 - Amazon EC2 Fundamentals
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.3-week3/1.3.2-day12-2025-09-23/ title="Day 12 - EC2 Storage & Backup" class=dd-item><a href=../../1-worklog/1.3-week3/1.3.2-day12-2025-09-23/><b>1.3.2. </b>Day 12 - EC2 Storage & Backup
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.3-week3/1.3.3-day13-2025-09-24/ title="Day 13 - Instance Store & User Data" class=dd-item><a href=../../1-worklog/1.3-week3/1.3.3-day13-2025-09-24/><b>1.3.3. </b>Day 13 - Instance Store & User Data
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.3-week3/1.3.4-day14-2025-09-25/ title="Day 14 - EC2 Auto Scaling" class=dd-item><a href=../../1-worklog/1.3-week3/1.3.4-day14-2025-09-25/><b>1.3.4. </b>Day 14 - EC2 Auto Scaling
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.3-week3/1.3.5-day15-2025-09-26/ title="Day 15 - Lightsail, EFS & FSx" class=dd-item><a href=../../1-worklog/1.3-week3/1.3.5-day15-2025-09-26/><b>1.3.5. </b>Day 15 - Lightsail, EFS & FSx
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.4-week4/ title="Week 4 - AWS Storage Services" class=dd-item><a href=../../1-worklog/1.4-week4/><b>1.4. </b>Week 4 - AWS Storage Services
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.4-week4/1.4.1-day16-2025-09-29/ title="Day 16 - Amazon S3 Fundamentals" class=dd-item><a href=../../1-worklog/1.4-week4/1.4.1-day16-2025-09-29/><b>1.4.1. </b>Day 16 - Amazon S3 Fundamentals
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.4-week4/1.4.2-day17-2025-09-30/ title="Day 17 - S3 Advanced Features" class=dd-item><a href=../../1-worklog/1.4-week4/1.4.2-day17-2025-09-30/><b>1.4.2. </b>Day 17 - S3 Advanced Features
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.4-week4/1.4.3-day18-2025-10-01/ title="Day 18 - AWS Snow Family & Hybrid Storage" class=dd-item><a href=../../1-worklog/1.4-week4/1.4.3-day18-2025-10-01/><b>1.4.3. </b>Day 18 - AWS Snow Family & Hybrid Storage
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.4-week4/1.4.4-day19-2025-10-02/ title="Day 19 - Disaster Recovery on AWS" class=dd-item><a href=../../1-worklog/1.4-week4/1.4.4-day19-2025-10-02/><b>1.4.4. </b>Day 19 - Disaster Recovery on AWS
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.4-week4/1.4.5-day20-2025-10-03/ title="Day 20 - AWS Backup & FSx" class=dd-item><a href=../../1-worklog/1.4-week4/1.4.5-day20-2025-10-03/><b>1.4.5. </b>Day 20 - AWS Backup & FSx
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.5-week5/ title="Week 5 - AWS Security & Identity" class=dd-item><a href=../../1-worklog/1.5-week5/><b>1.5. </b>Week 5 - AWS Security & Identity
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.5-week5/1.5.1-day21-2025-10-06/ title="Day 21 - Shared Responsibility & IAM Basics" class=dd-item><a href=../../1-worklog/1.5-week5/1.5.1-day21-2025-10-06/><b>1.5.1. </b>Day 21 - Shared Responsibility & IAM Basics
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.5-week5/1.5.2-day22-2025-10-07/ title="Day 22 - IAM Policies & Roles" class=dd-item><a href=../../1-worklog/1.5-week5/1.5.2-day22-2025-10-07/><b>1.5.2. </b>Day 22 - IAM Policies & Roles
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.5-week5/1.5.3-day23-2025-10-08/ title="Day 23 - Amazon Cognito & Organizations" class=dd-item><a href=../../1-worklog/1.5-week5/1.5.3-day23-2025-10-08/><b>1.5.3. </b>Day 23 - Amazon Cognito & Organizations
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.5-week5/1.5.4-day24-2025-10-09/ title="Day 24 - SCPs, Identity Center & KMS" class=dd-item><a href=../../1-worklog/1.5-week5/1.5.4-day24-2025-10-09/><b>1.5.4. </b>Day 24 - SCPs, Identity Center & KMS
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.5-week5/1.5.5-day25-2025-10-10/ title="Day 25 - AWS Security Hub & Automation" class=dd-item><a href=../../1-worklog/1.5-week5/1.5.5-day25-2025-10-10/><b>1.5.5. </b>Day 25 - AWS Security Hub & Automation
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.6-week6/ title="Week 6 - AWS Database Services" class=dd-item><a href=../../1-worklog/1.6-week6/><b>1.6. </b>Week 6 - AWS Database Services
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.6-week6/1.6.1-day26-2025-10-13/ title="Day 26 - Database Fundamentals" class=dd-item><a href=../../1-worklog/1.6-week6/1.6.1-day26-2025-10-13/><b>1.6.1. </b>Day 26 - Database Fundamentals
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.6-week6/1.6.2-day27-2025-10-14/ title="Day 27 - Amazon RDS & Aurora" class=dd-item><a href=../../1-worklog/1.6-week6/1.6.2-day27-2025-10-14/><b>1.6.2. </b>Day 27 - Amazon RDS & Aurora
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.6-week6/1.6.3-day28-2025-10-15/ title="Day 28 - Amazon Redshift" class=dd-item><a href=../../1-worklog/1.6-week6/1.6.3-day28-2025-10-15/><b>1.6.3. </b>Day 28 - Amazon Redshift
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.6-week6/1.6.4-day29-2025-10-16/ title="Day 29 - Amazon ElastiCache" class=dd-item><a href=../../1-worklog/1.6-week6/1.6.4-day29-2025-10-16/><b>1.6.4. </b>Day 29 - Amazon ElastiCache
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.6-week6/1.6.5-day30-2025-10-17/ title="Day 30 - Database Migration & Best Practices" class=dd-item><a href=../../1-worklog/1.6-week6/1.6.5-day30-2025-10-17/><b>1.6.5. </b>Day 30 - Database Migration & Best Practices
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.7-week7/ title="Week 7 - Vertical Slice Delivery" class=dd-item><a href=../../1-worklog/1.7-week7/><b>1.7. </b>Week 7 - Vertical Slice Delivery
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.7-week7/1.7.1-day31-2025-10-20/ title="Day 31 - Vertical Slice Kickoff" class=dd-item><a href=../../1-worklog/1.7-week7/1.7.1-day31-2025-10-20/><b>1.7.1. </b>Day 31 - Vertical Slice Kickoff
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.7-week7/1.7.2-day32-2025-10-21/ title="Day 32 - Contract-First & Mocking" class=dd-item><a href=../../1-worklog/1.7-week7/1.7.2-day32-2025-10-21/><b>1.7.2. </b>Day 32 - Contract-First & Mocking
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.7-week7/1.7.3-day33-2025-10-22/ title="Day 33 - Next.js App Router" class=dd-item><a href=../../1-worklog/1.7-week7/1.7.3-day33-2025-10-22/><b>1.7.3. </b>Day 33 - Next.js App Router
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.7-week7/1.7.4-day34-2025-10-23/ title="Day 34 - FastAPI Clean Architecture" class=dd-item><a href=../../1-worklog/1.7-week7/1.7.4-day34-2025-10-23/><b>1.7.4. </b>Day 34 - FastAPI Clean Architecture
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.7-week7/1.7.5-day35-2025-10-24/ title="Day 35 - Contract Testing & Retrospective" class=dd-item><a href=../../1-worklog/1.7-week7/1.7.5-day35-2025-10-24/><b>1.7.5. </b>Day 35 - Contract Testing & Retrospective
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.8-week8/ title="Week 8 - Learning Natural Language Processing" class=dd-item><a href=../../1-worklog/1.8-week8/><b>1.8. </b>Week 8 - Learning Natural Language Processing
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.8-week8/1.8.1-day36-2025-10-27/ title="Day 36 - Introduction to NLP & Text Preprocessing" class=dd-item><a href=../../1-worklog/1.8-week8/1.8.1-day36-2025-10-27/><b>1.8.1. </b>Day 36 - Introduction to NLP & Text Preprocessing
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.8-week8/1.8.2-day37-2025-10-28/ title="Day 37 - Advanced Text Preprocessing" class=dd-item><a href=../../1-worklog/1.8-week8/1.8.2-day37-2025-10-28/><b>1.8.2. </b>Day 37 - Advanced Text Preprocessing
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.8-week8/1.8.3-day38-2025-10-29/ title="Day 38 - Text Analysis & Sentiment Analysis" class=dd-item><a href=../../1-worklog/1.8-week8/1.8.3-day38-2025-10-29/><b>1.8.3. </b>Day 38 - Text Analysis & Sentiment Analysis
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.8-week8/1.8.4-day39-2025-10-30/ title="Day 39 - Named Entity Recognition (NER)" class=dd-item><a href=../../1-worklog/1.8-week8/1.8.4-day39-2025-10-30/><b>1.8.4. </b>Day 39 - Named Entity Recognition (NER)
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.8-week8/1.8.5-day40-2025-10-31/ title="Day 40 - Building NLP Projects" class=dd-item><a href=../../1-worklog/1.8-week8/1.8.5-day40-2025-10-31/><b>1.8.5. </b>Day 40 - Building NLP Projects
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.9-week9/ title="Week 9 - NLP Revision & Advanced Concepts" class=dd-item><a href=../../1-worklog/1.9-week9/><b>1.9. </b>Week 9 - NLP Revision & Advanced Concepts
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.9-week9/1.9.1-day41-2025-11-03/ title="Day 41 - NLP Fundamentals Revision" class=dd-item><a href=../../1-worklog/1.9-week9/1.9.1-day41-2025-11-03/><b>1.9.1. </b>Day 41 - NLP Fundamentals Revision
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.9-week9/1.9.2-day42-2025-11-04/ title="Day 42 - Advanced Text Classification" class=dd-item><a href=../../1-worklog/1.9-week9/1.9.2-day42-2025-11-04/><b>1.9.2. </b>Day 42 - Advanced Text Classification
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.9-week9/1.9.3-day43-2025-11-05/ title="Day 43 - Production Sentiment Analysis Systems" class=dd-item><a href=../../1-worklog/1.9-week9/1.9.3-day43-2025-11-05/><b>1.9.3. </b>Day 43 - Production Sentiment Analysis Systems
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.9-week9/1.9.4-day44-2025-11-06/ title="Day 44 - Advanced NER & Custom Entity Training" class=dd-item><a href=../../1-worklog/1.9-week9/1.9.4-day44-2025-11-06/><b>1.9.4. </b>Day 44 - Advanced NER & Custom Entity Training
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.9-week9/1.9.5-day45-2025-11-07/ title="Day 45 - NLP Integration & Final Project" class=dd-item><a href=../../1-worklog/1.9-week9/1.9.5-day45-2025-11-07/><b>1.9.5. </b>Day 45 - NLP Integration & Final Project
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.10-week10/ title="Week 10 - Online Library Project Completion (Frontend)" class=dd-item><a href=../../1-worklog/1.10-week10/><b>1.10. </b>Week 10 - Online Library Project Completion (Frontend)
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.10-week10/1.10.1-day46-2025-11-10/ title="Day 46 - Authentication & Project Setup" class=dd-item><a href=../../1-worklog/1.10-week10/1.10.1-day46-2025-11-10/><b>1.10.1. </b>Day 46 - Authentication & Project Setup
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.10-week10/1.10.2-day47-2025-11-11/ title="Day 47 - Book Upload Flow & Presigned URLs" class=dd-item><a href=../../1-worklog/1.10-week10/1.10.2-day47-2025-11-11/><b>1.10.2. </b>Day 47 - Book Upload Flow & Presigned URLs
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.10-week10/1.10.3-day48-2025-11-12/ title="Day 48 - Admin Panel & Approval Workflow" class=dd-item><a href=../../1-worklog/1.10-week10/1.10.3-day48-2025-11-12/><b>1.10.3. </b>Day 48 - Admin Panel & Approval Workflow
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.10-week10/1.10.4-day49-2025-11-13/ title="Day 49 - Reader Interface & Search Implementation" class=dd-item><a href=../../1-worklog/1.10-week10/1.10.4-day49-2025-11-13/><b>1.10.4. </b>Day 49 - Reader Interface & Search Implementation
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.10-week10/1.10.5-day50-2025-11-14/ title="Day 50 - Testing, Deployment & Project Completion" class=dd-item><a href=../../1-worklog/1.10-week10/1.10.5-day50-2025-11-14/><b>1.10.5. </b>Day 50 - Testing, Deployment & Project Completion
+<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li><li data-nav-id=/2-proposal/ title=Proposal class=dd-item><a href=../../2-proposal/><b>2. </b>Proposal
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/3-blogstranslated/ title="Translated Blogs" class=dd-item><a href=../../3-blogstranslated/><b>3. </b>Translated Blogs
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/3-blogstranslated/3.1-blog1/ title="Blog 1" class=dd-item><a href=../../3-blogstranslated/3.1-blog1/><b>3.1. </b>Blog 1
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/3-blogstranslated/3.2-blog2/ title="Blog 2" class=dd-item><a href=../../3-blogstranslated/3.2-blog2/><b>3.2. </b>Blog 2
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/3-blogstranslated/3.3-blog3/ title="Blog 3" class=dd-item><a href=../../3-blogstranslated/3.3-blog3/><b>3.3. </b>Blog 3
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/4-eventparticipated/ title="Events Participated" class=dd-item><a href=../../4-eventparticipated/><b>4. </b>Events Participated
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/4-eventparticipated/4.1-event1/ title="Event 1 - Vietnam Cloud Day 2025" class=dd-item><a href=../../4-eventparticipated/4.1-event1/><b>4.1. </b>Event 1 - Vietnam Cloud Day 2025
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/4-eventparticipated/4.2-event2/ title="Event 2 - AWS GenAI Builder Club" class=dd-item><a href=../../4-eventparticipated/4.2-event2/><b>4.2. </b>Event 2 - AWS GenAI Builder Club
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/5-workshop/ title="Workshop: Building an Online Library with AWS Serverless" class="dd-item
+parent"><a href=../../5-workshop/><b>5. </b>Workshop: Building an Online Library with AWS Serverless
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/5-workshop/5.1-module1/ title="Module 1: Foundation & Authentication" class=dd-item><a href=../../5-workshop/5.1-module1/><b>5.1. </b>Module 1: Foundation & Authentication
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.2-module2/ title="Module 2: Upload Infrastructure" class=dd-item><a href=../../5-workshop/5.2-module2/><b>5.2. </b>Module 2: Upload Infrastructure
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.3-module3/ title="Module 3: Hệ Thống Duyệt Admin" class=dd-item><a href=../../5-workshop/5.3-module3/><b>5.3. </b>Module 3: Hệ Thống Duyệt Admin
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.4-module4/ title="Module 4: Content Delivery with CloudFront" class=dd-item><a href=../../5-workshop/5.4-module4/><b>5.4. </b>Module 4: Content Delivery with CloudFront
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.5-module5/ title="Module 5: Search & Discovery" class=dd-item><a href=../../5-workshop/5.5-module5/><b>5.5. </b>Module 5: Search & Discovery
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.6-module6/ title="Module 6: Deployment & Operations" class="dd-item
+active"><a href=../../5-workshop/5.6-module6/><b>5.6. </b>Module 6: Deployment & Operations
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/6-self-evaluation/ title=Self-Assessment class=dd-item><a href=../../6-self-evaluation/><b>6. </b>Self-Assessment
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/7-feedback/ title="Sharing and Feedback" class=dd-item><a href=../../7-feedback/><b>7. </b>Sharing and Feedback
+<i class="fas fa-check read-icon"></i></a></li></ul><section id=shortcuts><h3>More</h3><ul><li><a class=padding href=https://www.facebook.com/groups/awsstudygroupfcj/><i class='fab fa-facebook'></i> AWS Study Group</a></li></ul></section><section id=prefooter><hr><ul><li><a class=padding><i class="fas fa-language fa-fw"></i><div class=select-style><select id=select-language onchange="location=this.value"><option id=en value=https://aws-workshop-8slc.vercel.app/5-workshop/5.6-module6/ selected>English</option><option id=vi value=https://aws-workshop-8slc.vercel.app/vi/5-workshop/5.6-module6/>Tiếng Việt</option></select><svg id="Capa_1" xmlns:xlink="http://www.w3.org/1999/xlink" width="255" height="255" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255"><g><g id="arrow-drop-down"><polygon points="0,63.75 127.5,191.25 255,63.75"/></g></g></svg></div></a></li><li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></section><section id=footer><left><b>Workshop</b><br><img src="https://hitwebcounter.com/counter/counter.php?page=7920860&style=0038&nbdigits=9&type=page&initCount=0" title=Migrate alt="web counter" border=0></a><br><b><a href=https://cloudjourney.awsstudygroup.com/>Cloud Journey</a></b><br><img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" alt="web counter" border=0>
+</left><left><br><br><b>Last Updated</b><br><i><span id=lastUpdated style=color:orange></span>
+</i><script>const today=new Date,formattedDate=today.toLocaleDateString("en-GB");document.getElementById("lastUpdated").textContent=formattedDate</script></left><left><br><br><b>Team</b><br><i><a href=https://www.facebook.com/groups/660548818043427 style=color:orange>First Cloud Journey</a><br></i></left><script async defer src=https://buttons.github.io/buttons.js></script></section></div></nav><section id=body><div id=overlay></div><div class="padding highlightable"><div><div id=top-bar><div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb><span id=sidebar-toggle-span><a href=# id=sidebar-toggle data-sidebar-toggle><i class="fas fa-bars"></i>
+</a></span><span id=toc-menu><i class="fas fa-list-alt"></i></span>
+<span class=links><a href=../../>Internship Report</a> > <a href=../../5-workshop/>Workshop: Building an Online Library with AWS Serverless</a> > Module 6: Deployment & Operations
+          
+        
+ </span></div><div class=progress><div class=wrapper><nav id=TableOfContents><ul><li><a href=#overview>Overview</a></li><li><a href=#what-youll-learn>What You&rsquo;ll Learn</a></li><li><a href=#architecture-for-this-module>Architecture for This Module</a></li><li><a href=#step-1-set-up-cicd-with-amplify>Step 1: Set Up CI/CD with Amplify</a><ul><li><a href=#11-configure-amplify-build-settings>1.1 Configure Amplify Build Settings</a></li><li><a href=#12-set-up-environment-variables>1.2 Set Up Environment Variables</a></li><li><a href=#13-configure-branch-deployments>1.3 Configure Branch Deployments</a></li></ul></li><li><a href=#step-2-cloudwatch-monitoring>Step 2: CloudWatch Monitoring</a><ul><li><a href=#21-create-cloudwatch-dashboard>2.1 Create CloudWatch Dashboard</a></li><li><a href=#22-set-up-cloudwatch-alarms>2.2 Set Up CloudWatch Alarms</a></li></ul></li><li><a href=#step-3-cost-monitoring--optimization>Step 3: Cost Monitoring & Optimization</a><ul><li><a href=#31-set-up-aws-budgets>3.1 Set Up AWS Budgets</a></li><li><a href=#32-cost-optimization-strategies>3.2 Cost Optimization Strategies</a></li></ul></li><li><a href=#step-4-security-hardening>Step 4: Security Hardening</a><ul><li><a href=#41-iam-least-privilege>4.1 IAM Least Privilege</a></li><li><a href=#42-enable-encryption>4.2 Enable Encryption</a></li><li><a href=#43-api-security>4.3 API Security</a></li></ul></li><li><a href=#step-5-distributed-tracing-with-x-ray>Step 5: Distributed Tracing with X-Ray</a><ul><li><a href=#51-enable-x-ray-for-lambda>5.1 Enable X-Ray for Lambda</a></li><li><a href=#52-add-x-ray-sdk-to-lambda>5.2 Add X-Ray SDK to Lambda</a></li></ul></li><li><a href=#step-6-operational-runbooks>Step 6: Operational Runbooks</a><ul><li><a href=#61-incident-response-procedures>6.1 Incident Response Procedures</a></li><li><a href=#62-backup--disaster-recovery>6.2 Backup & Disaster Recovery</a></li></ul></li><li><a href=#verification--testing>Verification & Testing</a><ul><li><a href=#checklist>Checklist</a></li><li><a href=#load-testing>Load Testing</a></li></ul></li><li><a href=#clean-up>Clean Up</a><ul><li><a href=#complete-resource-cleanup>Complete Resource Cleanup</a></li></ul></li><li><a href=#workshop-summary>Workshop Summary</a><ul><li><a href=#technical-achievements>Technical Achievements</a></li><li><a href=#skills-acquired>Skills Acquired</a></li><li><a href=#cost-summary>Cost Summary</a></li><li><a href=#next-steps>Next Steps</a></li></ul></li><li><a href=#additional-resources>Additional Resources</a></li></ul></nav></div></div></div></div><div id=head-tags></div><div id=body-inner><h1>Module 6: Deployment & Operations</h1><h2 id=overview>Overview</h2><p>In this final module, you&rsquo;ll set up production deployment with CI/CD, implement monitoring and alerting, optimize costs, and apply security hardening to the Online Library platform. You&rsquo;ll also learn operational best practices for running serverless applications at scale.</p><p><strong>Duration:</strong> ~90 minutes</p><p><strong>Services Used:</strong></p><ul><li>AWS Amplify (CI/CD)</li><li>Amazon CloudWatch (monitoring, alarms)</li><li>AWS CloudFormation (stack updates)</li><li>AWS Budgets (cost alerts)</li><li>AWS X-Ray (tracing)</li></ul><hr><h2 id=what-youll-learn>What You&rsquo;ll Learn</h2><ul><li>Set up automated CI/CD with Amplify and CDK</li><li>Configure CloudWatch dashboards and alarms</li><li>Implement cost monitoring and optimization</li><li>Apply security best practices and hardening</li><li>Set up distributed tracing with X-Ray</li><li>Create operational runbooks and documentation</li></ul><hr><h2 id=architecture-for-this-module>Architecture for This Module</h2><pre tabindex=0><code>GitHub → Amplify CI/CD → Build &amp; Deploy Frontend
+       ↓
+       CDK Pipeline → Deploy Infrastructure
+                   ↓
+              CloudWatch ← Lambda Logs
+                   ↓
+              Alarms → SNS → Email/Slack
+                   ↓
+              X-Ray ← Trace Data
+</code></pre><hr><h2 id=step-1-set-up-cicd-with-amplify>Step 1: Set Up CI/CD with Amplify</h2><h3 id=11-configure-amplify-build-settings>1.1 Configure Amplify Build Settings</h3><p>Update <code>amplify.yml</code>:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#75715e># filepath: amplify.yml</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>version</span>: <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>frontend</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>phases</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>preBuild</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>commands</span>:
+</span></span><span style=display:flex><span>        - <span style=color:#ae81ff>npm ci</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>build</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>commands</span>:
+</span></span><span style=display:flex><span>        - <span style=color:#ae81ff>npm run build</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>artifacts</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>baseDirectory</span>: <span style=color:#ae81ff>.next</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>files</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#e6db74>&#39;**/*&#39;</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>cache</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>paths</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>node_modules/**/*</span>
+</span></span><span style=display:flex><span>      - <span style=color:#ae81ff>.next/cache/**/*</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>backend</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>phases</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>build</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>commands</span>:
+</span></span><span style=display:flex><span>        - <span style=color:#ae81ff>cd cdk</span>
+</span></span><span style=display:flex><span>        - <span style=color:#ae81ff>npm ci</span>
+</span></span><span style=display:flex><span>        - <span style=color:#ae81ff>npm run build</span>
+</span></span><span style=display:flex><span>        - <span style=color:#ae81ff>cdk deploy --require-approval never</span>
+</span></span></code></pre></div><h3 id=12-set-up-environment-variables>1.2 Set Up Environment Variables</h3><p>In Amplify Console, configure:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>NEXT_PUBLIC_AWS_REGION<span style=color:#f92672>=</span>ap-southeast-1
+</span></span><span style=display:flex><span>NEXT_PUBLIC_USER_POOL_ID<span style=color:#f92672>=</span>&lt;from-cdk-output&gt;
+</span></span><span style=display:flex><span>NEXT_PUBLIC_USER_POOL_CLIENT_ID<span style=color:#f92672>=</span>&lt;from-cdk-output&gt;
+</span></span><span style=display:flex><span>NEXT_PUBLIC_API_URL<span style=color:#f92672>=</span>&lt;from-cdk-output&gt;
+</span></span><span style=display:flex><span>NEXT_PUBLIC_DISTRIBUTION_DOMAIN<span style=color:#f92672>=</span>&lt;from-cdk-output&gt;
+</span></span></code></pre></div><h3 id=13-configure-branch-deployments>1.3 Configure Branch Deployments</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// filepath: lib/amplify-stack.ts
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>amplify</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;aws-cdk-lib/aws-amplify&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>app</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>amplify</span>.<span style=color:#a6e22e>CfnApp</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;OnlineLibraryApp&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>name</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;online-library&#39;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>repository</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;https://github.com/your-org/online-library&#39;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>accessToken</span>: <span style=color:#66d9ef>cdk.SecretValue.secretsManager</span>(<span style=color:#e6db74>&#39;github-token&#39;</span>),
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>buildSpec</span>: <span style=color:#66d9ef>amplify.BuildSpec.fromFile</span>(<span style=color:#e6db74>&#39;amplify.yml&#39;</span>),
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>environmentVariables</span><span style=color:#f92672>:</span> [
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>name</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;NEXT_PUBLIC_AWS_REGION&#39;</span>,
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>value</span>: <span style=color:#66d9ef>this.region</span>,
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// ...other variables
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  ],
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Main branch for production
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>mainBranch</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>amplify</span>.<span style=color:#a6e22e>CfnBranch</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;MainBranch&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>appId</span>: <span style=color:#66d9ef>app.attrAppId</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>branchName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;main&#39;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>enableAutoBuild</span>: <span style=color:#66d9ef>true</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>stage</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;PRODUCTION&#39;</span>,
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Dev branch for staging
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>devBranch</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>amplify</span>.<span style=color:#a6e22e>CfnBranch</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;DevBranch&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>appId</span>: <span style=color:#66d9ef>app.attrAppId</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>branchName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;dev&#39;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>enableAutoBuild</span>: <span style=color:#66d9ef>true</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>stage</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;DEVELOPMENT&#39;</span>,
+</span></span><span style=display:flex><span>});
+</span></span></code></pre></div><hr><h2 id=step-2-cloudwatch-monitoring>Step 2: CloudWatch Monitoring</h2><h3 id=21-create-cloudwatch-dashboard>2.1 Create CloudWatch Dashboard</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// filepath: lib/monitoring-stack.ts
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>cloudwatch</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;aws-cdk-lib/aws-cloudwatch&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MonitoringStack</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>cdk</span>.<span style=color:#a6e22e>Stack</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>constructor</span>(<span style=color:#a6e22e>scope</span>: <span style=color:#66d9ef>Construct</span>, <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>string</span>, <span style=color:#a6e22e>props?</span>: <span style=color:#66d9ef>cdk.StackProps</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>super</span>(<span style=color:#a6e22e>scope</span>, <span style=color:#a6e22e>id</span>, <span style=color:#a6e22e>props</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Create dashboard
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>dashboard</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cloudwatch</span>.<span style=color:#a6e22e>Dashboard</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;OnlineLibraryDashboard&#39;</span>, {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>dashboardName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;online-library-metrics&#39;</span>,
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Lambda metrics
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>dashboard</span>.<span style=color:#a6e22e>addWidgets</span>(
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cloudwatch</span>.<span style=color:#a6e22e>GraphWidget</span>({
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;Lambda Invocations&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>left</span><span style=color:#f92672>:</span> [
+</span></span><span style=display:flex><span>          <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cloudwatch</span>.<span style=color:#a6e22e>Metric</span>({
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>namespace</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;AWS/Lambda&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>metricName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;Invocations&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>statistic</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;Sum&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>period</span>: <span style=color:#66d9ef>cdk.Duration.minutes</span>(<span style=color:#ae81ff>5</span>),
+</span></span><span style=display:flex><span>          }),
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>      })
+</span></span><span style=display:flex><span>    );
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// API Gateway metrics
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>dashboard</span>.<span style=color:#a6e22e>addWidgets</span>(
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cloudwatch</span>.<span style=color:#a6e22e>GraphWidget</span>({
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;API Requests&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>left</span><span style=color:#f92672>:</span> [
+</span></span><span style=display:flex><span>          <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cloudwatch</span>.<span style=color:#a6e22e>Metric</span>({
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>namespace</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;AWS/ApiGateway&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>metricName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;Count&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>statistic</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;Sum&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>period</span>: <span style=color:#66d9ef>cdk.Duration.minutes</span>(<span style=color:#ae81ff>5</span>),
+</span></span><span style=display:flex><span>          }),
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>right</span><span style=color:#f92672>:</span> [
+</span></span><span style=display:flex><span>          <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cloudwatch</span>.<span style=color:#a6e22e>Metric</span>({
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>namespace</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;AWS/ApiGateway&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>metricName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;4XXError&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>statistic</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;Sum&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>period</span>: <span style=color:#66d9ef>cdk.Duration.minutes</span>(<span style=color:#ae81ff>5</span>),
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>color</span>: <span style=color:#66d9ef>cloudwatch.Color.ORANGE</span>,
+</span></span><span style=display:flex><span>          }),
+</span></span><span style=display:flex><span>          <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cloudwatch</span>.<span style=color:#a6e22e>Metric</span>({
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>namespace</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;AWS/ApiGateway&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>metricName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;5XXError&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>statistic</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;Sum&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>period</span>: <span style=color:#66d9ef>cdk.Duration.minutes</span>(<span style=color:#ae81ff>5</span>),
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>color</span>: <span style=color:#66d9ef>cloudwatch.Color.RED</span>,
+</span></span><span style=display:flex><span>          }),
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>      })
+</span></span><span style=display:flex><span>    );
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// DynamoDB metrics
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>dashboard</span>.<span style=color:#a6e22e>addWidgets</span>(
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cloudwatch</span>.<span style=color:#a6e22e>GraphWidget</span>({
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;DynamoDB Operations&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>left</span><span style=color:#f92672>:</span> [
+</span></span><span style=display:flex><span>          <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cloudwatch</span>.<span style=color:#a6e22e>Metric</span>({
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>namespace</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;AWS/DynamoDB&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>metricName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;ConsumedReadCapacityUnits&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>statistic</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;Sum&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>period</span>: <span style=color:#66d9ef>cdk.Duration.minutes</span>(<span style=color:#ae81ff>5</span>),
+</span></span><span style=display:flex><span>          }),
+</span></span><span style=display:flex><span>          <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cloudwatch</span>.<span style=color:#a6e22e>Metric</span>({
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>namespace</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;AWS/DynamoDB&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>metricName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;ConsumedWriteCapacityUnits&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>statistic</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;Sum&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>period</span>: <span style=color:#66d9ef>cdk.Duration.minutes</span>(<span style=color:#ae81ff>5</span>),
+</span></span><span style=display:flex><span>          }),
+</span></span><span style=display:flex><span>        ],
+</span></span><span style=display:flex><span>      })
+</span></span><span style=display:flex><span>    );
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=22-set-up-cloudwatch-alarms>2.2 Set Up CloudWatch Alarms</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// filepath: lib/alarms-stack.ts
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>cloudwatch</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;aws-cdk-lib/aws-cloudwatch&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>sns</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;aws-cdk-lib/aws-sns&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>subscriptions</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;aws-cdk-lib/aws-sns-subscriptions&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>actions</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;aws-cdk-lib/aws-cloudwatch-actions&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Create SNS topic for alerts
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>alertTopic</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>sns</span>.<span style=color:#a6e22e>Topic</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;AlertTopic&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>topicName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;online-library-alerts&#39;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>displayName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;Online Library Alerts&#39;</span>,
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Subscribe email
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>alertTopic</span>.<span style=color:#a6e22e>addSubscription</span>(
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>subscriptions</span>.<span style=color:#a6e22e>EmailSubscription</span>(<span style=color:#e6db74>&#39;ops@example.com&#39;</span>)
+</span></span><span style=display:flex><span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Lambda error rate alarm
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>lambdaErrorAlarm</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cloudwatch</span>.<span style=color:#a6e22e>Alarm</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;LambdaErrorAlarm&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>alarmName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;online-library-lambda-errors&#39;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>metric</span>: <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cloudwatch</span>.<span style=color:#a6e22e>Metric</span>({
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>namespace</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;AWS/Lambda&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>metricName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;Errors&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>statistic</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;Sum&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>period</span>: <span style=color:#66d9ef>cdk.Duration.minutes</span>(<span style=color:#ae81ff>5</span>),
+</span></span><span style=display:flex><span>  }),
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>threshold</span>: <span style=color:#66d9ef>10</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>evaluationPeriods</span>: <span style=color:#66d9ef>2</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>comparisonOperator</span>: <span style=color:#66d9ef>cloudwatch.ComparisonOperator.GREATER_THAN_THRESHOLD</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>treatMissingData</span>: <span style=color:#66d9ef>cloudwatch.TreatMissingData.NOT_BREACHING</span>,
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>lambdaErrorAlarm</span>.<span style=color:#a6e22e>addAlarmAction</span>(<span style=color:#66d9ef>new</span> <span style=color:#a6e22e>actions</span>.<span style=color:#a6e22e>SnsAction</span>(<span style=color:#a6e22e>alertTopic</span>));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// API Gateway 5XX errors
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>apiErrorAlarm</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cloudwatch</span>.<span style=color:#a6e22e>Alarm</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;ApiErrorAlarm&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>alarmName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;online-library-api-5xx-errors&#39;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>metric</span>: <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cloudwatch</span>.<span style=color:#a6e22e>Metric</span>({
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>namespace</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;AWS/ApiGateway&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>metricName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;5XXError&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>statistic</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;Sum&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>period</span>: <span style=color:#66d9ef>cdk.Duration.minutes</span>(<span style=color:#ae81ff>5</span>),
+</span></span><span style=display:flex><span>  }),
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>threshold</span>: <span style=color:#66d9ef>5</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>evaluationPeriods</span>: <span style=color:#66d9ef>1</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>comparisonOperator</span>: <span style=color:#66d9ef>cloudwatch.ComparisonOperator.GREATER_THAN_THRESHOLD</span>,
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>apiErrorAlarm</span>.<span style=color:#a6e22e>addAlarmAction</span>(<span style=color:#66d9ef>new</span> <span style=color:#a6e22e>actions</span>.<span style=color:#a6e22e>SnsAction</span>(<span style=color:#a6e22e>alertTopic</span>));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// DynamoDB throttling alarm
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>dynamoThrottleAlarm</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cloudwatch</span>.<span style=color:#a6e22e>Alarm</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;DynamoThrottleAlarm&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>alarmName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;online-library-dynamodb-throttle&#39;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>metric</span>: <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>cloudwatch</span>.<span style=color:#a6e22e>Metric</span>({
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>namespace</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;AWS/DynamoDB&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>metricName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;UserErrors&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>statistic</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;Sum&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>period</span>: <span style=color:#66d9ef>cdk.Duration.minutes</span>(<span style=color:#ae81ff>5</span>),
+</span></span><span style=display:flex><span>  }),
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>threshold</span>: <span style=color:#66d9ef>10</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>evaluationPeriods</span>: <span style=color:#66d9ef>2</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>comparisonOperator</span>: <span style=color:#66d9ef>cloudwatch.ComparisonOperator.GREATER_THAN_THRESHOLD</span>,
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>dynamoThrottleAlarm</span>.<span style=color:#a6e22e>addAlarmAction</span>(<span style=color:#66d9ef>new</span> <span style=color:#a6e22e>actions</span>.<span style=color:#a6e22e>SnsAction</span>(<span style=color:#a6e22e>alertTopic</span>));
+</span></span></code></pre></div><hr><h2 id=step-3-cost-monitoring--optimization>Step 3: Cost Monitoring & Optimization</h2><h3 id=31-set-up-aws-budgets>3.1 Set Up AWS Budgets</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// filepath: lib/budget-stack.ts
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>budgets</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;aws-cdk-lib/aws-budgets&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>budget</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>budgets</span>.<span style=color:#a6e22e>CfnBudget</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;MonthlyBudget&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>budget</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>budgetName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;online-library-monthly-budget&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>budgetType</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;COST&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>timeUnit</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;MONTHLY&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>budgetLimit</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>amount</span>: <span style=color:#66d9ef>20</span>, <span style=color:#75715e>// $20/month
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>      <span style=color:#a6e22e>unit</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;USD&#39;</span>,
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>  },
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>notificationsWithSubscribers</span><span style=color:#f92672>:</span> [
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>notification</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>notificationType</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;ACTUAL&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>comparisonOperator</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;GREATER_THAN&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>threshold</span>: <span style=color:#66d9ef>80</span>, <span style=color:#75715e>// Alert at 80% of budget
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>      },
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>subscribers</span><span style=color:#f92672>:</span> [
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>subscriptionType</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;EMAIL&#39;</span>,
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>address</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;billing@example.com&#39;</span>,
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>      ],
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>notification</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>notificationType</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;FORECASTED&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>comparisonOperator</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;GREATER_THAN&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>threshold</span>: <span style=color:#66d9ef>100</span>, <span style=color:#75715e>// Alert if forecasted to exceed
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>      },
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>subscribers</span><span style=color:#f92672>:</span> [
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>subscriptionType</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;EMAIL&#39;</span>,
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>address</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;billing@example.com&#39;</span>,
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>      ],
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>  ],
+</span></span><span style=display:flex><span>});
+</span></span></code></pre></div><h3 id=32-cost-optimization-strategies>3.2 Cost Optimization Strategies</h3><p><strong>Lambda Optimization:</strong></p><ul><li>Set appropriate memory (128MB-512MB based on profiling)</li><li>Use ARM64 (Graviton2) for 20% cost savings</li><li>Implement caching to reduce invocations</li></ul><p><strong>DynamoDB Optimization:</strong></p><ul><li>Use on-demand pricing for MVP</li><li>Monitor and optimize GSI usage</li><li>Implement caching with CloudFront</li></ul><p><strong>S3 Optimization:</strong></p><ul><li>Lifecycle policies to delete old files</li><li>Intelligent-Tiering for long-term storage</li><li>Optimize object sizes</li></ul><p><strong>CloudFront Optimization:</strong></p><ul><li>Cache API responses where appropriate</li><li>Set appropriate TTL values</li><li>Use compression</li></ul><hr><h2 id=step-4-security-hardening>Step 4: Security Hardening</h2><h3 id=41-iam-least-privilege>4.1 IAM Least Privilege</h3><p>Update Lambda execution roles:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// filepath: lib/security-stack.ts
+</span></span></span><span style=display:flex><span><span style=color:#75715e>// Create specific role for each Lambda
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>approveBookRole</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>iam</span>.<span style=color:#a6e22e>Role</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;ApproveBookRole&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>assumedBy</span>: <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>iam</span>.<span style=color:#a6e22e>ServicePrincipal</span>(<span style=color:#e6db74>&#39;lambda.amazonaws.com&#39;</span>),
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>managedPolicies</span><span style=color:#f92672>:</span> [
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>iam</span>.<span style=color:#a6e22e>ManagedPolicy</span>.<span style=color:#a6e22e>fromAwsManagedPolicyName</span>(
+</span></span><span style=display:flex><span>      <span style=color:#e6db74>&#39;service-role/AWSLambdaBasicExecutionRole&#39;</span>
+</span></span><span style=display:flex><span>    ),
+</span></span><span style=display:flex><span>  ],
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Grant only specific S3 permissions
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>uploadsBucket</span>.<span style=color:#a6e22e>grantRead</span>(<span style=color:#a6e22e>approveBookRole</span>);
+</span></span><span style=display:flex><span><span style=color:#a6e22e>booksBucket</span>.<span style=color:#a6e22e>grantPut</span>(<span style=color:#a6e22e>approveBookRole</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Grant only specific DynamoDB permissions
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>booksTable</span>.<span style=color:#a6e22e>grant</span>(<span style=color:#a6e22e>approveBookRole</span>, 
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#39;dynamodb:GetItem&#39;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#39;dynamodb:UpdateItem&#39;</span>
+</span></span><span style=display:flex><span>);
+</span></span></code></pre></div><h3 id=42-enable-encryption>4.2 Enable Encryption</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// filepath: lib/online-library-cdk-stack.ts
+</span></span></span><span style=display:flex><span><span style=color:#75715e>// S3 buckets with encryption
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>uploadsBucket</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>s3</span>.<span style=color:#a6e22e>Bucket</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;UploadsBucket&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>encryption</span>: <span style=color:#66d9ef>s3.BucketEncryption.S3_MANAGED</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>enforceSSL</span>: <span style=color:#66d9ef>true</span>, <span style=color:#75715e>// Require HTTPS
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// DynamoDB with encryption at rest
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>booksTable</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>dynamodb</span>.<span style=color:#a6e22e>Table</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;BooksTable&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>encryption</span>: <span style=color:#66d9ef>dynamodb.TableEncryption.AWS_MANAGED</span>,
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Enable CloudWatch Logs encryption
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>logGroup</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>logs</span>.<span style=color:#a6e22e>LogGroup</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;ApiLogs&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>encryption</span>: <span style=color:#66d9ef>logs.Encryption.KMS_MANAGED</span>,
+</span></span><span style=display:flex><span>});
+</span></span></code></pre></div><h3 id=43-api-security>4.3 API Security</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// filepath: lib/api-stack.ts
+</span></span></span><span style=display:flex><span><span style=color:#75715e>// Add throttling
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>httpApi</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>apigateway</span>.<span style=color:#a6e22e>HttpApi</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;OnlineLibraryApi&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>throttle</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>rateLimit</span>: <span style=color:#66d9ef>100</span>, <span style=color:#75715e>// requests per second
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>burstLimit</span>: <span style=color:#66d9ef>200</span>,
+</span></span><span style=display:flex><span>  },
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Add WAF (optional, for production)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>webAcl</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>wafv2</span>.<span style=color:#a6e22e>CfnWebACL</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;ApiWaf&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>scope</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;REGIONAL&#39;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>defaultAction</span><span style=color:#f92672>:</span> { <span style=color:#a6e22e>allow</span><span style=color:#f92672>:</span> {} },
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>rules</span><span style=color:#f92672>:</span> [
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>name</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;RateLimitRule&#39;</span>,
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>priority</span>: <span style=color:#66d9ef>1</span>,
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>statement</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>rateBasedStatement</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>limit</span>: <span style=color:#66d9ef>2000</span>,
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>aggregateKeyType</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;IP&#39;</span>,
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>      },
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>action</span><span style=color:#f92672>:</span> { <span style=color:#a6e22e>block</span><span style=color:#f92672>:</span> {} },
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>visibilityConfig</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>sampledRequestsEnabled</span>: <span style=color:#66d9ef>true</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>cloudWatchMetricsEnabled</span>: <span style=color:#66d9ef>true</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>metricName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;RateLimitRule&#39;</span>,
+</span></span><span style=display:flex><span>      },
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>  ],
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>visibilityConfig</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>sampledRequestsEnabled</span>: <span style=color:#66d9ef>true</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cloudWatchMetricsEnabled</span>: <span style=color:#66d9ef>true</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>metricName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;OnlineLibraryWaf&#39;</span>,
+</span></span><span style=display:flex><span>  },
+</span></span><span style=display:flex><span>});
+</span></span></code></pre></div><hr><h2 id=step-5-distributed-tracing-with-x-ray>Step 5: Distributed Tracing with X-Ray</h2><h3 id=51-enable-x-ray-for-lambda>5.1 Enable X-Ray for Lambda</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// filepath: lib/online-library-cdk-stack.ts
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>createUploadUrlFunction</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>lambda</span>.Function(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;CreateUploadUrl&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>runtime</span>: <span style=color:#66d9ef>lambda.Runtime.PYTHON_3_9</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>handler</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;index.lambda_handler&#39;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>code</span>: <span style=color:#66d9ef>lambda.Code.fromAsset</span>(<span style=color:#e6db74>&#39;lambda/createUploadUrl&#39;</span>),
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>tracing</span>: <span style=color:#66d9ef>lambda.Tracing.ACTIVE</span>, <span style=color:#75715e>// Enable X-Ray
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>});
+</span></span></code></pre></div><h3 id=52-add-x-ray-sdk-to-lambda>5.2 Add X-Ray SDK to Lambda</h3><p>Update <code>lambda/createUploadUrl/requirements.txt</code>:</p><pre tabindex=0><code>aws-xray-sdk
+boto3
+</code></pre><p>Update Lambda code:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># filepath: lambda/createUploadUrl/index.py</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> aws_xray_sdk.core <span style=color:#f92672>import</span> xray_recorder
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> aws_xray_sdk.core <span style=color:#f92672>import</span> patch_all
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Patch AWS SDK</span>
+</span></span><span style=display:flex><span>patch_all()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@xray_recorder.capture</span>(<span style=color:#e6db74>&#39;create_upload_url&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>lambda_handler</span>(event, context):
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Add custom metadata</span>
+</span></span><span style=display:flex><span>    xray_recorder<span style=color:#f92672>.</span>put_metadata(<span style=color:#e6db74>&#39;user_id&#39;</span>, user_id)
+</span></span><span style=display:flex><span>    xray_recorder<span style=color:#f92672>.</span>put_annotation(<span style=color:#e6db74>&#39;request_type&#39;</span>, <span style=color:#e6db74>&#39;upload&#39;</span>)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># ...existing code...</span>
+</span></span></code></pre></div><hr><h2 id=step-6-operational-runbooks>Step 6: Operational Runbooks</h2><h3 id=61-incident-response-procedures>6.1 Incident Response Procedures</h3><p>Create <code>docs/runbooks/incident-response.md</code>:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span># Incident Response Runbook
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## High Error Rate
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=font-weight:700>**Symptoms:**</span> CloudWatch alarm for Lambda errors
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-weight:700>**Investigation:**</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>1.</span> Check CloudWatch Logs Insights:
+</span></span></code></pre></div><p>fields @timestamp, @message
+| filter @message like /ERROR/
+| sort @timestamp desc
+| limit 20</p><pre tabindex=0><code>
+2. Check X-Ray service map for bottlenecks
+3. Review recent deployments
+
+**Resolution:**
+- Rollback deployment if recent change
+- Scale up Lambda memory if memory errors
+- Check DynamoDB throttling
+
+## Slow Response Times
+
+**Symptoms:** Users reporting slow page loads
+
+**Investigation:**
+1. Check CloudFront cache hit ratio
+2. Review Lambda duration metrics
+3. Check DynamoDB performance metrics
+
+**Resolution:**
+- Increase Lambda memory
+- Optimize DynamoDB queries
+- Adjust CloudFront cache settings
+</code></pre><h3 id=62-backup--disaster-recovery>6.2 Backup & Disaster Recovery</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// filepath: lib/backup-stack.ts
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>backup</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;aws-cdk-lib/aws-backup&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Create backup vault
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>vault</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>backup</span>.<span style=color:#a6e22e>BackupVault</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;BackupVault&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>backupVaultName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;online-library-backups&#39;</span>,
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Create backup plan
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>plan</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>backup</span>.<span style=color:#a6e22e>BackupPlan</span>(<span style=color:#66d9ef>this</span>, <span style=color:#e6db74>&#39;BackupPlan&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>backupPlanName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;daily-backups&#39;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>backupPlanRules</span><span style=color:#f92672>:</span> [
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>backup</span>.<span style=color:#a6e22e>BackupPlanRule</span>({
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>ruleName</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;DailyBackup&#39;</span>,
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>scheduleExpression</span>: <span style=color:#66d9ef>cdk.aws_events.Schedule.cron</span>({
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>hour</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;2&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>minute</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;0&#39;</span>,
+</span></span><span style=display:flex><span>      }),
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>deleteAfter</span>: <span style=color:#66d9ef>cdk.Duration.days</span>(<span style=color:#ae81ff>30</span>),
+</span></span><span style=display:flex><span>    }),
+</span></span><span style=display:flex><span>  ],
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Add DynamoDB table to backup
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>plan</span>.<span style=color:#a6e22e>addSelection</span>(<span style=color:#e6db74>&#39;DynamoDBSelection&#39;</span>, {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>resources</span><span style=color:#f92672>:</span> [
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>backup</span>.<span style=color:#a6e22e>BackupResource</span>.<span style=color:#a6e22e>fromDynamoDbTable</span>(<span style=color:#a6e22e>booksTable</span>),
+</span></span><span style=display:flex><span>  ],
+</span></span><span style=display:flex><span>});
+</span></span></code></pre></div><hr><h2 id=verification--testing>Verification & Testing</h2><h3 id=checklist>Checklist</h3><ul><li>CI/CD pipeline deploys automatically on push</li><li>CloudWatch dashboard shows all metrics</li><li>Alarms trigger and send notifications</li><li>Budget alerts configured</li><li>X-Ray traces appear in console</li><li>IAM roles follow least privilege</li><li>All data encrypted at rest and in transit</li><li>Runbooks documented and tested</li></ul><h3 id=load-testing>Load Testing</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Install artillery</span>
+</span></span><span style=display:flex><span>npm install -g artillery
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Create load test config</span>
+</span></span><span style=display:flex><span>cat &gt; load-test.yml <span style=color:#e6db74>&lt;&lt;EOF
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>config:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  target: &#34;https://your-api-url&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  phases:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    - duration: 60
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      arrivalRate: 10
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  http:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    headers:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      Authorization: &#34;Bearer YOUR_JWT_TOKEN&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>scenarios:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  - name: &#34;Search books&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    flow:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      - get:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          url: &#34;/search?title=test&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>EOF</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Run load test</span>
+</span></span><span style=display:flex><span>artillery run load-test.yml
+</span></span></code></pre></div><hr><h2 id=clean-up>Clean Up</h2><h3 id=complete-resource-cleanup>Complete Resource Cleanup</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Delete Amplify app</span>
+</span></span><span style=display:flex><span>aws amplify delete-app --app-id YOUR_APP_ID
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Delete CDK stacks</span>
+</span></span><span style=display:flex><span>cdk destroy --all
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Delete S3 buckets (if not auto-deleted)</span>
+</span></span><span style=display:flex><span>aws s3 rb s3://your-bucket-name --force
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Delete CloudWatch log groups</span>
+</span></span><span style=display:flex><span>aws logs delete-log-group --log-group-name /aws/lambda/function-name
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Verify all resources deleted</span>
+</span></span><span style=display:flex><span>aws resourcegroupstaggingapi get-resources <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --tag-filters Key<span style=color:#f92672>=</span>Project,Values<span style=color:#f92672>=</span>online-library
+</span></span></code></pre></div><hr><h2 id=workshop-summary>Workshop Summary</h2><p>Congratulations! You&rsquo;ve completed the Online Library Workshop. You&rsquo;ve built:</p><h3 id=technical-achievements>Technical Achievements</h3><p><strong>Authentication System</strong> - Cognito with email verification and JWT<br><strong>Upload Infrastructure</strong> - Presigned URLs with progress tracking<br><strong>Admin Approval Workflow</strong> - Role-based access control<br><strong>Content Delivery</strong> - CloudFront with signed URLs and OAC<br><strong>Search Functionality</strong> - DynamoDB GSI with pagination<br><strong>CI/CD Pipeline</strong> - Automated deployments<br><strong>Monitoring & Alerts</strong> - CloudWatch dashboards and alarms<br><strong>Security Hardening</strong> - Encryption, IAM, and WAF</p><h3 id=skills-acquired>Skills Acquired</h3><ul><li>Serverless architecture design and implementation</li><li>AWS CDK infrastructure as code</li><li>Frontend development with Next.js and React</li><li>API design with API Gateway and Lambda</li><li>Database design with DynamoDB</li><li>Content delivery with S3 and CloudFront</li><li>DevOps practices with CI/CD</li><li>Operational excellence with monitoring and alerting</li></ul><h3 id=cost-summary>Cost Summary</h3><p><strong>Monthly operational cost (without Free Tier):</strong> ~$9.80</p><p>The platform can scale to:</p><ul><li><strong>5,000 users:</strong> ~$50/month</li><li><strong>50,000 users:</strong> ~$200/month</li></ul><h3 id=next-steps>Next Steps</h3><p><strong>Enhance the Platform:</strong></p><ol><li>Add file format validation (MIME type checking)</li><li>Implement automatic file deletion after 72 hours</li><li>Add bookmark and reading progress tracking</li><li>Build recommendation system</li><li>Add commenting and rating features</li><li>Implement analytics with QuickSight</li></ol><p><strong>Learn More:</strong></p><ul><li>AWS Well-Architected Framework</li><li>Advanced DynamoDB patterns</li><li>CloudFront optimization techniques</li><li>Security best practices for serverless</li></ul><hr><h2 id=additional-resources>Additional Resources</h2><ul><li><a href=https://aws.amazon.com/serverless/sam/>AWS Serverless Application Model</a></li><li><a href=https://aws.amazon.com/architecture/well-architected/>AWS Well-Architected Framework</a></li><li><a href=https://serverlessland.com/patterns>Serverless Patterns Collection</a></li><li><a href=https://cdkworkshop.com/>AWS CDK Workshop</a></li><li><a href=https://docs.aws.amazon.com/security/>AWS Security Best Practices</a></li></ul><hr><p><strong>Thank you for completing this workshop!</strong> 🎉</p><p>You&rsquo;ve successfully built a production-ready serverless application on AWS. Apply these skills to your own projects and continue exploring the AWS ecosystem.</p><footer class=footline></footer></div></div><div id=navigation><a class="nav nav-prev" href=../../5-workshop/5.5-module5/ title="Module 5: Search & Discovery"><i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=../../6-self-evaluation/ title=Self-Assessment style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=../../js/clipboard.min.js?1764835724></script><script src=../../js/perfect-scrollbar.min.js?1764835724></script><script src=../../js/perfect-scrollbar.jquery.min.js?1764835724></script><script src=../../js/jquery.sticky.js?1764835724></script><script src=../../js/featherlight.min.js?1764835724></script><script src=../../js/highlight.pack.js?1764835724></script><script>hljs.initHighlightingOnLoad()</script><script src=../../js/modernizr.custom-3.6.0.js?1764835724></script><script src=../../js/learn.js?1764835724></script><script src=../../js/hugo-learn.js?1764835724></script><link href=../../mermaid/mermaid.css?1764835724 rel=stylesheet><script src=../../mermaid/mermaid.js?1764835724></script><script>mermaid.initialize({startOnLoad:!0})</script><script>(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,(e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date),(i=t.createElement(n),a=t.getElementsByTagName(n)[0]),i.async=1,i.src=s,a.parentNode.insertBefore(i,a)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-158079754-2","auto"),ga("send","pageview")</script></body></html>
