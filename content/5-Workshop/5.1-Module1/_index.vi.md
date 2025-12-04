@@ -361,13 +361,13 @@ export default function LoginPage() {
 
 ### Checklist
 
-- ✅ CDK stack triển khai thành công
-- ✅ Cognito User Pool được tạo với cấu hình đúng
-- ✅ Người dùng có thể đăng ký với xác thực email
-- ✅ Người dùng có thể đăng nhập và nhận JWT tokens
-- ✅ Protected routes chuyển hướng người dùng chưa xác thực
-- ✅ Admin group tồn tại trong Cognito
-- ✅ Dashboard hiển thị thông tin người dùng
+- CDK stack triển khai thành công
+- Cognito User Pool được tạo với cấu hình đúng
+- Người dùng có thể đăng ký với xác thực email
+- Người dùng có thể đăng nhập và nhận JWT tokens
+- Protected routes chuyển hướng người dùng chưa xác thực
+- Admin group tồn tại trong Cognito
+- Dashboard hiển thị thông tin người dùng
 
 ### Các vấn đề thường gặp & Giải pháp
 

@@ -702,14 +702,14 @@ export default function UploadPage() {
 
 ### Checklist
 
-- ✅ S3 buckets created with correct policies
-- ✅ DynamoDB table created with GSIs
-- ✅ Lambda generates presigned URLs successfully
-- ✅ API Gateway route protected with JWT
-- ✅ Upload form validates file type and size
-- ✅ Progress tracking works during upload
-- ✅ Metadata stored in DynamoDB with PENDING status
-- ✅ Files uploaded to correct S3 location
+- S3 buckets created with correct policies
+- DynamoDB table created with GSIs
+- Lambda generates presigned URLs successfully
+- API Gateway route protected with JWT
+- Upload form validates file type and size
+- Progress tracking works during upload
+- Metadata stored in DynamoDB with PENDING status
+- Files uploaded to correct S3 location
 
 ### Testing Steps
 

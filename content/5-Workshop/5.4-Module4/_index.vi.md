@@ -50,14 +50,14 @@ Truy cập nội dung qua CloudFront (với OAC tới S3)
 
 ### Checklist
 
-- ✅ CloudFront distribution được tạo với OAC
-- ✅ S3 bucket policy chỉ cho phép CloudFront access
-- ✅ Lambda tạo signed URLs hợp lệ
-- ✅ Signed URLs hết hạn sau TTL
-- ✅ PDF render chính xác trong browser
-- ✅ Navigation controls hoạt động (prev/next page)
-- ✅ Zoom functionality hoạt động
-- ✅ Unauthorized users không thể truy cập nội dung
+- CloudFront distribution được tạo với OAC
+- S3 bucket policy chỉ cho phép CloudFront access
+- Lambda tạo signed URLs hợp lệ
+- Signed URLs hết hạn sau TTL
+- PDF render chính xác trong browser
+- Navigation controls hoạt động (prev/next page)
+- Zoom functionality hoạt động
+- Unauthorized users không thể truy cập nội dung
 
 ### Các vấn đề thường gặp & Giải pháp
 

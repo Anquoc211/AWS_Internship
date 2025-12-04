@@ -110,14 +110,14 @@ Before starting this workshop, you should have:
 
 By the end of this workshop, you will:
 
-✅ Understand serverless architecture patterns  
-✅ Implement secure authentication with Cognito  
-✅ Handle file uploads at scale with S3  
-✅ Build approval workflows with Lambda  
-✅ Deliver content securely via CloudFront  
-✅ Design efficient search with DynamoDB  
-✅ Deploy with CI/CD automation  
-✅ Monitor and optimize costs  
+Understand serverless architecture patterns  
+Implement secure authentication with Cognito  
+Handle file uploads at scale with S3  
+Build approval workflows with Lambda  
+Deliver content securely via CloudFront  
+Design efficient search with DynamoDB  
+Deploy with CI/CD automation  
+Monitor and optimize costs  
 
 ---
 

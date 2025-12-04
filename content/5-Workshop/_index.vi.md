@@ -110,14 +110,14 @@ Trước khi bắt đầu workshop này, bạn cần có:
 
 Sau khi hoàn thành workshop này, bạn sẽ:
 
-✅ Hiểu các pattern kiến trúc serverless  
-✅ Triển khai xác thực an toàn với Cognito  
-✅ Xử lý tải file lên quy mô lớn với S3  
-✅ Xây dựng quy trình duyệt với Lambda  
-✅ Phân phối nội dung an toàn qua CloudFront  
-✅ Thiết kế tìm kiếm hiệu quả với DynamoDB  
-✅ Triển khai với tự động hóa CI/CD  
-✅ Giám sát và tối ưu chi phí  
+Hiểu các pattern kiến trúc serverless  
+Triển khai xác thực an toàn với Cognito  
+Xử lý tải file lên quy mô lớn với S3  
+Xây dựng quy trình duyệt với Lambda  
+Phân phối nội dung an toàn qua CloudFront  
+Thiết kế tìm kiếm hiệu quả với DynamoDB  
+Triển khai với tự động hóa CI/CD  
+Giám sát và tối ưu chi phí  
 
 ---
 

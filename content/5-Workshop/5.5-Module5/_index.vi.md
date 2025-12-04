@@ -47,14 +47,14 @@ User ← Kết quả tìm kiếm ← Response
 
 ### Checklist
 
-- ✅ DynamoDB GSI được tạo cho title và author
-- ✅ Search Lambda queries GSI hiệu quả
-- ✅ Tìm kiếm theo title trả kết quả đúng
-- ✅ Tìm kiếm theo author trả kết quả đúng
-- ✅ Tìm kiếm kết hợp (title VÀ author) hoạt động
-- ✅ Phân trang với nextToken chức năng
-- ✅ UI tìm kiếm debounces input
-- ✅ Nút load more tải thêm kết quả
+- DynamoDB GSI được tạo cho title và author
+- Search Lambda queries GSI hiệu quả
+- Tìm kiếm theo title trả kết quả đúng
+- Tìm kiếm theo author trả kết quả đúng
+- Tìm kiếm kết hợp (title VÀ author) hoạt động
+- Phân trang với nextToken chức năng
+- UI tìm kiếm debounces input
+- Nút load more tải thêm kết quả
 
 ### Các vấn đề thường gặp & Giải pháp
 

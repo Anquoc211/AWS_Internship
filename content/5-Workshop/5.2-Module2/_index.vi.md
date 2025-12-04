@@ -198,14 +198,14 @@ export class OnlineLibraryCdkStack extends cdk.Stack {
 
 ### Checklist
 
-- ✅ S3 buckets được tạo với policies đúng
-- ✅ DynamoDB table được tạo với GSIs
-- ✅ Lambda tạo presigned URLs thành công
-- ✅ API Gateway route được bảo vệ bằng JWT
-- ✅ Form upload validate loại file và kích thước
-- ✅ Theo dõi tiến trình hoạt động khi upload
-- ✅ Metadata được lưu trong DynamoDB với status PENDING
-- ✅ Files được upload đến đúng vị trí S3
+- S3 buckets được tạo với policies đúng
+- DynamoDB table được tạo với GSIs
+- Lambda tạo presigned URLs thành công
+- API Gateway route được bảo vệ bằng JWT
+- Form upload validate loại file và kích thước
+- Theo dõi tiến trình hoạt động khi upload
+- Metadata được lưu trong DynamoDB với status PENDING
+- Files được upload đến đúng vị trí S3
 
 ### Các vấn đề thường gặp & Giải pháp
 

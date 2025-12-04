@@ -580,14 +580,14 @@ export default function ReadPage() {
 
 ### Checklist
 
-- ✅ CloudFront distribution created with OAC
-- ✅ S3 bucket policy allows only CloudFront access
-- ✅ Lambda generates valid signed URLs
-- ✅ Signed URLs expire after TTL
-- ✅ PDF renders correctly in browser
-- ✅ Navigation controls work (prev/next page)
-- ✅ Zoom functionality works
-- ✅ Unauthorized users cannot access content
+- CloudFront distribution created with OAC
+- S3 bucket policy allows only CloudFront access
+- Lambda generates valid signed URLs
+- Signed URLs expire after TTL
+- PDF renders correctly in browser
+- Navigation controls work (prev/next page)
+- Zoom functionality works
+- Unauthorized users cannot access content
 
 ### Common Issues & Solutions
 

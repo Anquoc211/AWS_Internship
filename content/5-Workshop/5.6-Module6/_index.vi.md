@@ -36,14 +36,14 @@ Trong module cuối cùng này, bạn sẽ thiết lập triển khai production
 
 ### Checklist
 
-- ✅ CI/CD pipeline triển khai tự động khi push
-- ✅ CloudWatch dashboard hiển thị tất cả metrics
-- ✅ Alarms kích hoạt và gửi thông báo
-- ✅ Budget alerts được cấu hình
-- ✅ X-Ray traces xuất hiện trong console
-- ✅ IAM roles tuân theo least privilege
-- ✅ Tất cả dữ liệu được mã hóa at rest và in transit
-- ✅ Runbooks được tài liệu hóa và kiểm thử
+- CI/CD pipeline triển khai tự động khi push
+- CloudWatch dashboard hiển thị tất cả metrics
+- Alarms kích hoạt và gửi thông báo
+- Budget alerts được cấu hình
+- X-Ray traces xuất hiện trong console
+- IAM roles tuân theo least privilege
+- Tất cả dữ liệu được mã hóa at rest và in transit
+- Runbooks được tài liệu hóa và kiểm thử
 
 ---
 
@@ -77,14 +77,14 @@ Chúc mừng! Bạn đã hoàn thành Workshop Thư viện Online. Bạn đã x�
 
 ### Thành tựu kỹ thuật
 
-✅ **Hệ thống xác thực** - Cognito với xác thực email và JWT  
-✅ **Hạ tầng Upload** - Presigned URLs với theo dõi tiến trình  
-✅ **Quy trình duyệt Admin** - Kiểm soát truy cập dựa trên vai trò  
-✅ **Phân phối nội dung** - CloudFront với signed URLs và OAC  
-✅ **Chức năng tìm kiếm** - DynamoDB GSI với phân trang  
-✅ **CI/CD Pipeline** - Triển khai tự động  
-✅ **Giám sát & Cảnh báo** - CloudWatch dashboards và alarms  
-✅ **Tăng cường bảo mật** - Encryption, IAM, và WAF  
+**Hệ thống xác thực** - Cognito với xác thực email và JWT  
+**Hạ tầng Upload** - Presigned URLs với theo dõi tiến trình  
+**Quy trình duyệt Admin** - Kiểm soát truy cập dựa trên vai trò  
+**Phân phối nội dung** - CloudFront với signed URLs và OAC  
+**Chức năng tìm kiếm** - DynamoDB GSI với phân trang  
+**CI/CD Pipeline** - Triển khai tự động  
+**Giám sát & Cảnh báo** - CloudWatch dashboards và alarms  
+**Tăng cường bảo mật** - Encryption, IAM, và WAF  
 
 ### Kỹ năng đạt được
 

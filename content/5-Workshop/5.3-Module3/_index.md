@@ -811,14 +811,14 @@ export function PendingBooksList() {
 
 ### Danh sách kiểm tra
 
-- ✅ Nhóm Admin trong Cognito được tạo và người dùng được gán
-- ✅ Lambda phê duyệt sao chép file chính xác
-- ✅ Lambda từ chối di chuyển file vào khu vực cách ly
-- ✅ DynamoDB cập nhật đúng trạng thái và metadata
-- ✅ Bảng điều khiển admin hiển thị sách chờ duyệt
-- ✅ Modal phê duyệt hoạt động và cập nhật UI
-- ✅ Modal từ chối yêu cầu lý do
-- ✅ Người dùng không phải admin không truy cập được các endpoint admin
+- Nhóm Admin trong Cognito được tạo và người dùng được gán
+- Lambda phê duyệt sao chép file chính xác
+- Lambda từ chối di chuyển file vào khu vực cách ly
+- DynamoDB cập nhật đúng trạng thái và metadata
+- Bảng điều khiển admin hiển thị sách chờ duyệt
+- Modal phê duyệt hoạt động và cập nhật UI
+- Modal từ chối yêu cầu lý do
+- Người dùng không phải admin không truy cập được các endpoint admin
 
 ### Các vấn đề thường gặp & Giải pháp
 

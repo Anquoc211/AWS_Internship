@@ -589,14 +589,14 @@ plan.addSelection('DynamoDBSelection', {
 
 ### Checklist
 
-- ✅ CI/CD pipeline deploys automatically on push
-- ✅ CloudWatch dashboard shows all metrics
-- ✅ Alarms trigger and send notifications
-- ✅ Budget alerts configured
-- ✅ X-Ray traces appear in console
-- ✅ IAM roles follow least privilege
-- ✅ All data encrypted at rest and in transit
-- ✅ Runbooks documented and tested
+- CI/CD pipeline deploys automatically on push
+- CloudWatch dashboard shows all metrics
+- Alarms trigger and send notifications
+- Budget alerts configured
+- X-Ray traces appear in console
+- IAM roles follow least privilege
+- All data encrypted at rest and in transit
+- Runbooks documented and tested
 
 ### Load Testing
 
@@ -657,14 +657,14 @@ Congratulations! You've completed the Online Library Workshop. You've built:
 
 ### Technical Achievements
 
-✅ **Authentication System** - Cognito with email verification and JWT  
-✅ **Upload Infrastructure** - Presigned URLs with progress tracking  
-✅ **Admin Approval Workflow** - Role-based access control  
-✅ **Content Delivery** - CloudFront with signed URLs and OAC  
-✅ **Search Functionality** - DynamoDB GSI with pagination  
-✅ **CI/CD Pipeline** - Automated deployments  
-✅ **Monitoring & Alerts** - CloudWatch dashboards and alarms  
-✅ **Security Hardening** - Encryption, IAM, and WAF  
+**Authentication System** - Cognito with email verification and JWT  
+**Upload Infrastructure** - Presigned URLs with progress tracking  
+**Admin Approval Workflow** - Role-based access control  
+**Content Delivery** - CloudFront with signed URLs and OAC  
+**Search Functionality** - DynamoDB GSI with pagination  
+**CI/CD Pipeline** - Automated deployments  
+**Monitoring & Alerts** - CloudWatch dashboards and alarms  
+**Security Hardening** - Encryption, IAM, and WAF  
 
 ### Skills Acquired
 

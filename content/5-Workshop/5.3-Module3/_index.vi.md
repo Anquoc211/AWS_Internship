@@ -52,14 +52,14 @@ Admin User → Dashboard → API Gateway → Lambda (approveBook/rejectBook)
 
 ### Checklist
 
-- ✅ Cognito Admin group được tạo và users được gán
-- ✅ Approval Lambda copies files chính xác
-- ✅ Rejection Lambda moves files vào quarantine
-- ✅ DynamoDB cập nhật với status và metadata đúng
-- ✅ Admin dashboard hiển thị sách pending
-- ✅ Approval modal hoạt động và cập nhật UI
-- ✅ Rejection modal yêu cầu lý do
-- ✅ Non-admin users không thể truy cập admin endpoints
+- Cognito Admin group được tạo và users được gán
+- Approval Lambda copies files chính xác
+- Rejection Lambda moves files vào quarantine
+- DynamoDB cập nhật với status và metadata đúng
+- Admin dashboard hiển thị sách pending
+- Approval modal hoạt động và cập nhật UI
+- Rejection modal yêu cầu lý do
+- Non-admin users không thể truy cập admin endpoints
 
 ### Các vấn đề thường gặp & Giải pháp
 
