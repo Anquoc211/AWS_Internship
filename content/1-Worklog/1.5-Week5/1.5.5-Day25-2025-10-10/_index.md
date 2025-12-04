@@ -129,12 +129,12 @@ pre: "<b> 1.5.5. </b>"
 
 Tuần này đã hoàn thành kiến thức về AWS Security:
 
-✅ Shared Responsibility Model  
-✅ AWS IAM (Users, Groups, Roles, Policies)  
-✅ Amazon Cognito  
-✅ AWS Organizations & SCPs  
-✅ AWS Identity Center  
-✅ AWS KMS  
-✅ AWS Security Hub  
+Shared Responsibility Model  
+AWS IAM (Users, Groups, Roles, Policies)  
+Amazon Cognito  
+AWS Organizations & SCPs  
+AWS Identity Center  
+AWS KMS  
+AWS Security Hub  
 
 **Labs completed:** 8 labs (Security Hub, Lambda Automation, Resource Groups, IAM Policies, KMS & CloudTrail, Advanced Role Control)

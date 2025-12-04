@@ -17,12 +17,12 @@ The worklog is organized by **week**, with each week consisting of **5 working d
 
 ### Progress
 
-- ✅ **Week 1** (Sept 8-12): Cloud Computing Fundamentals
-- ✅ **Week 2** (Sept 15-19): AWS Networking Services
-- ✅ **Week 3** (Sept 22-26): AWS Compute Services
-- ✅ **Week 4** (Sept 29-Oct 3): AWS Storage Services
-- ✅ **Week 5** (Oct 6-10): AWS Security & Identity
-- ✅ **Week 6** (Oct 13-17): AWS Database Services
+- **Week 1** (Sept 8-12): Cloud Computing Fundamentals
+- **Week 2** (Sept 15-19): AWS Networking Services
+- **Week 3** (Sept 22-26): AWS Compute Services
+- **Week 4** (Sept 29-Oct 3): AWS Storage Services
+- **Week 5** (Oct 6-10): AWS Security & Identity
+- **Week 6** (Oct 13-17): AWS Database Services
 - 🔄 **Week 7** (Oct 20-22): Advanced Topics (3 days)
 
 ### Statistics

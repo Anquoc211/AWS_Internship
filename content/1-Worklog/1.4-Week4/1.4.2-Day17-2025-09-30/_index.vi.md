@@ -76,7 +76,7 @@ Cách đặt tên object ảnh hưởng đáng kể tới hiệu năng S3:
 
 ```
 ❌ Tệ:  2025-09-30-file1.jpg, 2025-09-30-file2.jpg
-✅ Tốt: a1b2/2025-09-30-file1.jpg, c3d4/2025-09-30-file2.jpg
+Tốt: a1b2/2025-09-30-file1.jpg, c3d4/2025-09-30-file2.jpg
 ```
 
 ---

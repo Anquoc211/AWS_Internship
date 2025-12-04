@@ -414,13 +414,13 @@ async def get_metrics():
 
 ## Kỹ năng đã đạt được
 
-✅ Hiểu sâu về kỹ thuật tiền xử lý NLP  
-✅ Xây dựng hệ thống phân loại sẵn sàng production  
-✅ Triển khai phân tích cảm xúc đa thành phần  
-✅ Huấn luyện mô hình NER tùy chỉnh cho các lĩnh vực cụ thể  
-✅ Tích hợp các thành phần NLP thành hệ thống liền mạch  
-✅ Thiết kế API và thực hành triển khai tốt nhất  
-✅ Tối ưu hóa hiệu suất và giám sát  
+Hiểu sâu về kỹ thuật tiền xử lý NLP  
+Xây dựng hệ thống phân loại sẵn sàng production  
+Triển khai phân tích cảm xúc đa thành phần  
+Huấn luyện mô hình NER tùy chỉnh cho các lĩnh vực cụ thể  
+Tích hợp các thành phần NLP thành hệ thống liền mạch  
+Thiết kế API và thực hành triển khai tốt nhất  
+Tối ưu hóa hiệu suất và giám sát  
 
 ## Thành tựu chính
 

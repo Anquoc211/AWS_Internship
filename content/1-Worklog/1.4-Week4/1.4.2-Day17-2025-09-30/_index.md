@@ -76,7 +76,7 @@ Object key naming can significantly affect S3 performance:
 
 ```
 ❌ Bad:  2025-09-30-file1.jpg, 2025-09-30-file2.jpg
-✅ Good: a1b2/2025-09-30-file1.jpg, c3d4/2025-09-30-file2.jpg
+Good: a1b2/2025-09-30-file1.jpg, c3d4/2025-09-30-file2.jpg
 ```
 
 ---

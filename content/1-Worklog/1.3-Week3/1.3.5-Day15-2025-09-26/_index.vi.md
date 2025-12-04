@@ -119,10 +119,10 @@ pre: "<b> 1.3.5. </b>"
 
 Tuần này đã hoàn thành kiến thức về AWS Compute:
 
-✅ Amazon EC2 và các loại instance  
-✅ AMI, EBS, Instance Store  
-✅ EC2 Auto Scaling  
-✅ Các mô hình giá của EC2  
-✅ Lightsail, EFS, FSx  
+Amazon EC2 và các loại instance  
+AMI, EBS, Instance Store  
+EC2 Auto Scaling  
+Các mô hình giá của EC2  
+Lightsail, EFS, FSx  
 
 **Labs đã hoàn tất:** 3 labs (IAM Setup, Budgets, Support Plans)

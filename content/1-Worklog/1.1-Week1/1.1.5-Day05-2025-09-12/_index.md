@@ -81,10 +81,10 @@ pre: "<b> 1.1.5. </b>"
 
 Tuần này đã hoàn thành các kiến thức nền tảng về AWS:
 
-✅ Hiểu về Cloud Computing và lợi ích  
-✅ Nắm được AWS Global Infrastructure  
-✅ Biết cách sử dụng AWS Management Tools  
-✅ Học về Cost Optimization strategies  
-✅ Tìm hiểu AWS Well-Architected Framework  
+Hiểu về Cloud Computing và lợi ích  
+Nắm được AWS Global Infrastructure  
+Biết cách sử dụng AWS Management Tools  
+Học về Cost Optimization strategies  
+Tìm hiểu AWS Well-Architected Framework  
 
 **Labs completed:** 3 labs (IAM Setup, Budgets, Support Plans)

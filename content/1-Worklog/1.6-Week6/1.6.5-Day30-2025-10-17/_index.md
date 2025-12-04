@@ -133,11 +133,11 @@ AWS DMS helps migrate databases to AWS quickly and securely with minimal downtim
 
 Tuần này đã hoàn thành kiến thức về AWS Database Services:
 
-✅ Database Fundamentals (RDBMS, NoSQL, OLTP vs OLAP)  
-✅ Amazon RDS & Aurora  
-✅ Amazon Redshift  
-✅ Amazon ElastiCache  
-✅ AWS Database Migration Service  
+Database Fundamentals (RDBMS, NoSQL, OLTP vs OLAP)  
+Amazon RDS & Aurora  
+Amazon Redshift  
+Amazon ElastiCache  
+AWS Database Migration Service  
 
 **Labs completed:** 2 labs (RDS & EC2 Integration, Database Migration Service)
 

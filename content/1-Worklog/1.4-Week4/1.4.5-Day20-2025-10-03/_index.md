@@ -104,11 +104,11 @@ Centralized backup service for automating and governing data protection at scale
 
 Tuần này đã hoàn thành kiến thức về AWS Storage:
 
-✅ Amazon S3 và Storage Classes  
-✅ S3 Static Website và CORS  
-✅ AWS Snow Family  
-✅ AWS Storage Gateway  
-✅ Disaster Recovery Strategies  
-✅ AWS Backup  
+Amazon S3 và Storage Classes  
+S3 Static Website và CORS  
+AWS Snow Family  
+AWS Storage Gateway  
+Disaster Recovery Strategies  
+AWS Backup  
 
 **Labs completed:** 5 labs (Backup, VM Import/Export, Storage Gateway, FSx, S3 & CloudFront)

@@ -90,10 +90,10 @@ pre: "<b> 1.2.5. </b>"
 
 Tuần này đã hoàn thành kiến thức về AWS Networking:
 
-✅ Amazon VPC và Subnets  
-✅ Security Groups và NACLs  
-✅ VPC Peering và Transit Gateway  
-✅ VPN và Direct Connect  
-✅ Elastic Load Balancing (ALB, NLB, GWLB)  
+Amazon VPC và Subnets  
+Security Groups và NACLs  
+VPC Peering và Transit Gateway  
+VPN và Direct Connect  
+Elastic Load Balancing (ALB, NLB, GWLB)  
 
 **Labs completed:** 4 labs (VPC Basics, Hybrid DNS, VPC Peering, Transit Gateway)
