@@ -25,6 +25,9 @@ jobs:
       - name: Build website
         run: hugo --minify --baseURL "https://anquoc211.github.io/AWS_Internship/"
 
+      - name: Add .nojekyll file
+        run: touch public/.nojekyll
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
