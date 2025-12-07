@@ -1,5 +1,9 @@
-baseURL = "https://aws-workshop-8slc.vercel.app/"
-relativeURLs = true
+#baseURL = "https://aws-workshop-8slc.vercel.app/"
+#relativeURLs = true
+#canonifyURLs = false
+
+baseURL = "https://anquoc211.github.io/AWS_Internship/"
+relativeURLs = false
 canonifyURLs = false
 
 # Change the default theme to be use when building the site with Hugo
