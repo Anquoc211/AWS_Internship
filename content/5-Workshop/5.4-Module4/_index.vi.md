@@ -1,99 +1,159 @@
----
-title: "Module 4: Phân phối nội dung với CloudFront"
-date: "2025-01-15T12:00:00+07:00"
+﻿---
+title: "Đăng nhập & Quản lý phiên"
 weight: 4
 chapter: false
 pre: " <b> 5.4. </b> "
 ---
 
-## Tổng quan
+## Xây dựng component đăng nhập
 
-Trong module này, bạn sẽ triển khai phân phối nội dung an toàn sử dụng Amazon CloudFront với signed URLs. Bạn sẽ cấu hình Origin Access Control (OAC) để bảo vệ nội dung S3, tạo signed URLs có thời hạn cho truy cập được ủy quyền, và xây dựng giao diện đọc PDF/ePub.
+Tạo file `src/components/Login.js`:
 
-**Thời lượng:** ~90 phút
+```javascript
+import { Auth } from 'aws-amplify';
+import { useState } from 'react';
 
-**Dịch vụ sử dụng:**
-- Amazon CloudFront (CDN với signed URLs)
-- Amazon S3 (origin được bảo vệ)
-- AWS Lambda (tạo signed URL)
-- CloudFront Key Pairs (cho signing)
+function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [user, setUser] = useState(null);
 
----
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const user = await Auth.signIn(email, password);
+      setUser(user);
+      console.log('Đăng nhập thành công:', user);
+    } catch (error) {
+      console.error('Lỗi đăng nhập:', error);
+      alert(error.message);
+    }
+  };
 
-## Những gì bạn sẽ học
+  const handleLogout = async () => {
+    try {
+      await Auth.signOut();
+      setUser(null);
+      console.log('Đăng xuất thành công');
+    } catch (error) {
+      console.error('Lỗi đăng xuất:', error);
+    }
+  };
 
-- Cấu hình CloudFront distribution với OAC
-- Tạo CloudFront signed URLs từ Lambda
-- Triển khai URL expiration và security policies
-- Xây dựng PDF và ePub reader components
-- Xử lý content streaming và caching
+  return (
+    <div>
+      {!user ? (
+        <form onSubmit={handleLogin}>
+          <h2>Đăng nhập</h2>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Mật khẩu" required />
+          <button type="submit">Đăng nhập</button>
+        </form>
+      ) : (
+        <div>
+          <h2>Chào mừng, {user.attributes.email}</h2>
+          <button onClick={handleLogout}>Đăng xuất</button>
+        </div>
+      )}
+    </div>
+  );
+}
 
----
-
-## Kiến trúc cho Module này
-
-```
-User → Yêu cầu sách → Lambda (getReadUrl)
-                        ↓
-                  Kiểm tra DynamoDB (APPROVED?)
-                        ↓
-                  Tạo CloudFront Signed URL (TTL 15 phút)
-                        ↓
-User ← Signed URL ← Response
-     ↓
-Truy cập nội dung qua CloudFront (với OAC tới S3)
-```
-
----
-
-## Xác minh & Kiểm thử
-
-### Checklist
-
-- CloudFront distribution được tạo với OAC
-- S3 bucket policy chỉ cho phép CloudFront access
-- Lambda tạo signed URLs hợp lệ
-- Signed URLs hết hạn sau TTL
-- PDF render chính xác trong browser
-- Navigation controls hoạt động (prev/next page)
-- Zoom functionality hoạt động
-- Unauthorized users không thể truy cập nội dung
-
-### Các vấn đề thường gặp & Giải pháp
-
-**Vấn đề:** PDF không load với lỗi CORS  
-**Giải pháp:** Xác minh CloudFront CORS settings và S3 bucket CORS configuration
-
-**Vấn đề:** Signed URL hết hạn quá nhanh  
-**Giải pháp:** Điều chỉnh TTL trong Lambda hoặc triển khai cơ chế refresh URL
-
-**Vấn đề:** PDF.js worker không load  
-**Giải pháp:** Đảm bảo PDF.js worker URL có thể truy cập và version khớp
-
----
-
-## Dọn dẹp
-
-```bash
-cdk destroy
+export default Login;
 ```
 
----
+## Kiểm tra trạng thái xác thực
 
-## Bước tiếp theo
+Thêm vào `src/App.js`:
 
-Chúc mừng! Bạn đã hoàn thành Module 4. Bây giờ bạn có:
-- Phân phối nội dung an toàn qua CloudFront
-- Tạo Signed URL với expiration
-- PDF reader với navigation và zoom
-- Nội dung S3 được bảo vệ với OAC
+```javascript
+import { Amplify } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
+import { useEffect, useState } from 'react';
+import awsconfig from './aws-exports';
+import Login from './components/Login';
 
-**Tiếp tục đến:** [Module 5: Tìm kiếm & Khám phá](../5.5-module5/)
+Amplify.configure(awsconfig);
 
----
+function App() {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-## Tài nguyên bổ sung
+  useEffect(() => {
+    checkUser();
+  }, []);
 
-- [Tài liệu CloudFront Signed URLs](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-signed-urls.html)
-- [Hướng dẫn CloudFront OAC](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html)
-- [Tài liệu React PDF](https://github.com/wojtekmaj/react-pdf)
+  const checkUser = async () => {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      setUser(user);
+    } catch (error) {
+      setUser(null);
+    }
+    setLoading(false);
+  };
+
+  if (loading) return <div>Đang tải...</div>;
+
+  return (
+    <div className="App">
+      {user ? <h1>Chào mừng trở lại!</h1> : <Login />}
+    </div>
+  );
+}
+
+export default App;
+```
+
+## Quản lý phiên
+
+Cognito tự động quản lý phiên:
+
+- **Access Token**: Có hiệu lực 1 giờ, dùng để ủy quyền API
+- **ID Token**: Chứa thuộc tính người dùng, hết hạn sau 1 giờ
+- **Refresh Token**: Có hiệu lực 30 ngày (có thể cấu hình), làm mới access/ID tokens
+
+### Tự động làm mới phiên
+
+Amplify tự động làm mới tokens:
+
+```javascript
+// Lấy phiên hiện tại
+const session = await Auth.currentSession();
+console.log('Access token:', session.getAccessToken().getJwtToken());
+
+// Amplify tự động xử lý làm mới token
+// Không cần làm mới thủ công
+```
+
+## Routes được bảo vệ
+
+Tạo routes được bảo vệ trong ứng dụng:
+
+```javascript
+import { Route, Navigate } from 'react-router-dom';
+
+function ProtectedRoute({ children }) {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  const checkAuth = async () => {
+    try {
+      await Auth.currentAuthenticatedUser();
+      setUser(true);
+    } catch {
+      setUser(false);
+    }
+    setLoading(false);
+  };
+
+  if (loading) return <div>Đang tải...</div>;
+  return user ? children : <Navigate to="/login" />;
+}
+
+export default ProtectedRoute;
+```

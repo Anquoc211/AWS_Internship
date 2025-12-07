@@ -1,96 +1,162 @@
----
-title: "Module 5: Tìm kiếm & Khám phá"
-date: "2025-01-15T13:00:00+07:00"
+﻿---
+title: "Quản lý mật khẩu"
 weight: 5
 chapter: false
 pre: " <b> 5.5. </b> "
 ---
 
-## Tổng quan
+## Quy trình quên mật khẩu
 
-Trong module này, bạn sẽ triển khai chức năng tìm kiếm cho Thư viện Online sử dụng DynamoDB Global Secondary Indexes (GSI). Bạn sẽ xây dựng các truy vấn hiệu quả cho tìm kiếm theo tiêu đề và tác giả, triển khai phân trang, và tạo giao diện tìm kiếm thân thiện với người dùng có bộ lọc.
+Tạo file `src/components/ForgotPassword.js`:
 
-**Thời lượng:** ~60 phút
+```javascript
+import { Auth } from 'aws-amplify';
+import { useState } from 'react';
 
-**Dịch vụ sử dụng:**
-- Amazon DynamoDB (GSI cho tìm kiếm)
-- AWS Lambda (logic tìm kiếm)
-- Amazon API Gateway (search endpoint)
+function ForgotPassword() {
+  const [email, setEmail] = useState('');
+  const [code, setCode] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [step, setStep] = useState('request');
 
----
+  const handleRequestReset = async (e) => {
+    e.preventDefault();
+    try {
+      await Auth.forgotPassword(email);
+      setStep('reset');
+      alert('Mã xác thực đã được gửi đến email của bạn');
+    } catch (error) {
+      console.error('Lỗi:', error);
+      alert(error.message);
+    }
+  };
 
-## Những gì bạn sẽ học
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    try {
+      await Auth.forgotPasswordSubmit(email, code, newPassword);
+      alert('Đặt lại mật khẩu thành công!');
+      setStep('complete');
+    } catch (error) {
+      console.error('Lỗi:', error);
+      alert(error.message);
+    }
+  };
 
-- Thiết kế DynamoDB GSI cho tìm kiếm hiệu quả
-- Query GSI thay vì Scan operations tốn kém
-- Triển khai phân trang với cursor-based navigation
-- Xây dựng UI tìm kiếm với autocomplete
-- Thêm bộ lọc và khả năng sắp xếp
+  if (step === 'request') {
+    return (
+      <form onSubmit={handleRequestReset}>
+        <h2>Quên mật khẩu</h2>
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
+        <button type="submit">Gửi mã</button>
+      </form>
+    );
+  }
 
----
+  if (step === 'reset') {
+    return (
+      <form onSubmit={handleResetPassword}>
+        <h2>Đặt lại mật khẩu</h2>
+        <input type="text" value={code} onChange={(e) => setCode(e.target.value)} placeholder="Mã xác thực" required />
+        <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="Mật khẩu mới" required />
+        <button type="submit">Đặt lại mật khẩu</button>
+      </form>
+    );
+  }
 
-## Kiến trúc cho Module này
+  return <div>Đặt lại mật khẩu hoàn tất! <a href="/login">Đi đến Đăng nhập</a></div>;
+}
 
+export default ForgotPassword;
 ```
-User → Form tìm kiếm → API Gateway → Lambda (searchBooks)
-                                    ↓
-                              Query GSI1 (Title) hoặc GSI2 (Author)
-                                    ↓
-                              Trả kết quả đã lọc & phân trang
-                                    ↓
-User ← Kết quả tìm kiếm ← Response
+
+## Đổi mật khẩu
+
+Tạo file `src/components/ChangePassword.js`:
+
+```javascript
+import { Auth } from 'aws-amplify';
+import { useState } from 'react';
+
+function ChangePassword() {
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      await Auth.changePassword(user, oldPassword, newPassword);
+      alert('Đổi mật khẩu thành công!');
+      setOldPassword('');
+      setNewPassword('');
+    } catch (error) {
+      console.error('Lỗi:', error);
+      alert(error.message);
+    }
+  };
+
+  return (
+    <form onSubmit={handleChangePassword}>
+      <h2>Đổi mật khẩu</h2>
+      <input type="password" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} placeholder="Mật khẩu hiện tại" required />
+      <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="Mật khẩu mới" required />
+      <button type="submit">Đổi mật khẩu</button>
+    </form>
+  );
+}
+
+export default ChangePassword;
 ```
 
----
+## Chính sách mật khẩu
 
-## Xác minh & Kiểm thử
-
-### Checklist
-
-- DynamoDB GSI được tạo cho title và author
-- Search Lambda queries GSI hiệu quả
-- Tìm kiếm theo title trả kết quả đúng
-- Tìm kiếm theo author trả kết quả đúng
-- Tìm kiếm kết hợp (title VÀ author) hoạt động
-- Phân trang với nextToken chức năng
-- UI tìm kiếm debounces input
-- Nút load more tải thêm kết quả
-
-### Các vấn đề thường gặp & Giải pháp
-
-**Vấn đề:** Tìm kiếm trả quá nhiều kết quả  
-**Giải pháp:** Triển khai begins_with matching chặt chẽ hơn hoặc thêm bộ lọc bổ sung
-
-**Vấn đề:** Hiệu suất tìm kiếm chậm  
-**Giải pháp:** Đảm bảo GSI được cấu hình đúng và sử dụng Query không phải Scan
-
-**Vấn đề:** Phân trang không hoạt động đúng  
-**Giải pháp:** Xác minh LastEvaluatedKey được encode/decode đúng cách
-
----
-
-## Dọn dẹp
+Cấu hình yêu cầu mật khẩu trong Amplify:
 
 ```bash
-cdk destroy
+amplify update auth
+# Chọn: Walkthrough all the auth configurations
+# Password policy: Custom
+# Minimum length: 8
+# Require lowercase: Yes
+# Require uppercase: Yes
+# Require numbers: Yes
+# Require symbols: Yes
 ```
 
----
+Triển khai thay đổi:
 
-## Bước tiếp theo
+```bash
+amplify push
+```
 
-Chúc mừng! Bạn đã hoàn thành Module 5. Bây giờ bạn có:
-- Tìm kiếm hiệu quả sử dụng DynamoDB GSI
-- Tìm kiếm theo title và author với prefix matching
-- Phân trang cho tập kết quả lớn
-- Giao diện tìm kiếm thân thiện với debouncing
+## Xác thực mật khẩu
 
-**Tiếp tục đến:** [Module 6: Triển khai & Vận hành](../5.6-module6/)
+Thêm xác thực phía client:
 
----
+```javascript
+const validatePassword = (password) => {
+  const minLength = 8;
+  const hasUpperCase = /[A-Z]/.test(password);
+  const hasLowerCase = /[a-z]/.test(password);
+  const hasNumbers = /\d/.test(password);
+  const hasSymbols = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
-## Tài nguyên bổ sung
-
-- [Tài liệu DynamoDB GSI](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.html)
-- [DynamoDB Query Operations](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.html)
-- [Pagination Best Practices](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.Pagination.html)
+  if (password.length < minLength) {
+    return 'Mật khẩu phải có ít nhất 8 ký tự';
+  }
+  if (!hasUpperCase) {
+    return 'Mật khẩu phải chứa chữ in hoa';
+  }
+  if (!hasLowerCase) {
+    return 'Mật khẩu phải chứa chữ thường';
+  }
+  if (!hasNumbers) {
+    return 'Mật khẩu phải chứa số';
+  }
+  if (!hasSymbols) {
+    return 'Mật khẩu phải chứa ký tự đặc biệt';
+  }
+  return null;
+};
+```
