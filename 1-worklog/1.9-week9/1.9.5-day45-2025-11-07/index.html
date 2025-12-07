@@ -1,0 +1,696 @@
+<!doctype html><html lang=en class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.134.3"><meta name=description content><meta name=author content="thienlh@thienlu.com"><link rel=icon href=https://anquoc211.github.io/AWS_Internship/images/favicon.png type=image/png><title>Day 45 - NLP Integration & Final Project :: Internship Report</title>
+<link href=https://anquoc211.github.io/AWS_Internship/css/nucleus.css?1765072081 rel=stylesheet><link href=https://anquoc211.github.io/AWS_Internship/css/fontawesome-all.min.css?1765072081 rel=stylesheet><link href=https://anquoc211.github.io/AWS_Internship/css/hybrid.css?1765072081 rel=stylesheet><link href=https://anquoc211.github.io/AWS_Internship/css/featherlight.min.css?1765072081 rel=stylesheet><link href=https://anquoc211.github.io/AWS_Internship/css/perfect-scrollbar.min.css?1765072081 rel=stylesheet><link href=https://anquoc211.github.io/AWS_Internship/css/auto-complete.css?1765072081 rel=stylesheet><link href=https://anquoc211.github.io/AWS_Internship/css/atom-one-dark-reasonable.css?1765072081 rel=stylesheet><link href=https://anquoc211.github.io/AWS_Internship/css/theme.css?1765072081 rel=stylesheet><link href=https://anquoc211.github.io/AWS_Internship/css/hugo-theme.css?1765072081 rel=stylesheet><link href=https://anquoc211.github.io/AWS_Internship/css/theme-workshop.css?1765072081 rel=stylesheet><script src=https://anquoc211.github.io/AWS_Internship/js/jquery-3.3.1.min.js?1765072081></script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=https://anquoc211.github.io/AWS_Internship/1-worklog/1.9-week9/1.9.5-day45-2025-11-07/><nav id=sidebar class=showVisitedLinks><div id=header-wrapper><div id=header><a id=logo href=https://anquoc211.github.io/AWS_Internship/><svg id="Layer_1" data-name="Layer 1" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff}.cls-2{fill:#f90;fill-rule:evenodd}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09 10.85a4.7 4.7.0 00.19 1.48 7.73 7.73.0 00.54 1.19.77.77.0 01.12.38.64.64.0 01-.32.49l-1 .7a.83.83.0 01-.44.15.69.69.0 01-.49-.23 3.8 3.8.0 01-.6-.77q-.25-.42-.51-1a6.14 6.14.0 01-4.89 2.3 4.54 4.54.0 01-3.32-1.19 4.27 4.27.0 01-1.22-3.2 4.28 4.28.0 011.46-3.4A6.06 6.06.0 017.69 6.46a12.47 12.47.0 011.76.13q.92.13 1.91.36V5.73a3.65 3.65.0 00-.79-2.66A3.81 3.81.0 007.86 2.3a7.71 7.71.0 00-1.79.22 12.78 12.78.0 00-1.79.57 4.55 4.55.0 01-.58.22h-.26q-.35.0-.35-.52V2a1.09 1.09.0 01.12-.58 1.2 1.2.0 01.47-.35A10.88 10.88.0 015.77.32 10.19 10.19.0 018.36.0a6 6 0 014.35 1.35 5.49 5.49.0 011.38 4.09zM7.34 13.38a5.36 5.36.0 001.72-.31A3.63 3.63.0 0010.63 12 2.62 2.62.0 0011.19 11a5.63 5.63.0 00.16-1.44v-.7a14.35 14.35.0 00-1.53-.28 12.37 12.37.0 00-1.56-.1 3.84 3.84.0 00-2.47.67A2.34 2.34.0 005 11a2.35 2.35.0 00.61 1.76A2.4 2.4.0 007.34 13.38zm13.35 1.8a1 1 0 01-.64-.16 1.3 1.3.0 01-.35-.65L15.81 1.51a3 3 0 01-.15-.67.36.36.0 01.41-.41H17.7a1 1 0 01.65.16 1.4 1.4.0 01.33.65l2.79 11 2.59-11A1.17 1.17.0 0124.39.6a1.1 1.1.0 01.67-.16H26.4a1.1 1.1.0 01.67.16 1.17 1.17.0 01.32.65L30 12.39 32.88 1.25A1.39 1.39.0 0133.22.6a1 1 0 01.65-.16h1.54a.36.36.0 01.41.41 1.36 1.36.0 010 .26 3.64 3.64.0 01-.12.41l-4 12.86a1.3 1.3.0 01-.35.65 1 1 0 01-.64.16H29.25a1 1 0 01-.67-.17 1.26 1.26.0 01-.32-.67L25.67 3.64l-2.56 10.7a1.26 1.26.0 01-.32.67 1 1 0 01-.67.17zm21.36.44a11.28 11.28.0 01-2.56-.29 7.44 7.44.0 01-1.92-.67 1 1 0 01-.61-.93v-.84q0-.52.38-.52a.9.9.0 01.31.06l.42.17a8.77 8.77.0 001.83.58 9.78 9.78.0 002 .2 4.48 4.48.0 002.43-.55 1.76 1.76.0 00.86-1.57 1.61 1.61.0 00-.45-1.16A4.29 4.29.0 0043 9.22l-2.41-.76A5.15 5.15.0 0138 6.78a3.94 3.94.0 01-.83-2.41 3.7 3.7.0 01.45-1.85 4.47 4.47.0 011.19-1.37 5.27 5.27.0 011.7-.86A7.4 7.4.0 0142.6.0a8.87 8.87.0 011.12.07q.57.07 1.08.19t.95.26a4.27 4.27.0 01.7.29 1.59 1.59.0 01.49.41.94.94.0 01.15.55v.79q0 .52-.38.52a1.76 1.76.0 01-.64-.2 7.74 7.74.0 00-3.2-.64 4.37 4.37.0 00-2.21.47 1.6 1.6.0 00-.79 1.48 1.58 1.58.0 00.49 1.18 4.94 4.94.0 001.83.92L44.55 7a5.08 5.08.0 012.57 1.6A3.76 3.76.0 0147.9 11a4.21 4.21.0 01-.44 1.93 4.4 4.4.0 01-1.21 1.47 5.43 5.43.0 01-1.85.93A8.25 8.25.0 0142.05 15.62z"/><path class="cls-2" d="M45.19 23.81C39.72 27.85 31.78 30 25 30A36.64 36.64.0 01.22 20.57c-.51-.46-.06-1.09.56-.74A49.78 49.78.0 0025.53 26.4 49.23 49.23.0 0044.4 22.53C45.32 22.14 46.1 23.14 45.19 23.81z"/><path class="cls-2" d="M47.47 21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74 3.13-2.2 8.27-1.57 8.86-.83s-.16 5.89-3.09 8.35c-.45.38-.88.18-.68-.32C46.69 25.8 48.17 22.11 47.47 21.21z"/></svg></a></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
+<input data-search-input id=search-by type=search placeholder=Search...>
+<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=https://anquoc211.github.io/AWS_Internship/js/lunr.min.js?1765072081></script><script type=text/javascript src=https://anquoc211.github.io/AWS_Internship/js/auto-complete.js?1765072081></script><script type=text/javascript>var baseurl="https://anquoc211.github.io/AWS_Internship/"</script><script type=text/javascript src=https://anquoc211.github.io/AWS_Internship/js/search.js?1765072081></script></div><div class=highlightable><ul class=topics><li data-nav-id=/1-worklog/ title="Worklog - AWS Learning Journey" class="dd-item
+parent"><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/><b>1. </b>Worklog - AWS Learning Journey
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.1-week1/ title="Week 1 - Cloud Computing Fundamentals" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.1-week1/><b>1.1. </b>Week 1 - Cloud Computing Fundamentals
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.1-week1/1.1.1-day01-2025-09-08/ title="Day 01 - Introduction to Cloud Computing" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.1-week1/1.1.1-day01-2025-09-08/><b>1.1.1. </b>Day 01 - Introduction to Cloud Computing
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.1-week1/1.1.2-day02-2025-09-09/ title="Day 02 - AWS Global Infrastructure" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.1-week1/1.1.2-day02-2025-09-09/><b>1.1.2. </b>Day 02 - AWS Global Infrastructure
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.1-week1/1.1.3-day03-2025-09-10/ title="Day 03 - AWS Management Tools" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.1-week1/1.1.3-day03-2025-09-10/><b>1.1.3. </b>Day 03 - AWS Management Tools
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.1-week1/1.1.4-day04-2025-09-11/ title="Day 04 - Cost Optimization on AWS" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.1-week1/1.1.4-day04-2025-09-11/><b>1.1.4. </b>Day 04 - Cost Optimization on AWS
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.1-week1/1.1.5-day05-2025-09-12/ title="Day 05 - AWS Well-Architected Framework" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.1-week1/1.1.5-day05-2025-09-12/><b>1.1.5. </b>Day 05 - AWS Well-Architected Framework
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.2-week2/ title="Week 2 - AWS Networking Services" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.2-week2/><b>1.2. </b>Week 2 - AWS Networking Services
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.2-week2/1.2.1-day06-2025-09-15/ title="Day 06 - Amazon VPC Fundamentals" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.2-week2/1.2.1-day06-2025-09-15/><b>1.2.1. </b>Day 06 - Amazon VPC Fundamentals
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.2-week2/1.2.2-day07-2025-09-16/ title="Day 07 - VPC Routing & Network Interfaces" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.2-week2/1.2.2-day07-2025-09-16/><b>1.2.2. </b>Day 07 - VPC Routing & Network Interfaces
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.2-week2/1.2.3-day08-2025-09-17/ title="Day 08 - VPC Security & Flow Logs" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.2-week2/1.2.3-day08-2025-09-17/><b>1.2.3. </b>Day 08 - VPC Security & Flow Logs
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.2-week2/1.2.4-day09-2025-09-18/ title="Day 09 - VPC Connectivity & Load Balancing" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.2-week2/1.2.4-day09-2025-09-18/><b>1.2.4. </b>Day 09 - VPC Connectivity & Load Balancing
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.2-week2/1.2.5-day10-2025-09-19/ title="Day 10 - Elastic Load Balancing" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.2-week2/1.2.5-day10-2025-09-19/><b>1.2.5. </b>Day 10 - Elastic Load Balancing
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.3-week3/ title="Week 3 - AWS Compute Services" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.3-week3/><b>1.3. </b>Week 3 - AWS Compute Services
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.3-week3/1.3.1-day11-2025-09-22/ title="Day 11 - Amazon EC2 Fundamentals" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.3-week3/1.3.1-day11-2025-09-22/><b>1.3.1. </b>Day 11 - Amazon EC2 Fundamentals
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.3-week3/1.3.2-day12-2025-09-23/ title="Day 12 - EC2 Storage & Backup" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.3-week3/1.3.2-day12-2025-09-23/><b>1.3.2. </b>Day 12 - EC2 Storage & Backup
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.3-week3/1.3.3-day13-2025-09-24/ title="Day 13 - Instance Store & User Data" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.3-week3/1.3.3-day13-2025-09-24/><b>1.3.3. </b>Day 13 - Instance Store & User Data
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.3-week3/1.3.4-day14-2025-09-25/ title="Day 14 - EC2 Auto Scaling" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.3-week3/1.3.4-day14-2025-09-25/><b>1.3.4. </b>Day 14 - EC2 Auto Scaling
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.3-week3/1.3.5-day15-2025-09-26/ title="Day 15 - Lightsail, EFS & FSx" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.3-week3/1.3.5-day15-2025-09-26/><b>1.3.5. </b>Day 15 - Lightsail, EFS & FSx
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.4-week4/ title="Week 4 - AWS Storage Services" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.4-week4/><b>1.4. </b>Week 4 - AWS Storage Services
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.4-week4/1.4.1-day16-2025-09-29/ title="Day 16 - Amazon S3 Fundamentals" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.4-week4/1.4.1-day16-2025-09-29/><b>1.4.1. </b>Day 16 - Amazon S3 Fundamentals
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.4-week4/1.4.2-day17-2025-09-30/ title="Day 17 - S3 Advanced Features" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.4-week4/1.4.2-day17-2025-09-30/><b>1.4.2. </b>Day 17 - S3 Advanced Features
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.4-week4/1.4.3-day18-2025-10-01/ title="Day 18 - AWS Snow Family & Hybrid Storage" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.4-week4/1.4.3-day18-2025-10-01/><b>1.4.3. </b>Day 18 - AWS Snow Family & Hybrid Storage
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.4-week4/1.4.4-day19-2025-10-02/ title="Day 19 - Disaster Recovery on AWS" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.4-week4/1.4.4-day19-2025-10-02/><b>1.4.4. </b>Day 19 - Disaster Recovery on AWS
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.4-week4/1.4.5-day20-2025-10-03/ title="Day 20 - AWS Backup & FSx" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.4-week4/1.4.5-day20-2025-10-03/><b>1.4.5. </b>Day 20 - AWS Backup & FSx
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.5-week5/ title="Week 5 - AWS Security & Identity" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.5-week5/><b>1.5. </b>Week 5 - AWS Security & Identity
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.5-week5/1.5.1-day21-2025-10-06/ title="Day 21 - Shared Responsibility & IAM Basics" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.5-week5/1.5.1-day21-2025-10-06/><b>1.5.1. </b>Day 21 - Shared Responsibility & IAM Basics
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.5-week5/1.5.2-day22-2025-10-07/ title="Day 22 - IAM Policies & Roles" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.5-week5/1.5.2-day22-2025-10-07/><b>1.5.2. </b>Day 22 - IAM Policies & Roles
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.5-week5/1.5.3-day23-2025-10-08/ title="Day 23 - Amazon Cognito & Organizations" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.5-week5/1.5.3-day23-2025-10-08/><b>1.5.3. </b>Day 23 - Amazon Cognito & Organizations
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.5-week5/1.5.4-day24-2025-10-09/ title="Day 24 - SCPs, Identity Center & KMS" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.5-week5/1.5.4-day24-2025-10-09/><b>1.5.4. </b>Day 24 - SCPs, Identity Center & KMS
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.5-week5/1.5.5-day25-2025-10-10/ title="Day 25 - AWS Security Hub & Automation" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.5-week5/1.5.5-day25-2025-10-10/><b>1.5.5. </b>Day 25 - AWS Security Hub & Automation
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.6-week6/ title="Week 6 - AWS Database Services" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.6-week6/><b>1.6. </b>Week 6 - AWS Database Services
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.6-week6/1.6.1-day26-2025-10-13/ title="Day 26 - Database Fundamentals" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.6-week6/1.6.1-day26-2025-10-13/><b>1.6.1. </b>Day 26 - Database Fundamentals
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.6-week6/1.6.2-day27-2025-10-14/ title="Day 27 - Amazon RDS & Aurora" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.6-week6/1.6.2-day27-2025-10-14/><b>1.6.2. </b>Day 27 - Amazon RDS & Aurora
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.6-week6/1.6.3-day28-2025-10-15/ title="Day 28 - Amazon Redshift" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.6-week6/1.6.3-day28-2025-10-15/><b>1.6.3. </b>Day 28 - Amazon Redshift
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.6-week6/1.6.4-day29-2025-10-16/ title="Day 29 - Amazon ElastiCache" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.6-week6/1.6.4-day29-2025-10-16/><b>1.6.4. </b>Day 29 - Amazon ElastiCache
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.6-week6/1.6.5-day30-2025-10-17/ title="Day 30 - Database Migration & Best Practices" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.6-week6/1.6.5-day30-2025-10-17/><b>1.6.5. </b>Day 30 - Database Migration & Best Practices
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.7-week7/ title="Week 7 - Vertical Slice Delivery" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.7-week7/><b>1.7. </b>Week 7 - Vertical Slice Delivery
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.7-week7/1.7.1-day31-2025-10-20/ title="Day 31 - Vertical Slice Kickoff" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.7-week7/1.7.1-day31-2025-10-20/><b>1.7.1. </b>Day 31 - Vertical Slice Kickoff
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.7-week7/1.7.2-day32-2025-10-21/ title="Day 32 - Contract-First & Mocking" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.7-week7/1.7.2-day32-2025-10-21/><b>1.7.2. </b>Day 32 - Contract-First & Mocking
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.7-week7/1.7.3-day33-2025-10-22/ title="Day 33 - Next.js App Router" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.7-week7/1.7.3-day33-2025-10-22/><b>1.7.3. </b>Day 33 - Next.js App Router
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.7-week7/1.7.4-day34-2025-10-23/ title="Day 34 - FastAPI Clean Architecture" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.7-week7/1.7.4-day34-2025-10-23/><b>1.7.4. </b>Day 34 - FastAPI Clean Architecture
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.7-week7/1.7.5-day35-2025-10-24/ title="Day 35 - Contract Testing & Retrospective" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.7-week7/1.7.5-day35-2025-10-24/><b>1.7.5. </b>Day 35 - Contract Testing & Retrospective
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.8-week8/ title="Week 8 - Learning Natural Language Processing" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.8-week8/><b>1.8. </b>Week 8 - Learning Natural Language Processing
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.8-week8/1.8.1-day36-2025-10-27/ title="Day 36 - Introduction to NLP & Text Preprocessing" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.8-week8/1.8.1-day36-2025-10-27/><b>1.8.1. </b>Day 36 - Introduction to NLP & Text Preprocessing
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.8-week8/1.8.2-day37-2025-10-28/ title="Day 37 - Advanced Text Preprocessing" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.8-week8/1.8.2-day37-2025-10-28/><b>1.8.2. </b>Day 37 - Advanced Text Preprocessing
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.8-week8/1.8.3-day38-2025-10-29/ title="Day 38 - Text Analysis & Sentiment Analysis" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.8-week8/1.8.3-day38-2025-10-29/><b>1.8.3. </b>Day 38 - Text Analysis & Sentiment Analysis
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.8-week8/1.8.4-day39-2025-10-30/ title="Day 39 - Named Entity Recognition (NER)" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.8-week8/1.8.4-day39-2025-10-30/><b>1.8.4. </b>Day 39 - Named Entity Recognition (NER)
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.8-week8/1.8.5-day40-2025-10-31/ title="Day 40 - Building NLP Projects" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.8-week8/1.8.5-day40-2025-10-31/><b>1.8.5. </b>Day 40 - Building NLP Projects
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.9-week9/ title="Week 9 - NLP Revision & Advanced Concepts" class="dd-item
+parent"><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.9-week9/><b>1.9. </b>Week 9 - NLP Revision & Advanced Concepts
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.9-week9/1.9.1-day41-2025-11-03/ title="Day 41 - NLP Fundamentals Revision" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.9-week9/1.9.1-day41-2025-11-03/><b>1.9.1. </b>Day 41 - NLP Fundamentals Revision
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.9-week9/1.9.2-day42-2025-11-04/ title="Day 42 - Advanced Text Classification" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.9-week9/1.9.2-day42-2025-11-04/><b>1.9.2. </b>Day 42 - Advanced Text Classification
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.9-week9/1.9.3-day43-2025-11-05/ title="Day 43 - Production Sentiment Analysis Systems" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.9-week9/1.9.3-day43-2025-11-05/><b>1.9.3. </b>Day 43 - Production Sentiment Analysis Systems
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.9-week9/1.9.4-day44-2025-11-06/ title="Day 44 - Advanced NER & Custom Entity Training" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.9-week9/1.9.4-day44-2025-11-06/><b>1.9.4. </b>Day 44 - Advanced NER & Custom Entity Training
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.9-week9/1.9.5-day45-2025-11-07/ title="Day 45 - NLP Integration & Final Project" class="dd-item
+active"><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.9-week9/1.9.5-day45-2025-11-07/><b>1.9.5. </b>Day 45 - NLP Integration & Final Project
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/1-worklog/1.10-week10/ title="Week 10 - Online Library Project Completion (Frontend)" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.10-week10/><b>1.10. </b>Week 10 - Online Library Project Completion (Frontend)
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.10-week10/1.10.1-day46-2025-11-10/ title="Day 46 - Authentication & Project Setup" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.10-week10/1.10.1-day46-2025-11-10/><b>1.10.1. </b>Day 46 - Authentication & Project Setup
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.10-week10/1.10.2-day47-2025-11-11/ title="Day 47 - Book Upload Flow & Presigned URLs" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.10-week10/1.10.2-day47-2025-11-11/><b>1.10.2. </b>Day 47 - Book Upload Flow & Presigned URLs
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.10-week10/1.10.3-day48-2025-11-12/ title="Day 48 - Admin Panel & Approval Workflow" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.10-week10/1.10.3-day48-2025-11-12/><b>1.10.3. </b>Day 48 - Admin Panel & Approval Workflow
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.10-week10/1.10.4-day49-2025-11-13/ title="Day 49 - Reader Interface & Search Implementation" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.10-week10/1.10.4-day49-2025-11-13/><b>1.10.4. </b>Day 49 - Reader Interface & Search Implementation
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.10-week10/1.10.5-day50-2025-11-14/ title="Day 50 - Testing, Deployment & Project Completion" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.10-week10/1.10.5-day50-2025-11-14/><b>1.10.5. </b>Day 50 - Testing, Deployment & Project Completion
+<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li><li data-nav-id=/2-proposal/ title=Proposal class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/2-proposal/><b>2. </b>Proposal
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/3-blogstranslated/ title="Translated Blogs" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/3-blogstranslated/><b>3. </b>Translated Blogs
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/3-blogstranslated/3.1-blog1/ title="Blog 1" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/3-blogstranslated/3.1-blog1/><b>3.1. </b>Blog 1
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/3-blogstranslated/3.2-blog2/ title="Blog 2" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/3-blogstranslated/3.2-blog2/><b>3.2. </b>Blog 2
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/3-blogstranslated/3.3-blog3/ title="Blog 3" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/3-blogstranslated/3.3-blog3/><b>3.3. </b>Blog 3
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/4-eventparticipated/ title="Events Participated" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/4-eventparticipated/><b>4. </b>Events Participated
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/4-eventparticipated/4.1-event1/ title="Event 1 - Vietnam Cloud Day 2025" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/4-eventparticipated/4.1-event1/><b>4.1. </b>Event 1 - Vietnam Cloud Day 2025
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/4-eventparticipated/4.2-event2/ title="Event 2 - AWS GenAI Builder Club" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/4-eventparticipated/4.2-event2/><b>4.2. </b>Event 2 - AWS GenAI Builder Club
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/5-workshop/ title=Workshop class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/5-workshop/><b>5. </b>Workshop
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/5-workshop/5.1-workshop-overview/ title="Workshop Overview" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/5-workshop/5.1-workshop-overview/><b>5.1. </b>Workshop Overview
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.2-prerequisite/ title=Prerequisites class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/5-workshop/5.2-prerequisite/><b>5.2. </b>Prerequisites
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.3-module3/ title="User Registration & Verification" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/5-workshop/5.3-module3/><b>5.3. </b>User Registration & Verification
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.4-module4/ title="Login & Session Management" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/5-workshop/5.4-module4/><b>5.4. </b>Login & Session Management
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.5-module5/ title="Password Management" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/5-workshop/5.5-module5/><b>5.5. </b>Password Management
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.6-module6/ title="Advanced Features & Cleanup" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/5-workshop/5.6-module6/><b>5.6. </b>Advanced Features & Cleanup
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/6-self-evaluation/ title=Self-Assessment class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/6-self-evaluation/><b>6. </b>Self-Assessment
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/7-feedback/ title="Sharing and Feedback" class=dd-item><a href=https://anquoc211.github.io/AWS_Internship/7-feedback/><b>7. </b>Sharing and Feedback
+<i class="fas fa-check read-icon"></i></a></li></ul><section id=shortcuts><h3>More</h3><ul><li><a class=padding href=https://www.facebook.com/groups/awsstudygroupfcj/><i class='fab fa-facebook'></i> AWS Study Group</a></li></ul></section><section id=prefooter><hr><ul><li><a class=padding><i class="fas fa-language fa-fw"></i><div class=select-style><select id=select-language onchange="location=this.value"><option id=en value=https://anquoc211.github.io/AWS_Internship/1-worklog/1.9-week9/1.9.5-day45-2025-11-07/ selected>English</option><option id=vi value=https://anquoc211.github.io/AWS_Internship/vi/1-worklog/1.9-week9/1.9.5-day45-2025-11-07/>Tiếng Việt</option></select><svg id="Capa_1" xmlns:xlink="http://www.w3.org/1999/xlink" width="255" height="255" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255"><g><g id="arrow-drop-down"><polygon points="0,63.75 127.5,191.25 255,63.75"/></g></g></svg></div></a></li><li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></section><section id=footer><left><b>Workshop</b><br><img src="https://hitwebcounter.com/counter/counter.php?page=7920860&style=0038&nbdigits=9&type=page&initCount=0" title=Migrate alt="web counter" border=0></a><br><b><a href=https://cloudjourney.awsstudygroup.com/>Cloud Journey</a></b><br><img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" alt="web counter" border=0>
+</left><left><br><br><b>Last Updated</b><br><i><span id=lastUpdated style=color:orange></span>
+</i><script>const today=new Date,formattedDate=today.toLocaleDateString("en-GB");document.getElementById("lastUpdated").textContent=formattedDate</script></left><left><br><br><b>Team</b><br><i><a href=https://www.facebook.com/groups/660548818043427 style=color:orange>First Cloud Journey</a><br></i></left><script async defer src=https://buttons.github.io/buttons.js></script></section></div></nav><section id=body><div id=overlay></div><div class="padding highlightable"><div><div id=top-bar><div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb><span id=sidebar-toggle-span><a href=# id=sidebar-toggle data-sidebar-toggle><i class="fas fa-bars"></i>
+</a></span><span id=toc-menu><i class="fas fa-list-alt"></i></span>
+<span class=links><a href=https://anquoc211.github.io/AWS_Internship/>Internship Report</a> > <a href=https://anquoc211.github.io/AWS_Internship/1-worklog/>Worklog - AWS Learning Journey</a> > <a href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.9-week9/>Week 9 - NLP Revision & Advanced Concepts</a> > Day 45 - NLP Integration & Final Project
+          
+       </span></div><div class=progress><div class=wrapper><nav id=TableOfContents><ul><li><a href=#week-9-recap>Week 9 Recap</a><ul><li><a href=#concepts-covered-this-week>Concepts Covered This Week</a></li><li><a href=#key-learnings>Key Learnings</a></li></ul></li><li><a href=#integrating-nlp-components>Integrating NLP Components</a><ul><li><a href=#multi-component-pipeline>Multi-Component Pipeline</a></li><li><a href=#design-patterns>Design Patterns</a></li></ul></li><li><a href=#building-complete-nlp-applications>Building Complete NLP Applications</a><ul><li><a href=#requirements-analysis>Requirements Analysis</a></li><li><a href=#system-architecture>System Architecture</a></li></ul></li><li><a href=#best-practices>Best Practices</a><ul><li><a href=#code-organization>Code Organization</a></li><li><a href=#testing-strategy>Testing Strategy</a></li><li><a href=#deployment>Deployment</a></li></ul></li><li><a href=#key-insights>Key Insights</a></li></ul><ul><li><a href=#lab-1-multi-component-nlp-pipeline>Lab 1: Multi-Component NLP Pipeline</a></li><li><a href=#lab-2-restful-nlp-api-with-error-handling>Lab 2: RESTful NLP API with Error Handling</a></li><li><a href=#lab-3-batch-processing-system>Lab 3: Batch Processing System</a></li><li><a href=#lab-4-complete-nlp-application-with-web-interface>Lab 4: Complete NLP Application with Web Interface</a></li><li><a href=#lab-5-week-9-final-project---complete-nlp-system>Lab 5: Week 9 Final Project - Complete NLP System</a></li></ul><ul><li><a href=#topics-covered>Topics Covered</a></li><li><a href=#skills-acquired>Skills Acquired</a></li><li><a href=#key-achievements>Key Achievements</a></li></ul></nav></div></div></div></div><div id=head-tags></div><div id=body-inner><h1>Day 45 - NLP Integration & Final Project</h1><p><strong>Date:</strong> 2025-11-07<br><strong>Status:</strong> &ldquo;Done&rdquo;</p><hr><h1 id=lecture-notes><strong>Lecture Notes</strong></h1><h2 id=week-9-recap>Week 9 Recap</h2><h3 id=concepts-covered-this-week>Concepts Covered This Week</h3><ul><li><strong>Day 41</strong>: NLP fundamentals revision - tokenization, preprocessing pipelines</li><li><strong>Day 42</strong>: Advanced text classification - ensemble methods, imbalanced data</li><li><strong>Day 43</strong>: Production sentiment analysis - aspect-based, emotion detection, APIs</li><li><strong>Day 44</strong>: Advanced NER - custom training, entity linking, relation extraction</li><li><strong>Day 45</strong>: Integration & complete NLP systems</li></ul><h3 id=key-learnings>Key Learnings</h3><ul><li>Building production-ready NLP systems requires more than good models</li><li>Integration of multiple NLP components creates powerful applications</li><li>Monitoring, evaluation, and continuous improvement are essential</li><li>Domain adaptation crucial for real-world performance</li></ul><h2 id=integrating-nlp-components>Integrating NLP Components</h2><h3 id=multi-component-pipeline>Multi-Component Pipeline</h3><pre tabindex=0><code>Text Input → Preprocessing → Classification → NER → Sentiment → Output
+</code></pre><p><strong>Benefits of Integration:</strong></p><ul><li>Single API for multiple NLP tasks</li><li>Shared preprocessing reduces computation</li><li>Consistent error handling across components</li><li>Easier maintenance and updates</li></ul><h3 id=design-patterns>Design Patterns</h3><p><strong>Pipeline Pattern</strong></p><ul><li>Sequential processing of text through multiple stages</li><li>Each stage can be independently developed and tested</li><li>Easy to add/remove stages</li></ul><p><strong>Microservices Pattern</strong></p><ul><li>Each NLP task as separate service</li><li>Scalable and independently deployable</li><li>Communication via REST API or message queues</li></ul><p><strong>Monolithic Pattern</strong></p><ul><li>All NLP tasks in single application</li><li>Simpler deployment</li><li>Suitable for smaller applications</li></ul><h2 id=building-complete-nlp-applications>Building Complete NLP Applications</h2><h3 id=requirements-analysis>Requirements Analysis</h3><p><strong>Functional Requirements:</strong></p><ul><li>What NLP tasks are needed?</li><li>What accuracy is acceptable?</li><li>Real-time or batch processing?</li><li>Input/output formats?</li></ul><p><strong>Non-Functional Requirements:</strong></p><ul><li>Performance (latency, throughput)</li><li>Scalability (concurrent users, data volume)</li><li>Reliability (uptime, error rates)</li><li>Security (data privacy, authentication)</li></ul><h3 id=system-architecture>System Architecture</h3><p><strong>Layers:</strong></p><ol><li><strong>API Layer</strong>: REST/GraphQL endpoints, request validation</li><li><strong>Business Logic Layer</strong>: NLP pipeline orchestration</li><li><strong>Processing Layer</strong>: Individual NLP components</li><li><strong>Data Layer</strong>: Model storage, caching, logging</li></ol><h2 id=best-practices>Best Practices</h2><h3 id=code-organization>Code Organization</h3><ul><li>Separate concerns: preprocessing, models, API, utilities</li><li>Configuration management (environment variables, config files)</li><li>Dependency injection for flexibility</li><li>Clear naming conventions</li></ul><h3 id=testing-strategy>Testing Strategy</h3><ul><li>Unit tests for individual components</li><li>Integration tests for pipelines</li><li>End-to-end tests for complete workflows</li><li>Performance/load testing</li></ul><h3 id=deployment>Deployment</h3><ul><li>Containerization (Docker) for consistency</li><li>CI/CD pipelines for automated deployment</li><li>Blue-green or canary deployments for safety</li><li>Health checks and monitoring</li></ul><h2 id=key-insights>Key Insights</h2><ul><li>Start simple, iterate based on real usage</li><li>Log everything for debugging and improvement</li><li>Plan for failure - graceful degradation</li><li>User feedback loop essential for improvement</li><li>Documentation as important as code</li></ul><hr><h1 id=hands-on-labs><strong>Hands-On Labs</strong></h1><h2 id=lab-1-multi-component-nlp-pipeline>Lab 1: Multi-Component NLP Pipeline</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> spacy
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> textblob <span style=color:#f92672>import</span> TextBlob
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.feature_extraction.text <span style=color:#f92672>import</span> TfidfVectorizer
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.naive_bayes <span style=color:#f92672>import</span> MultinomialNB
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> pickle
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ComprehensiveNLPPipeline</span>:
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;Integrated NLP pipeline with multiple components&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> __init__(self):
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Load models</span>
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>nlp <span style=color:#f92672>=</span> spacy<span style=color:#f92672>.</span>load(<span style=color:#e6db74>&#34;en_core_web_sm&#34;</span>)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Initialize components</span>
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>vectorizer <span style=color:#f92672>=</span> TfidfVectorizer(max_features<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>)
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>classifier <span style=color:#f92672>=</span> MultinomialNB()
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Train simple classifier (in production, load pre-trained)</span>
+</span></span><span style=display:flex><span>        sample_texts <span style=color:#f92672>=</span> [<span style=color:#e6db74>&#34;tech product review&#34;</span>, <span style=color:#e6db74>&#34;political news article&#34;</span>, <span style=color:#e6db74>&#34;sports game summary&#34;</span>] <span style=color:#f92672>*</span> <span style=color:#ae81ff>10</span>
+</span></span><span style=display:flex><span>        sample_labels <span style=color:#f92672>=</span> [<span style=color:#e6db74>&#34;technology&#34;</span>, <span style=color:#e6db74>&#34;politics&#34;</span>, <span style=color:#e6db74>&#34;sports&#34;</span>] <span style=color:#f92672>*</span> <span style=color:#ae81ff>10</span>
+</span></span><span style=display:flex><span>        X <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>vectorizer<span style=color:#f92672>.</span>fit_transform(sample_texts)
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>classifier<span style=color:#f92672>.</span>fit(X, sample_labels)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>preprocess</span>(self, text):
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Clean and normalize text&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Lowercase</span>
+</span></span><span style=display:flex><span>        text <span style=color:#f92672>=</span> text<span style=color:#f92672>.</span>lower()
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Remove extra whitespace</span>
+</span></span><span style=display:flex><span>        text <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39; &#39;</span><span style=color:#f92672>.</span>join(text<span style=color:#f92672>.</span>split())
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> text
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>extract_entities</span>(self, text):
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Extract named entities&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        doc <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>nlp(text)
+</span></span><span style=display:flex><span>        entities <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;text&#39;</span>: ent<span style=color:#f92672>.</span>text,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;label&#39;</span>: ent<span style=color:#f92672>.</span>label_,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;start&#39;</span>: ent<span style=color:#f92672>.</span>start_char,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;end&#39;</span>: ent<span style=color:#f92672>.</span>end_char
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> ent <span style=color:#f92672>in</span> doc<span style=color:#f92672>.</span>ents
+</span></span><span style=display:flex><span>        ]
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> entities
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>classify_text</span>(self, text):
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Classify text into category&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        X <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>vectorizer<span style=color:#f92672>.</span>transform([text])
+</span></span><span style=display:flex><span>        category <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>classifier<span style=color:#f92672>.</span>predict(X)[<span style=color:#ae81ff>0</span>]
+</span></span><span style=display:flex><span>        probabilities <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>classifier<span style=color:#f92672>.</span>predict_proba(X)[<span style=color:#ae81ff>0</span>]
+</span></span><span style=display:flex><span>        confidence <span style=color:#f92672>=</span> max(probabilities)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> category, confidence
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>analyze_sentiment</span>(self, text):
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Analyze sentiment&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        blob <span style=color:#f92672>=</span> TextBlob(text)
+</span></span><span style=display:flex><span>        polarity <span style=color:#f92672>=</span> blob<span style=color:#f92672>.</span>sentiment<span style=color:#f92672>.</span>polarity
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> polarity <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0.1</span>:
+</span></span><span style=display:flex><span>            sentiment <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;positive&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>elif</span> polarity <span style=color:#f92672>&lt;</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>0.1</span>:
+</span></span><span style=display:flex><span>            sentiment <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;negative&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>            sentiment <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;neutral&#34;</span>
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> sentiment, polarity
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>extract_keywords</span>(self, text, top_n<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span>):
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Extract key terms&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        doc <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>nlp(text)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Get noun phrases and important words</span>
+</span></span><span style=display:flex><span>        keywords <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> chunk <span style=color:#f92672>in</span> doc<span style=color:#f92672>.</span>noun_chunks:
+</span></span><span style=display:flex><span>            keywords<span style=color:#f92672>.</span>append(chunk<span style=color:#f92672>.</span>text)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Get named entities as keywords</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> ent <span style=color:#f92672>in</span> doc<span style=color:#f92672>.</span>ents:
+</span></span><span style=display:flex><span>            keywords<span style=color:#f92672>.</span>append(ent<span style=color:#f92672>.</span>text)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Remove duplicates and return top N</span>
+</span></span><span style=display:flex><span>        keywords <span style=color:#f92672>=</span> list(set(keywords))
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> keywords[:top_n]
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>analyze</span>(self, text):
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Complete analysis pipeline&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Preprocess</span>
+</span></span><span style=display:flex><span>        clean_text <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>preprocess(text)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Run all analyses</span>
+</span></span><span style=display:flex><span>        entities <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>extract_entities(clean_text)
+</span></span><span style=display:flex><span>        category, confidence <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>classify_text(clean_text)
+</span></span><span style=display:flex><span>        sentiment, polarity <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>analyze_sentiment(clean_text)
+</span></span><span style=display:flex><span>        keywords <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>extract_keywords(clean_text)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> {
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;original_text&#39;</span>: text,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;preprocessed_text&#39;</span>: clean_text,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;category&#39;</span>: category,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;category_confidence&#39;</span>: round(confidence, <span style=color:#ae81ff>3</span>),
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;sentiment&#39;</span>: sentiment,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;sentiment_polarity&#39;</span>: round(polarity, <span style=color:#ae81ff>3</span>),
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;entities&#39;</span>: entities,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;keywords&#39;</span>: keywords
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Test comprehensive pipeline</span>
+</span></span><span style=display:flex><span>pipeline <span style=color:#f92672>=</span> ComprehensiveNLPPipeline()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>test_text <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>Apple Inc. announced the new iPhone 15 today in Cupertino, California.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>CEO Tim Cook praised the innovative features and excellent performance.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>The product received overwhelmingly positive reviews from tech journalists.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>result <span style=color:#f92672>=</span> pipeline<span style=color:#f92672>.</span>analyze(test_text)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;=== Comprehensive NLP Analysis ===</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Original Text: </span><span style=color:#e6db74>{</span>result[<span style=color:#e6db74>&#39;original_text&#39;</span>]<span style=color:#e6db74>}</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Category: </span><span style=color:#e6db74>{</span>result[<span style=color:#e6db74>&#39;category&#39;</span>]<span style=color:#e6db74>}</span><span style=color:#e6db74> (confidence: </span><span style=color:#e6db74>{</span>result[<span style=color:#e6db74>&#39;category_confidence&#39;</span>]<span style=color:#e6db74>}</span><span style=color:#e6db74>)&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Sentiment: </span><span style=color:#e6db74>{</span>result[<span style=color:#e6db74>&#39;sentiment&#39;</span>]<span style=color:#e6db74>}</span><span style=color:#e6db74> (polarity: </span><span style=color:#e6db74>{</span>result[<span style=color:#e6db74>&#39;sentiment_polarity&#39;</span>]<span style=color:#e6db74>}</span><span style=color:#e6db74>)&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>Entities:&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> ent <span style=color:#f92672>in</span> result[<span style=color:#e6db74>&#39;entities&#39;</span>]:
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;  - </span><span style=color:#e6db74>{</span>ent[<span style=color:#e6db74>&#39;text&#39;</span>]<span style=color:#e6db74>}</span><span style=color:#e6db74> (</span><span style=color:#e6db74>{</span>ent[<span style=color:#e6db74>&#39;label&#39;</span>]<span style=color:#e6db74>}</span><span style=color:#e6db74>)&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>Keywords: </span><span style=color:#e6db74>{</span><span style=color:#e6db74>&#39;, &#39;</span><span style=color:#f92672>.</span>join(result[<span style=color:#e6db74>&#39;keywords&#39;</span>])<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><h2 id=lab-2-restful-nlp-api-with-error-handling>Lab 2: RESTful NLP API with Error Handling</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> fastapi <span style=color:#f92672>import</span> FastAPI, HTTPException, Request
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> fastapi.responses <span style=color:#f92672>import</span> JSONResponse
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> pydantic <span style=color:#f92672>import</span> BaseModel, validator
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> datetime <span style=color:#f92672>import</span> datetime
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> logging
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> time
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Configure logging</span>
+</span></span><span style=display:flex><span>logging<span style=color:#f92672>.</span>basicConfig(level<span style=color:#f92672>=</span>logging<span style=color:#f92672>.</span>INFO)
+</span></span><span style=display:flex><span>logger <span style=color:#f92672>=</span> logging<span style=color:#f92672>.</span>getLogger(__name__)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>app <span style=color:#f92672>=</span> FastAPI(
+</span></span><span style=display:flex><span>    title<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Comprehensive NLP API&#34;</span>,
+</span></span><span style=display:flex><span>    description<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Multi-component NLP analysis service&#34;</span>,
+</span></span><span style=display:flex><span>    version<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;1.0.0&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Initialize pipeline</span>
+</span></span><span style=display:flex><span>nlp_pipeline <span style=color:#f92672>=</span> ComprehensiveNLPPipeline()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AnalysisRequest</span>(BaseModel):
+</span></span><span style=display:flex><span>    text: str
+</span></span><span style=display:flex><span>    include_entities: bool <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>
+</span></span><span style=display:flex><span>    include_sentiment: bool <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>
+</span></span><span style=display:flex><span>    include_classification: bool <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>
+</span></span><span style=display:flex><span>    include_keywords: bool <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@validator</span>(<span style=color:#e6db74>&#39;text&#39;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>validate_text</span>(cls, v):
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>not</span> v <span style=color:#f92672>or</span> len(v<span style=color:#f92672>.</span>strip()) <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>raise</span> <span style=color:#a6e22e>ValueError</span>(<span style=color:#e6db74>&#39;Text cannot be empty&#39;</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> len(v) <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>10000</span>:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>raise</span> <span style=color:#a6e22e>ValueError</span>(<span style=color:#e6db74>&#39;Text too long (max 10000 characters)&#39;</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> v
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AnalysisResponse</span>(BaseModel):
+</span></span><span style=display:flex><span>    text: str
+</span></span><span style=display:flex><span>    category: str <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>
+</span></span><span style=display:flex><span>    category_confidence: float <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>
+</span></span><span style=display:flex><span>    sentiment: str <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>
+</span></span><span style=display:flex><span>    sentiment_polarity: float <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>
+</span></span><span style=display:flex><span>    entities: list <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>    keywords: list <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>    processing_time: float
+</span></span><span style=display:flex><span>    timestamp: str
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Middleware for logging</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@app.middleware</span>(<span style=color:#e6db74>&#34;http&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>log_requests</span>(request: Request, call_next):
+</span></span><span style=display:flex><span>    start_time <span style=color:#f92672>=</span> time<span style=color:#f92672>.</span>time()
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Log request</span>
+</span></span><span style=display:flex><span>    logger<span style=color:#f92672>.</span>info(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Request: </span><span style=color:#e6db74>{</span>request<span style=color:#f92672>.</span>method<span style=color:#e6db74>}</span><span style=color:#e6db74> </span><span style=color:#e6db74>{</span>request<span style=color:#f92672>.</span>url<span style=color:#f92672>.</span>path<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Process request</span>
+</span></span><span style=display:flex><span>    response <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> call_next(request)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Log response</span>
+</span></span><span style=display:flex><span>    process_time <span style=color:#f92672>=</span> time<span style=color:#f92672>.</span>time() <span style=color:#f92672>-</span> start_time
+</span></span><span style=display:flex><span>    logger<span style=color:#f92672>.</span>info(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Completed in </span><span style=color:#e6db74>{</span>process_time<span style=color:#e6db74>:</span><span style=color:#e6db74>.2f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>s with status </span><span style=color:#e6db74>{</span>response<span style=color:#f92672>.</span>status_code<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> response
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@app.exception_handler</span>(<span style=color:#a6e22e>Exception</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>global_exception_handler</span>(request: Request, exc: <span style=color:#a6e22e>Exception</span>):
+</span></span><span style=display:flex><span>    logger<span style=color:#f92672>.</span>error(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Unhandled exception: </span><span style=color:#e6db74>{</span>exc<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> JSONResponse(
+</span></span><span style=display:flex><span>        status_code<span style=color:#f92672>=</span><span style=color:#ae81ff>500</span>,
+</span></span><span style=display:flex><span>        content<span style=color:#f92672>=</span>{
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;error&#34;</span>: <span style=color:#e6db74>&#34;Internal server error&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;message&#34;</span>: str(exc),
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;timestamp&#34;</span>: datetime<span style=color:#f92672>.</span>utcnow()<span style=color:#f92672>.</span>isoformat()
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@app.post</span>(<span style=color:#e6db74>&#34;/analyze&#34;</span>, response_model<span style=color:#f92672>=</span>AnalysisResponse)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>analyze_text</span>(request: AnalysisRequest):
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;Comprehensive text analysis&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>try</span>:
+</span></span><span style=display:flex><span>        start_time <span style=color:#f92672>=</span> time<span style=color:#f92672>.</span>time()
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Run analysis</span>
+</span></span><span style=display:flex><span>        result <span style=color:#f92672>=</span> nlp_pipeline<span style=color:#f92672>.</span>analyze(request<span style=color:#f92672>.</span>text)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Build response based on requested components</span>
+</span></span><span style=display:flex><span>        response_data <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;text&#39;</span>: request<span style=color:#f92672>.</span>text,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;processing_time&#39;</span>: time<span style=color:#f92672>.</span>time() <span style=color:#f92672>-</span> start_time,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;timestamp&#39;</span>: datetime<span style=color:#f92672>.</span>utcnow()<span style=color:#f92672>.</span>isoformat() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;Z&#34;</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> request<span style=color:#f92672>.</span>include_classification:
+</span></span><span style=display:flex><span>            response_data[<span style=color:#e6db74>&#39;category&#39;</span>] <span style=color:#f92672>=</span> result[<span style=color:#e6db74>&#39;category&#39;</span>]
+</span></span><span style=display:flex><span>            response_data[<span style=color:#e6db74>&#39;category_confidence&#39;</span>] <span style=color:#f92672>=</span> result[<span style=color:#e6db74>&#39;category_confidence&#39;</span>]
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> request<span style=color:#f92672>.</span>include_sentiment:
+</span></span><span style=display:flex><span>            response_data[<span style=color:#e6db74>&#39;sentiment&#39;</span>] <span style=color:#f92672>=</span> result[<span style=color:#e6db74>&#39;sentiment&#39;</span>]
+</span></span><span style=display:flex><span>            response_data[<span style=color:#e6db74>&#39;sentiment_polarity&#39;</span>] <span style=color:#f92672>=</span> result[<span style=color:#e6db74>&#39;sentiment_polarity&#39;</span>]
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> request<span style=color:#f92672>.</span>include_entities:
+</span></span><span style=display:flex><span>            response_data[<span style=color:#e6db74>&#39;entities&#39;</span>] <span style=color:#f92672>=</span> result[<span style=color:#e6db74>&#39;entities&#39;</span>]
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> request<span style=color:#f92672>.</span>include_keywords:
+</span></span><span style=display:flex><span>            response_data[<span style=color:#e6db74>&#39;keywords&#39;</span>] <span style=color:#f92672>=</span> result[<span style=color:#e6db74>&#39;keywords&#39;</span>]
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> response_data
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>except</span> <span style=color:#a6e22e>Exception</span> <span style=color:#66d9ef>as</span> e:
+</span></span><span style=display:flex><span>        logger<span style=color:#f92672>.</span>error(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Analysis failed: </span><span style=color:#e6db74>{</span>e<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>raise</span> HTTPException(status_code<span style=color:#f92672>=</span><span style=color:#ae81ff>500</span>, detail<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Analysis failed: </span><span style=color:#e6db74>{</span>str(e)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@app.get</span>(<span style=color:#e6db74>&#34;/health&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>health_check</span>():
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;Health check endpoint&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> {
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;status&#34;</span>: <span style=color:#e6db74>&#34;healthy&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;timestamp&#34;</span>: datetime<span style=color:#f92672>.</span>utcnow()<span style=color:#f92672>.</span>isoformat(),
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;components&#34;</span>: {
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;spacy&#34;</span>: <span style=color:#e6db74>&#34;loaded&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;classifier&#34;</span>: <span style=color:#e6db74>&#34;ready&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;sentiment&#34;</span>: <span style=color:#e6db74>&#34;ready&#34;</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@app.get</span>(<span style=color:#e6db74>&#34;/metrics&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_metrics</span>():
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;System metrics&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> {
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;timestamp&#34;</span>: datetime<span style=color:#f92672>.</span>utcnow()<span style=color:#f92672>.</span>isoformat(),
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;uptime&#34;</span>: <span style=color:#e6db74>&#34;available&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;requests_processed&#34;</span>: <span style=color:#e6db74>&#34;tracked in production&#34;</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># To run: uvicorn script_name:app --reload</span>
+</span></span></code></pre></div><h2 id=lab-3-batch-processing-system>Lab 3: Batch Processing System</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> json
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> time
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> concurrent.futures <span style=color:#f92672>import</span> ThreadPoolExecutor, as_completed
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> pathlib <span style=color:#f92672>import</span> Path
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>BatchNLPProcessor</span>:
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;Process multiple texts efficiently&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> __init__(self, pipeline, max_workers<span style=color:#f92672>=</span><span style=color:#ae81ff>4</span>):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>pipeline <span style=color:#f92672>=</span> pipeline
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>max_workers <span style=color:#f92672>=</span> max_workers
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>process_single</span>(self, text_id, text):
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Process single text&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span>:
+</span></span><span style=display:flex><span>            result <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>pipeline<span style=color:#f92672>.</span>analyze(text)
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> {
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;id&#39;</span>: text_id,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;status&#39;</span>: <span style=color:#e6db74>&#39;success&#39;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;result&#39;</span>: result
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>except</span> <span style=color:#a6e22e>Exception</span> <span style=color:#66d9ef>as</span> e:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> {
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;id&#39;</span>: text_id,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;status&#39;</span>: <span style=color:#e6db74>&#39;error&#39;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;error&#39;</span>: str(e)
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>process_batch</span>(self, texts, show_progress<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>):
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Process multiple texts in parallel&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        results <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>        total <span style=color:#f92672>=</span> len(texts)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>with</span> ThreadPoolExecutor(max_workers<span style=color:#f92672>=</span>self<span style=color:#f92672>.</span>max_workers) <span style=color:#66d9ef>as</span> executor:
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Submit all tasks</span>
+</span></span><span style=display:flex><span>            future_to_id <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>                executor<span style=color:#f92672>.</span>submit(self<span style=color:#f92672>.</span>process_single, i, text): i 
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>for</span> i, text <span style=color:#f92672>in</span> enumerate(texts)
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Collect results</span>
+</span></span><span style=display:flex><span>            completed <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> future <span style=color:#f92672>in</span> as_completed(future_to_id):
+</span></span><span style=display:flex><span>                result <span style=color:#f92672>=</span> future<span style=color:#f92672>.</span>result()
+</span></span><span style=display:flex><span>                results<span style=color:#f92672>.</span>append(result)
+</span></span><span style=display:flex><span>                completed <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>                
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> show_progress:
+</span></span><span style=display:flex><span>                    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Progress: </span><span style=color:#e6db74>{</span>completed<span style=color:#e6db74>}</span><span style=color:#e6db74>/</span><span style=color:#e6db74>{</span>total<span style=color:#e6db74>}</span><span style=color:#e6db74> (</span><span style=color:#e6db74>{</span>completed<span style=color:#f92672>/</span>total<span style=color:#f92672>*</span><span style=color:#ae81ff>100</span><span style=color:#e6db74>:</span><span style=color:#e6db74>.1f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>%)&#34;</span>)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> results
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>process_file</span>(self, input_file, output_file):
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Process texts from file&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Read input</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>with</span> open(input_file, <span style=color:#e6db74>&#39;r&#39;</span>, encoding<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;utf-8&#39;</span>) <span style=color:#66d9ef>as</span> f:
+</span></span><span style=display:flex><span>            data <span style=color:#f92672>=</span> json<span style=color:#f92672>.</span>load(f)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        texts <span style=color:#f92672>=</span> data <span style=color:#66d9ef>if</span> isinstance(data, list) <span style=color:#66d9ef>else</span> [data]
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Process</span>
+</span></span><span style=display:flex><span>        results <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>process_batch(texts)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Write output</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>with</span> open(output_file, <span style=color:#e6db74>&#39;w&#39;</span>, encoding<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;utf-8&#39;</span>) <span style=color:#66d9ef>as</span> f:
+</span></span><span style=display:flex><span>            json<span style=color:#f92672>.</span>dump(results, f, indent<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>, ensure_ascii<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> len(results)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Test batch processing</span>
+</span></span><span style=display:flex><span>batch_processor <span style=color:#f92672>=</span> BatchNLPProcessor(pipeline, max_workers<span style=color:#f92672>=</span><span style=color:#ae81ff>4</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>test_texts <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;Apple released new products today.&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;The election results surprised many analysts.&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;The team won the championship game.&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;Stock markets reached new highs.&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;Scientists discovered a new species.&#34;</span>
+</span></span><span style=display:flex><span>] <span style=color:#f92672>*</span> <span style=color:#ae81ff>5</span>  <span style=color:#75715e># 25 texts total</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;Starting batch processing...&#34;</span>)
+</span></span><span style=display:flex><span>start_time <span style=color:#f92672>=</span> time<span style=color:#f92672>.</span>time()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>results <span style=color:#f92672>=</span> batch_processor<span style=color:#f92672>.</span>process_batch(test_texts)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>elapsed <span style=color:#f92672>=</span> time<span style=color:#f92672>.</span>time() <span style=color:#f92672>-</span> start_time
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>Completed </span><span style=color:#e6db74>{</span>len(results)<span style=color:#e6db74>}</span><span style=color:#e6db74> texts in </span><span style=color:#e6db74>{</span>elapsed<span style=color:#e6db74>:</span><span style=color:#e6db74>.2f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>s&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Average: </span><span style=color:#e6db74>{</span>elapsed<span style=color:#f92672>/</span>len(results)<span style=color:#e6db74>:</span><span style=color:#e6db74>.3f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>s per text&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Show sample results</span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>Sample Results:&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> result <span style=color:#f92672>in</span> results[:<span style=color:#ae81ff>3</span>]:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> result[<span style=color:#e6db74>&#39;status&#39;</span>] <span style=color:#f92672>==</span> <span style=color:#e6db74>&#39;success&#39;</span>:
+</span></span><span style=display:flex><span>        print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>Text </span><span style=color:#e6db74>{</span>result[<span style=color:#e6db74>&#39;id&#39;</span>]<span style=color:#e6db74>}</span><span style=color:#e6db74>:&#34;</span>)
+</span></span><span style=display:flex><span>        print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;  Category: </span><span style=color:#e6db74>{</span>result[<span style=color:#e6db74>&#39;result&#39;</span>][<span style=color:#e6db74>&#39;category&#39;</span>]<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>        print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;  Sentiment: </span><span style=color:#e6db74>{</span>result[<span style=color:#e6db74>&#39;result&#39;</span>][<span style=color:#e6db74>&#39;sentiment&#39;</span>]<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><h2 id=lab-4-complete-nlp-application-with-web-interface>Lab 4: Complete NLP Application with Web Interface</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> fastapi <span style=color:#f92672>import</span> FastAPI
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> fastapi.staticfiles <span style=color:#f92672>import</span> StaticFiles
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> fastapi.responses <span style=color:#f92672>import</span> HTMLResponse
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> uvicorn
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>app <span style=color:#f92672>=</span> FastAPI()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># HTML template for web interface</span>
+</span></span><span style=display:flex><span>HTML_TEMPLATE <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>&lt;!DOCTYPE html&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>&lt;html&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>&lt;head&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &lt;title&gt;NLP Analysis Tool&lt;/title&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &lt;style&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        body {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            font-family: Arial, sans-serif;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            max-width: 800px;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            margin: 50px auto;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            padding: 20px;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        textarea {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            width: 100%;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            height: 150px;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            padding: 10px;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            font-size: 14px;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        button {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            background-color: #4CAF50;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            color: white;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            padding: 10px 20px;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            border: none;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            cursor: pointer;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            font-size: 16px;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            margin-top: 10px;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        button:hover {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            background-color: #45a049;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        #results {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            margin-top: 20px;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            padding: 20px;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            background-color: #f5f5f5;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            border-radius: 5px;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        .result-item {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            margin: 10px 0;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        .label {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            font-weight: bold;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &lt;/style&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>&lt;/head&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>&lt;body&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &lt;h1&gt;📝 NLP Analysis Tool&lt;/h1&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &lt;p&gt;Enter text below to analyze:&lt;/p&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &lt;textarea id=&#34;textInput&#34; placeholder=&#34;Enter your text here...&#34;&gt;&lt;/textarea&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &lt;div&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        &lt;label&gt;&lt;input type=&#34;checkbox&#34; id=&#34;entities&#34; checked&gt; Named Entities&lt;/label&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        &lt;label&gt;&lt;input type=&#34;checkbox&#34; id=&#34;sentiment&#34; checked&gt; Sentiment&lt;/label&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        &lt;label&gt;&lt;input type=&#34;checkbox&#34; id=&#34;classification&#34; checked&gt; Classification&lt;/label&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        &lt;label&gt;&lt;input type=&#34;checkbox&#34; id=&#34;keywords&#34; checked&gt; Keywords&lt;/label&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &lt;/div&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &lt;button onclick=&#34;analyzeText()&#34;&gt;Analyze&lt;/button&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &lt;div id=&#34;results&#34;&gt;&lt;/div&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &lt;script&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        async function analyzeText() {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            const text = document.getElementById(&#39;textInput&#39;).value;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            if (!text.trim()) {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                alert(&#39;Please enter some text&#39;);
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                return;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            const request = {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                text: text,
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                include_entities: document.getElementById(&#39;entities&#39;).checked,
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                include_sentiment: document.getElementById(&#39;sentiment&#39;).checked,
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                include_classification: document.getElementById(&#39;classification&#39;).checked,
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                include_keywords: document.getElementById(&#39;keywords&#39;).checked
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            };
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            try {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                const response = await fetch(&#39;/analyze&#39;, {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                    method: &#39;POST&#39;,
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                    headers: {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                        &#39;Content-Type&#39;: &#39;application/json&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                    },
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                    body: JSON.stringify(request)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                });
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                const data = await response.json();
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                displayResults(data);
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            } catch (error) {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                document.getElementById(&#39;results&#39;).innerHTML = 
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                    &#39;&lt;p style=&#34;color: red;&#34;&gt;Error: &#39; + error.message + &#39;&lt;/p&gt;&#39;;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        function displayResults(data) {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            let html = &#39;&lt;h2&gt;Analysis Results&lt;/h2&gt;&#39;;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            if (data.category) {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                html += `&lt;div class=&#34;result-item&#34;&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                    &lt;span class=&#34;label&#34;&gt;Category:&lt;/span&gt; $</span><span style=color:#e6db74>{data.category}</span><span style=color:#e6db74> 
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                    (${(data.category_confidence * 100).toFixed(1)}</span><span style=color:#e6db74>% c</span><span style=color:#e6db74>onfidence)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                &lt;/div&gt;`;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            if (data.sentiment) {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                html += `&lt;div class=&#34;result-item&#34;&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                    &lt;span class=&#34;label&#34;&gt;Sentiment:&lt;/span&gt; $</span><span style=color:#e6db74>{data.sentiment}</span><span style=color:#e6db74> 
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                    (polarity: ${data.sentiment_polarity.toFixed(2)})
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                &lt;/div&gt;`;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            if (data.entities &amp;&amp; data.entities.length &gt; 0) {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                html += &#39;&lt;div class=&#34;result-item&#34;&gt;&lt;span class=&#34;label&#34;&gt;Entities:&lt;/span&gt;&lt;ul&gt;&#39;;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                data.entities.forEach(ent =&gt; {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                    html += `&lt;li&gt;$</span><span style=color:#e6db74>{ent.text}</span><span style=color:#e6db74> ($</span><span style=color:#e6db74>{ent.label}</span><span style=color:#e6db74>)&lt;/li&gt;`;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                });
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                html += &#39;&lt;/ul&gt;&lt;/div&gt;&#39;;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            if (data.keywords &amp;&amp; data.keywords.length &gt; 0) {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                html += `&lt;div class=&#34;result-item&#34;&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                    &lt;span class=&#34;label&#34;&gt;Keywords:&lt;/span&gt; ${data.keywords.join(&#39;, &#39;)}
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                &lt;/div&gt;`;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            html += `&lt;div class=&#34;result-item&#34;&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                &lt;span class=&#34;label&#34;&gt;Processing Time:&lt;/span&gt; ${(data.processing_time * 1000).toFixed(2)}ms
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            &lt;/div&gt;`;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            document.getElementById(&#39;results&#39;).innerHTML = html;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &lt;/script&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>&lt;/body&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>&lt;/html&gt;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@app.get</span>(<span style=color:#e6db74>&#34;/&#34;</span>, response_class<span style=color:#f92672>=</span>HTMLResponse)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_interface</span>():
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;Serve web interface&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> HTML_TEMPLATE
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Include analysis endpoint from Lab 2</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># ... (paste the analyze endpoint here)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> __name__ <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;__main__&#34;</span>:
+</span></span><span style=display:flex><span>    uvicorn<span style=color:#f92672>.</span>run(app, host<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;0.0.0.0&#34;</span>, port<span style=color:#f92672>=</span><span style=color:#ae81ff>8000</span>)
+</span></span></code></pre></div><h2 id=lab-5-week-9-final-project---complete-nlp-system>Lab 5: Week 9 Final Project - Complete NLP System</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> json
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> datetime <span style=color:#f92672>import</span> datetime
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> pathlib <span style=color:#f92672>import</span> Path
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>NLPSystemManager</span>:
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;Manage complete NLP system with all components&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> __init__(self, config_file<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>pipeline <span style=color:#f92672>=</span> ComprehensiveNLPPipeline()
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>batch_processor <span style=color:#f92672>=</span> BatchNLPProcessor(self<span style=color:#f92672>.</span>pipeline)
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>stats <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;total_processed&#39;</span>: <span style=color:#ae81ff>0</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;successful&#39;</span>: <span style=color:#ae81ff>0</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;failed&#39;</span>: <span style=color:#ae81ff>0</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;start_time&#39;</span>: datetime<span style=color:#f92672>.</span>now()<span style=color:#f92672>.</span>isoformat()
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> config_file:
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>load_config(config_file)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>load_config</span>(self, config_file):
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Load configuration&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>with</span> open(config_file, <span style=color:#e6db74>&#39;r&#39;</span>) <span style=color:#66d9ef>as</span> f:
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>config <span style=color:#f92672>=</span> json<span style=color:#f92672>.</span>load(f)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>process_request</span>(self, text, options<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>):
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Process single request&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span>:
+</span></span><span style=display:flex><span>            result <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>pipeline<span style=color:#f92672>.</span>analyze(text)
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>stats[<span style=color:#e6db74>&#39;total_processed&#39;</span>] <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>stats[<span style=color:#e6db74>&#39;successful&#39;</span>] <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> {<span style=color:#e6db74>&#39;status&#39;</span>: <span style=color:#e6db74>&#39;success&#39;</span>, <span style=color:#e6db74>&#39;data&#39;</span>: result}
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>except</span> <span style=color:#a6e22e>Exception</span> <span style=color:#66d9ef>as</span> e:
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>stats[<span style=color:#e6db74>&#39;total_processed&#39;</span>] <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>stats[<span style=color:#e6db74>&#39;failed&#39;</span>] <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> {<span style=color:#e6db74>&#39;status&#39;</span>: <span style=color:#e6db74>&#39;error&#39;</span>, <span style=color:#e6db74>&#39;error&#39;</span>: str(e)}
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_statistics</span>(self):
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Get system statistics&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        success_rate <span style=color:#f92672>=</span> (self<span style=color:#f92672>.</span>stats[<span style=color:#e6db74>&#39;successful&#39;</span>] <span style=color:#f92672>/</span> self<span style=color:#f92672>.</span>stats[<span style=color:#e6db74>&#39;total_processed&#39;</span>] <span style=color:#f92672>*</span> <span style=color:#ae81ff>100</span> 
+</span></span><span style=display:flex><span>                       <span style=color:#66d9ef>if</span> self<span style=color:#f92672>.</span>stats[<span style=color:#e6db74>&#39;total_processed&#39;</span>] <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>else</span> <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> {
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;total_processed&#39;</span>: self<span style=color:#f92672>.</span>stats[<span style=color:#e6db74>&#39;total_processed&#39;</span>],
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;successful&#39;</span>: self<span style=color:#f92672>.</span>stats[<span style=color:#e6db74>&#39;successful&#39;</span>],
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;failed&#39;</span>: self<span style=color:#f92672>.</span>stats[<span style=color:#e6db74>&#39;failed&#39;</span>],
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;success_rate&#39;</span>: <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{</span>success_rate<span style=color:#e6db74>:</span><span style=color:#e6db74>.2f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>%&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;uptime_since&#39;</span>: self<span style=color:#f92672>.</span>stats[<span style=color:#e6db74>&#39;start_time&#39;</span>]
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>export_report</span>(self, output_file):
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;&#34;&#34;Export system report&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        report <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;timestamp&#39;</span>: datetime<span style=color:#f92672>.</span>now()<span style=color:#f92672>.</span>isoformat(),
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;statistics&#39;</span>: self<span style=color:#f92672>.</span>get_statistics(),
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;configuration&#39;</span>: getattr(self, <span style=color:#e6db74>&#39;config&#39;</span>, {})
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>with</span> open(output_file, <span style=color:#e6db74>&#39;w&#39;</span>) <span style=color:#66d9ef>as</span> f:
+</span></span><span style=display:flex><span>            json<span style=color:#f92672>.</span>dump(report, f, indent<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Initialize complete system</span>
+</span></span><span style=display:flex><span>system <span style=color:#f92672>=</span> NLPSystemManager()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Process some texts</span>
+</span></span><span style=display:flex><span>test_texts <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;Apple announced new products&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;Political debate heats up&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;Team wins championship&#34;</span>
+</span></span><span style=display:flex><span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;=== NLP System Final Project ===</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;Processing texts...&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> i, text <span style=color:#f92672>in</span> enumerate(test_texts, <span style=color:#ae81ff>1</span>):
+</span></span><span style=display:flex><span>    result <span style=color:#f92672>=</span> system<span style=color:#f92672>.</span>process_request(text)
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>{</span>i<span style=color:#e6db74>}</span><span style=color:#e6db74>. </span><span style=color:#e6db74>{</span>text<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> result[<span style=color:#e6db74>&#39;status&#39;</span>] <span style=color:#f92672>==</span> <span style=color:#e6db74>&#39;success&#39;</span>:
+</span></span><span style=display:flex><span>        data <span style=color:#f92672>=</span> result[<span style=color:#e6db74>&#39;data&#39;</span>]
+</span></span><span style=display:flex><span>        print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;   Category: </span><span style=color:#e6db74>{</span>data[<span style=color:#e6db74>&#39;category&#39;</span>]<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>        print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;   Sentiment: </span><span style=color:#e6db74>{</span>data[<span style=color:#e6db74>&#39;sentiment&#39;</span>]<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>        print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;   Entities: </span><span style=color:#e6db74>{</span>len(data[<span style=color:#e6db74>&#39;entities&#39;</span>])<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>        print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;   Error: </span><span style=color:#e6db74>{</span>result[<span style=color:#e6db74>&#39;error&#39;</span>]<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Show statistics</span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;=&#34;</span><span style=color:#f92672>*</span><span style=color:#ae81ff>50</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;System Statistics:&#34;</span>)
+</span></span><span style=display:flex><span>stats <span style=color:#f92672>=</span> system<span style=color:#f92672>.</span>get_statistics()
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> key, value <span style=color:#f92672>in</span> stats<span style=color:#f92672>.</span>items():
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;  </span><span style=color:#e6db74>{</span>key<span style=color:#e6db74>}</span><span style=color:#e6db74>: </span><span style=color:#e6db74>{</span>value<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>Week 9 Complete - NLP Revision &amp; Integration Successful!&#34;</span>)
+</span></span></code></pre></div><hr><h1 id=practice-exercises><strong>Practice Exercises</strong></h1><ol><li>Build a complete NLP service with Docker deployment</li><li>Create a multi-language support system</li><li>Implement caching for improved performance</li><li>Build a monitoring dashboard for NLP metrics</li><li>Create comprehensive documentation and user guide</li></ol><hr><h1 id=week-9-summary><strong>Week 9 Summary</strong></h1><h2 id=topics-covered>Topics Covered</h2><ul><li><strong>Day 41</strong>: NLP fundamentals revision and advanced tokenization</li><li><strong>Day 42</strong>: Advanced text classification with ensemble methods</li><li><strong>Day 43</strong>: Production sentiment analysis systems</li><li><strong>Day 44</strong>: Custom NER training and entity linking</li><li><strong>Day 45</strong>: Complete NLP system integration</li></ul><h2 id=skills-acquired>Skills Acquired</h2><p>Deep understanding of NLP preprocessing techniques<br>Building production-ready classification systems<br>Implementing multi-component sentiment analysis<br>Training custom NER models for specific domains<br>Integrating NLP components into cohesive systems<br>API design and deployment best practices<br>Performance optimization and monitoring</p><h2 id=key-achievements>Key Achievements</h2><ul><li>Mastered complete NLP development lifecycle</li><li>Built production-ready NLP applications</li><li>Integrated multiple NLP components effectively</li><li>Implemented robust error handling and monitoring</li><li>Created comprehensive testing strategies</li></ul><footer class=footline></footer></div></div><div id=navigation><a class="nav nav-prev" href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.9-week9/1.9.4-day44-2025-11-06/ title="Day 44 - Advanced NER & Custom Entity Training"><i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=https://anquoc211.github.io/AWS_Internship/1-worklog/1.10-week10/ title="Week 10 - Online Library Project Completion (Frontend)" style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=https://anquoc211.github.io/AWS_Internship/js/clipboard.min.js?1765072081></script><script src=https://anquoc211.github.io/AWS_Internship/js/perfect-scrollbar.min.js?1765072081></script><script src=https://anquoc211.github.io/AWS_Internship/js/perfect-scrollbar.jquery.min.js?1765072081></script><script src=https://anquoc211.github.io/AWS_Internship/js/jquery.sticky.js?1765072081></script><script src=https://anquoc211.github.io/AWS_Internship/js/featherlight.min.js?1765072081></script><script src=https://anquoc211.github.io/AWS_Internship/js/highlight.pack.js?1765072081></script><script>hljs.initHighlightingOnLoad()</script><script src=https://anquoc211.github.io/AWS_Internship/js/modernizr.custom-3.6.0.js?1765072081></script><script src=https://anquoc211.github.io/AWS_Internship/js/learn.js?1765072081></script><script src=https://anquoc211.github.io/AWS_Internship/js/hugo-learn.js?1765072081></script><link href=https://anquoc211.github.io/AWS_Internship/mermaid/mermaid.css?1765072081 rel=stylesheet><script src=https://anquoc211.github.io/AWS_Internship/mermaid/mermaid.js?1765072081></script><script>mermaid.initialize({startOnLoad:!0})</script><script>(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,(e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date),(i=t.createElement(n),a=t.getElementsByTagName(n)[0]),i.async=1,i.src=s,a.parentNode.insertBefore(i,a)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-158079754-2","auto"),ga("send","pageview")</script></body></html>
